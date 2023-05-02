@@ -1,0 +1,77 @@
+$sgp-orange: #F76E00;
+$sgp-orange-light: #FFA431;
+$sgp-gray-soft: #ececec;
+$sgp-gray-light: #cccccc;
+$spg-gray: #4C4C4C;
+$spg-gray-medium: #707070;
+$sgp-white: #ffffff;
+$sgp-blue: #354778;
+
+$sgp-colors: (
+  orange: $sgp-orange,
+  orange-light: $sgp-orange-light,
+  gray-soft: $sgp-gray-soft,
+  gray-light: $sgp-gray-light,
+  gray-medium: $spg-gray-medium,
+  gray: $spg-gray,
+  white: $sgp-white,
+  blue: $sgp-blue
+);
+
+
+$sgp-headline-movil-fs: 25.6px;
+$sgp-headline-movil-lh: 32px;
+$sgp-headline-movil-ls: -0.3px;
+
+$sgp-headline-tablet-fs: 28.8px;
+$sgp-headline-tablet-lh: 36px;
+$sgp-headline-tablet-ls: -0.336px;
+
+$sgp-headline-desktop-fs: 32.44px;
+$sgp-headline-desktop-lh: 40px;
+$sgp-headline-desktop-ls: -0.336px;
+
+// TITLE
+$sgp-title-movil-fs: 20.3px;
+$sgp-title-movil-lh: 24.3px;
+$sgp-title-movil-ls: -0.352px;
+
+$sgp-title-tablet-fs: 22.78px;
+$sgp-title-tablet-lh: 32px;
+$sgp-title-tablet-ls: -0.3px;
+
+$sgp-title-desktop-fs: 22.8px;
+$sgp-title-desktop-lh: 32px;
+$sgp-title-desktop-ls: -0.3px;
+
+// SUBTITLE
+$sgp-subtitle-movil-fs: 18px;
+$sgp-subtitle-movil-lh: 21.8px;
+$sgp-subtitle-movil-ls: -0.352px;
+
+$sgp-subtitle-tablet-fs: 20.25px;
+$sgp-subtitle-tablet-lh: 24.3px;
+$sgp-subtitle-tablet-ls: -0.352px;
+
+// LABEL
+$sgp-label-lower-ls: 0.1px;
+$sgp-label-upper-ls: 0.5px;
+
+$sgp-label-small-fs: 12.64px;
+$sgp-label-small-lh: 16px;
+
+$sgp-label-medium-fs: 14.22px;
+$sgp-label-medium-lh: 17.1px;
+
+$sgp-label-large-fs: 16px;
+$sgp-label-large-lh: 19.2px;
+$sgp-label-otp: 1.6rem;
+
+// BODY
+$sgp-body-medium-fs: 14.22px;
+$sgp-body-medium-lh: 21.3px;
+$sgp-body-medium-ls: 0px;
+
+$sgp-body-large-fs: 16px;
+$sgp-body-large-lh: 24px;
+$sgp-body-large-ls: 0px;

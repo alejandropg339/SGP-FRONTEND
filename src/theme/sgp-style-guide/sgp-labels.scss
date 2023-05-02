@@ -1,0 +1,99 @@
+.sgp-lb {
+    font-style: normal !important;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: #{$spg-gray};
+    text-transform: unset;
+
+    // header
+    &--h1 {
+        font-weight: bold;
+        font-size: #{$sgp-headline-movil-fs} !important;
+        line-height: #{$sgp-headline-movil-lh} !important;
+        letter-spacing: #{$sgp-headline-movil-ls} !important;
+    }
+
+    // title
+    &--h2 {
+        font-weight: bold;
+        font-size: #{$sgp-title-movil-fs} !important;
+        line-height: #{$sgp-title-movil-lh} !important;
+        letter-spacing: #{$sgp-title-movil-ls} !important;
+    }
+
+    // subtitle
+    &--h3 {
+        font-weight: bold;
+        font-size: 20px !important;
+        line-height: 26px !important;
+    }
+
+    // body large
+    &--h4 {
+        font-size: #{$sgp-body-large-fs} !important;
+        line-height: #{$sgp-body-large-lh} !important;
+        letter-spacing: #{$sgp-body-large-ls} !important;
+    }
+
+    // body normal
+    &--h5 {
+        font-size: 15px !important;
+        line-height: 22px !important;
+    }
+    &--h6 {
+        font-size: 1rem !important;
+        font-weight: normal !important;
+    }
+    &--h7 {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    // desktop
+    &--title-desktop {
+        font-size: #{$sgp-title-desktop-fs} !important;
+        line-height: #{$sgp-title-desktop-lh} !important;
+        letter-spacing: #{$sgp-title-desktop-ls} !important;
+        font-weight: bold;
+    }
+
+    // tablet
+    &--title-tablet {
+        font-size: #{$sgp-title-tablet-fs} !important;
+        line-height: #{$sgp-title-tablet-lh} !important;
+        letter-spacing: #{$sgp-title-tablet-ls} !important;
+    }
+    
+    &--subtitle-tablet {
+        font-size: #{$sgp-subtitle-tablet-fs} !important;
+        line-height: #{$sgp-subtitle-tablet-lh} !important;
+        letter-spacing: #{$sgp-subtitle-tablet-ls} !important;
+    }
+    // movil
+    &--subtitle-movil {
+        font-size: #{$sgp-subtitle-movil-fs} !important;
+        line-height: #{$sgp-subtitle-movil-lh} !important;
+        letter-spacing: #{$sgp-subtitle-movil-ls} !important;
+    }
+
+    // small-text
+    &--small {
+        font-size: #{$sgp-label-small-fs} !important;
+        line-height: #{$sgp-label-small-lh} !important;
+    }
+
+    // small-text
+    &--large {
+        font-size: #{$sgp-label-large-fs} !important;
+        line-height: #{$sgp-label-large-lh} !important;
+    }
+
+    &--large-bold {
+        font-size: #{$sgp-label-large-fs} !important;
+        line-height: #{$sgp-label-large-lh} !important;
+        font-weight: bold;
+    }
+    &--medium {
+        font-size: #{$sgp-label-medium-fs} !important;
+        line-height: #{$sgp-label-medium-lh} !important;
+    }
+}

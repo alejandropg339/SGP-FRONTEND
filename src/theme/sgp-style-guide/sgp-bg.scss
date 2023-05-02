@@ -1,0 +1,15 @@
+@mixin color-modifiers-common {
+    @each $name, $hex in $sgp-colors {
+        &-#{'' + $name} {
+            background: #{$hex} !important;
+        }
+    }
+}
+
+.sgp-bg {
+    @include color-modifiers-common;
+}
+
+.sgp-bg-transparent {
+    background: transparent !important;
+}

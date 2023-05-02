@@ -1,0 +1,33 @@
+{
+    "scripts": {
+        "global-install": "npm i && cd projects/cobreMA && npm i && cd ../cobreBMCC && npm i && cd ../cobreBMCA && npm i && cd ../cobreFM && npm i && cd ../../ && cd libraries/accessPoint && npm i && cd ../login && npm i && cd ../withdrawal && npm i && cd ../purchase && npm i && cd ../commons && npm i && cd ../homeWallet && npm i && cd ../otp && npm i && cd ../onboarding && npm i && cd ../transference && npm i && cd ../affiliateCard && npm i && cd ../enrollment && npm i && cd ../accountRecovery && npm i && cd ../enrollment && npm i && cd ../biometric && npm i && cd ../welcome && npm i && cd ../withdrawalv2 && npm i && cd ../paymentQR && npm i && cd ../myAccount && npm i && cd ../help && npm i && cd ../marketPlace && npm i && cd ../transactions && npm i && cd ../../",
+        "prepare": "husky install",
+        "build-for-prod": "cd projects/cobreMA && npm run build-prod",
+        "test:e2e": "cd projects/cobreMA && npm run test:e2e",
+        "test:component": "cd projects/cobreMA && npm run test:component",
+        "test:e2e:ci": "cd projects/cobreMA && npm run test:e2e:ci",
+        "test:e2e:component": "cd projects/cobreMA && npm run test:e2e:component"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@typescript-eslint/eslint-plugin": "^4.29.0",
+        "commitlint-plugin-function-rules": "^1.3.2",
+        "eslint": "^7.32.0",
+        "eslint-config-react-app": "^7.0.1",
+        "husky": "^7.0.0",
+        "lint-staged": "^11.1.2",
+        "prettier": "2.4.1",
+        "prettier-eslint": "^8.2.2",
+        "@typescript-eslint/parser": "^5.36.2"
+    },
+    "lint-staged": {
+        "./libraries/**/*.tsx": [
+            "npx prettier --write './libraries/**/*.tsx'",
+            "npx eslint './libraries/**/*.tsx' --fix"
+        ]
+    },
+    "dependencies": {
+        "global-install": "^1.0.0"
+    }
+}

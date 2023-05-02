@@ -1,0 +1,11 @@
+@mixin color-modifiers {
+    @each $name, $hex in $sgp-colors {
+        &-#{'' + $name} {
+            color: #{$hex} !important;
+        }
+    }
+}
+
+.sgp-text {
+    @include color-modifiers;
+}
