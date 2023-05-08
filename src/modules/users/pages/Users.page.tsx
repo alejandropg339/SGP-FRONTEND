@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { SearchBar } from "../../commons/components/searchBar/SearchBar.component";
+import { SearchBar } from "../../../commons/components/searchBar/SearchBar.component";
 import debounce from 'lodash.debounce';
+import { useUserStore } from "../../../store/user.store";
 
 const Users = () => {
     const users = [{ id: 1, name: 'Juan', lastName: 'Perez' }, { id: 2, name: 'Pedro', lastName: 'Perez' }, { id: 3, name: 'Maria', lastName: 'Perez' }, { id: 4, name: 'Jose', lastName: 'Perez' }];
 
     const [query, setQuery] = useState('');
     const [results, setResults] = useState(users);
+    const userStore = useUserStore();
 
     const fetchData = (query: string, cbDebounce: any) => {
         if (query.length > 0) {
@@ -21,6 +23,10 @@ const Users = () => {
     const debouncedFetchData = debounce((query: string, cbDebounce: any) => {
         fetchData(query, cbDebounce);
     }, 500);
+
+    useEffect(() => {
+        console.log('userStore.userInfo', userStore.userInfo)
+    },[])
 
     useEffect(() => {
         debouncedFetchData(query, (res: any) => {

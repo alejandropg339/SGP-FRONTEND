@@ -15,7 +15,7 @@ const Enrollment = () => {
 
   return (
     <div className="container-fluid p-0">
-      <section className="sgp-full-size sgp-background-gradient">
+      <section className="sgp-background-gradient">
         <div className="py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100" >
             <div className="col-12 col-md-8 col-lg-6 col-xl-5" >
