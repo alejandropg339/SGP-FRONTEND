@@ -1,15 +1,15 @@
-import { LoginRequestInterface, LoginResponseInterface } from '../login/interfaces/LoginService.interface';
-import ApiNoAuthClient from './clients/apiNoAuthClient';
+import { AllUsersResponseInterface } from '../commons/interfaces/user.interface';
+import ApiAuthClient from './clients/apiAuthClient';
 import { urlParser } from './endpoints/endpoints';
 
 const url = import.meta.env.VITE_API;
 
-const ApiNoAuthRepository = {
-    authentication: {
-        login(body: LoginRequestInterface): Promise<LoginResponseInterface> {
-            return ApiNoAuthClient.post(urlParser(url).login, body)
+const ApiAuthRepository = {
+    users: {
+        getUsers(): Promise<AllUsersResponseInterface> {
+        return ApiAuthClient.get(urlParser(url).users)
         }
     }
 }
 
-export default ApiNoAuthRepository;
+export default ApiAuthRepository;

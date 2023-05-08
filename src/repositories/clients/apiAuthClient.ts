@@ -17,13 +17,15 @@ ApiAuthClient.interceptors.request.use(
 
 ApiAuthClient.interceptors.response.use(
     (config) => {
-        const { status, data = '' } = config.data;
-        if(!status || status === '1') {
-            return data;
+        const { status } = config.data;
+        if(!status || config.data.status === '1') {
+            return config.data;
         } else {
-            return Promise.reject(data);
+            return Promise.reject(config.data);
         }
     }, (error) => {
         return Promise.reject(error);
     }
 );
+
+export default ApiAuthClient;

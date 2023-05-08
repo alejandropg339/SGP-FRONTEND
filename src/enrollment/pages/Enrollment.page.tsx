@@ -5,12 +5,14 @@ import { CustomInput } from "../../commons/components/fromInputs/CustomInput.com
 import { EnrollmentInitialValues, enrollmentFormValidations } from "../config/EnrollmentForm.config";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
 import { CustomSelect } from "../../commons/components/fromInputs/CustomSelect.component";
+import { useEnrollment } from "../hooks/useEnrollment";
 
 const Enrollment = () => {
   const { t } = useTranslation('global');
+  const query = useEnrollment();
 
   const submit = (formValues: EnrollmentFormInterface) => {
-    console.log(formValues);
+    query.mutation.mutate(formValues);
   }
 
   return (
@@ -22,8 +24,8 @@ const Enrollment = () => {
               <div className="card sgp-bg-gray text-white sgp-card">
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">{t("enrollment.title")}</h2>
-                    <p className="text-white-50 mb-5">{t("enrollment.description")}</p>
+                    <h2 className="fw-bold mb-2 text-uppercase sgp-lb--h1">{t("enrollment.title")}</h2>
+                    <p className="text-white-50 mb-5 sgp-lb--large">{t("enrollment.description")}</p>
                     <Formik
                       initialValues={EnrollmentInitialValues}
                       validationSchema={enrollmentFormValidations}

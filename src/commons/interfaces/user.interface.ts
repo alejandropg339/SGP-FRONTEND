@@ -9,3 +9,23 @@ export interface UserInterface {
     programId?: string | null;
     hotbedId?: string | null;
 }
+
+export interface AllUsersResponseInterface {
+    status: string;
+    msg: string;
+    data: UserResponseDataInterface[];
+}
+
+export interface UserResponseDataInterface {
+    cedula: string;
+    cod_universitario: number;
+    correo_est: string;
+    nombres: string;
+    apellidos: string;
+    telefono: string;
+    visibilidad: string;
+    correo_personal: string;
+    semillero_id?: string;
+    programa_id?: string;
+
+}
