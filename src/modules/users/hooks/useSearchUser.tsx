@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { RepositoryApiAuth } from '../../../repositories/repositoryFactory';
 import { UserResponseDataInterface } from '../../../commons/interfaces/user.interface';
+import { useQuery } from '@tanstack/react-query';
+import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
 
 const getUsers = async () => {
-    try {
-        return await RepositoryApiAuth.users.getUsers();
-    } catch (error) {
-        console.log(error);
-    }
+    return await RepositoryApiAuth.users.getUsers();
 }
 
 export const useSearchUser = () => {
@@ -15,27 +13,33 @@ export const useSearchUser = () => {
     const [querySearch, setQuery] = useState('');
     const [results, setResults] = useState<UserResponseDataInterface[]>([]);
     const [initialResults, setInitialResults] = useState<UserResponseDataInterface[]>([]);
-    
-    useEffect(() => {
+    const errorManagement = useErrorManagement();
 
-        if(querySearch.length > 0){
+    useQuery({
+        queryKey: ['users'],
+        queryFn: getUsers,
+        onSuccess: async (res) => {
+            console.log(res)
+            setResults(res?.data ?? []);
+            setInitialResults(res?.data ?? []);
+        },
+        onError: async (error) => {
+            console.error(error)
+            errorManagement(error);
+        },
+        cacheTime: 1000 * 60
+    });
+
+    useEffect(() => {
+        if (querySearch.length > 0) {
             const filteredUsers = results?.filter(user => user.nombres.toLowerCase().includes(querySearch.toLowerCase()));
-            if(filteredUsers.length > 0){
-                setResults(filteredUsers ?? initialResults);                
+            if (filteredUsers.length > 0) {
+                setResults(filteredUsers ?? initialResults);
             }
-        }else {
+        } else {
             setResults(initialResults);
         }
     }, [querySearch]);
-
-    useEffect(() => {
-        const init = async () => {
-            const results = await getUsers();
-            setResults(results?.data ?? []);
-            setInitialResults(results?.data ?? []);
-        }
-        init();
-    }, [])
 
     return {
         results,

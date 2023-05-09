@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useErrorManagement } from "../../commons/hooks/UseErrorMagament";
-import { CommonRoutesEnum } from "../../enums/commonRoutes.enum";
+import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
+import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import Swal from "sweetalert2";
-import { RepositoryApiNoAuth } from "../../repositories/repositoryFactory";
+import { RepositoryApiNoAuth } from "../../../repositories/repositoryFactory";
 import { EnrollmentRequestInterface } from "../interfaces/EnrollmentService.interface";
 import { useMutation } from "@tanstack/react-query";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";

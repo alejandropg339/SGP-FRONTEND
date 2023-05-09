@@ -1,5 +1,5 @@
-import { EnrollmentRequestInterface, EnrollmentResponseInterface } from "../enrollment/interfaces/EnrollmentService.interface";
-import { LoginRequestInterface, LoginResponseInterface } from "../login/interfaces/LoginService.interface";
+import { EnrollmentRequestInterface, EnrollmentResponseInterface } from "../modules/enrollment/interfaces/EnrollmentService.interface";
+import { LoginRequestInterface, LoginResponseInterface } from "../modules/login/interfaces/LoginService.interface";
 import ApiNoAuthClient from "./clients/apiNoAuthClient";
 import { urlParser } from "./endpoints/endpoints";
 

@@ -6,6 +6,7 @@ export interface UserInterface {
     lastName: string;
     phone: string;
     visibility: string;
+    role: string;
     programId?: string | null;
     hotbedId?: string | null;
 }

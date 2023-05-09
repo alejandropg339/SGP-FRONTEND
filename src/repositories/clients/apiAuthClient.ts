@@ -24,7 +24,7 @@ ApiAuthClient.interceptors.response.use(
             return Promise.reject(config.data);
         }
     }, (error) => {
-        return Promise.reject(error);
+        return Promise.reject(error.response.data);
     }
 );
 

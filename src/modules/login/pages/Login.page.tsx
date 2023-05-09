@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { CustomInput } from '../../commons/components/fromInputs/CustomInput.component';
+import { CustomInput } from '../../../commons/components/fromInputs/CustomInput.component';
 import { Formik, useField, Form } from 'formik';
 import { initialValuesLoginForm, loginFormValidations } from '../config/LoginForm.config';
 import { LoginFormInterface } from '../interfaces/LoginForm.interface';
@@ -49,9 +49,6 @@ const Login = () => {
                     </div>
                     <div>
                       <p className="mb-0">{t("login.withoutAccount")} <Link to="/enrollment" className="text-white-50 fw-bold sgp-text-orange">  {t("login.register")} </Link></p>
-                    </div>
-                    <div>
-                      <p className="mb-0">{t("login.withoutAccount")} <Link to="/my-account" className="text-white-50 fw-bold sgp-text-orange">  {t("login.register")} </Link></p>
                     </div>
                   </div>
                 </div>

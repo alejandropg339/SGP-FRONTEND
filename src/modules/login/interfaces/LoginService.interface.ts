@@ -20,6 +20,6 @@ interface LoginDataResponseInterface {
     correo_personal: string;
     semillero_id: null;
     programa_id: null;
+    role: string;
     token: string;
-
 }

@@ -1,4 +1,4 @@
-import { emailFormatValidation, passwordFormatValidation, requiredField } from "../../commons/helpers/FormValidations";
+import { emailFormatValidation, passwordFormatValidation, requiredField } from "../../../commons/helpers/FormValidations";
 import { LoginFormInterface } from "../interfaces/LoginForm.interface";
 import * as Yup from 'yup';
 

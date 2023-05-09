@@ -1,10 +1,10 @@
 import { Formik, useField, Form } from "formik";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { CustomInput } from "../../commons/components/fromInputs/CustomInput.component";
+import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.component";
 import { EnrollmentInitialValues, enrollmentFormValidations } from "../config/EnrollmentForm.config";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
-import { CustomSelect } from "../../commons/components/fromInputs/CustomSelect.component";
+import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component";
 import { useEnrollment } from "../hooks/useEnrollment";
 
 const Enrollment = () => {

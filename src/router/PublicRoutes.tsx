@@ -1,12 +1,15 @@
 import { Navigate } from 'react-router-dom';
+import { useSessionStore } from '../store/session.store';
+import { SessionStateEnum } from '../enums/sessionStates.enum';
 
-const PublicRoute = ({ children}:{children:React.ReactNode}) => {
-    
+const PublicRoute = ({ children }:{ children:React.ReactNode }) => {
+    const sessionStore = useSessionStore();
     const logged = localStorage.getItem('token');
+    const lastPath = localStorage.getItem('lastPath');
     
-    return (!logged)
+    return (!logged && sessionStore.session === SessionStateEnum.Expired)
         ? <>{children}</>
-        : <Navigate to="/my-account" />
+        : <Navigate to={lastPath ?? '/users'} />
 }
 
 export default PublicRoute;
