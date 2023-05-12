@@ -1,28 +1,39 @@
 {
-    "login": {
-        "title": "Login",
-        "description": "Ingrese su correo institucional y su contraseña",
-        "withoutAccount": "¿No tienes usuario?",
-        "register": "Registrate",
-        "goIn": "Ingresar",
-        "email": "Correo",
-        "password": "Contraseña"
-    },
-    "enrollment": {
-        "title": "Registro",
-        "description": "Ingrese sus datos para registrarse en el sistema",
-        "numberId": "Cedula",
-        "code": "Código",
-        "email": "Correo institucional",
-        "name": "Nombre",
-        "lastName": "Apellido",
-        "phone": "Celular",
-        "personalEmail": "Correo personal",
-        "password": "Contraseña",
-        "confirmPassword": "Confirmar contraseña",
-        "program": "Programa",
-        "complete": "Registrarse",
-        "DouYouHaveAccount": "¿Ya tienes usuario?",
-        "login": "Ingresar"
-    }
+  "login": {
+    "title": "Login",
+    "description": "Ingrese su correo institucional y su contraseña",
+    "withoutAccount": "¿No tienes usuario?",
+    "register": "Registrate",
+    "goIn": "Ingresar",
+    "email": "Correo",
+    "password": "Contraseña"
+  },
+  "enrollment": {
+    "title": "Registro",
+    "description": "Ingrese sus datos para registrarse en el sistema",
+    "numberId": "Cedula",
+    "code": "Código",
+    "email": "Correo institucional",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "phone": "Celular",
+    "personalEmail": "Correo personal",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "program": "Programa",
+    "complete": "Registrarse",
+    "DouYouHaveAccount": "¿Ya tienes usuario?",
+    "login": "Ingresar"
+  },
+  "user": {
+    "numberId": "Cedula: ",
+    "uCode": "Código: ",
+    "name": "Nombres: ",
+    "lastName": "Apellidos: ",
+    "phone": "Teléfono: ",
+    "institutionalEmail": "Correo institucional: ",
+    "personalEmail": "Correo Personal",
+    "delete": "Eliminar",
+    "edit": "Editar"
+  }
 }

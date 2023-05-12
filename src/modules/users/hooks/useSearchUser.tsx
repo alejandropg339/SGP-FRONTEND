@@ -32,7 +32,7 @@ export const useSearchUser = () => {
 
     useEffect(() => {
         if (querySearch.length > 0) {
-            const filteredUsers = results?.filter(user => user.nombres.toLowerCase().includes(querySearch.toLowerCase()));
+            const filteredUsers = results?.filter(user => user.nombres.toLowerCase().includes(querySearch.toLowerCase()) || user.nombres.toLowerCase().includes(querySearch.toLowerCase()) || String(user.cod_universitario).includes(querySearch));
             if (filteredUsers.length > 0) {
                 setResults(filteredUsers ?? initialResults);
             }

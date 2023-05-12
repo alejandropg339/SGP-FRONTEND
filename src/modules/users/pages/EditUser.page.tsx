@@ -1,34 +1,42 @@
 import { Formik, useField, Form } from "formik";
 import { useTranslation } from 'react-i18next';
 import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.component";
-import { MyAccountFormInterface } from "../interfaces/MyAccountForm.interface";
-import { MyAccountFormValidations, MyAccountInitialValues } from "../config/MyAccountForm.config";
-import './MyAccount.page.scss'
+import { UserEditFormInterface } from "../Interfaces/UserEditForm.interface";
+import { EditUserFormValidations } from "../config/EditUserForm.config";
+import { useUserStore } from "../../../store/user.store";
 
-const MyAccount = () => {
+const EditUser = () => {
   const { t } = useTranslation('global');
+  const { userToEditInfo, userInfo } = useUserStore();
 
-  const submit = (formValues: MyAccountFormInterface) => {
+  const submit = (formValues: UserEditFormInterface) => {
     console.log(formValues);
   }
 
+  const EditUserInitialValues: UserEditFormInterface = {
+    name: userToEditInfo.nombres ?? '',
+    lastName: userToEditInfo.apellidos ?? '',
+    phone: userToEditInfo.telefono ?? '',
+    personalEmail: userToEditInfo.correo_personal ?? '',
+  }
+
   return (
-    <div className="container-fluid p-0 sgp-my-account sgp-bg-gray-soft">
+    <div className="container-fluid p-0 sgp-my-account">
       <section className="sgp-bg-gray-soft">
         <div className="py-5 ">
-            <div className="row mb-4">
-                <div className="col-12 text-center">
-                    <img src="src/assets/avatar.svg" alt="avatar" className="sgp-my-account__avatar"/>
-                </div>
+          <div className="row mb-4">
+            <div className="col-12 text-center">
+              <img src="src/assets/avatar.svg" alt="avatar" className="sgp-my-account__avatar" />
             </div>
-            <div className="row">
-                <div className="col-12 text-center">
-                    <p className="sgp-lb--h1">Alejandro Padilla - 30000045273</p>
-                    <p className="sgp-lb--h3">alejandro.padlla@usbbog.edu.co</p>
-                    <p className="sgp-lb--h3">C.C 1010092615</p>
-                    <p className="badge rounded-pill sgp-bg-orange sgp-lb--h2">Admin</p>
-                </div>
+          </div>
+          <div className="row">
+            <div className="col-12 text-center">
+              <p className="sgp-lb--h1">{userToEditInfo.nombres} {userToEditInfo.apellidos} - {userToEditInfo.cod_universitario}</p>
+              <p className="sgp-lb--h3">{userToEditInfo.correo_est}</p>
+              <p className="sgp-lb--h3">C.C {userToEditInfo.cedula}</p>
+              <p className="badge rounded-pill sgp-bg-orange sgp-lb--h2">{userInfo.role}</p>
             </div>
+          </div>
           <div className="row d-flex justify-content-center align-items-center " >
             <div className="col-12 col-md-8 col-lg-6 col-xl-5" >
               <div className="card sgp-bg-gray text-white sgp-card">
@@ -38,14 +46,14 @@ const MyAccount = () => {
                     {/* TODO: BADGE ROLE */}
                     <p className="text-white-50 mb-5">{t("enrollment.description")}</p>
                     <Formik
-                      initialValues={MyAccountInitialValues}
-                      validationSchema={MyAccountFormValidations}
+                      initialValues={EditUserInitialValues}
+                      validationSchema={EditUserFormValidations}
                       onSubmit={submit}
                       validateOnMount={true}
                     >
                       {(formikProps) => (
                         <Form>
-                          
+
                           <div className="mb-4">
                             <CustomInput label={t("enrollment.name") ?? ""} type='text' name='name' useField={useField} onChange={formikProps.handleChange} />
                           </div>
@@ -75,4 +83,4 @@ const MyAccount = () => {
   )
 }
 
-export default MyAccount;
+export default EditUser;

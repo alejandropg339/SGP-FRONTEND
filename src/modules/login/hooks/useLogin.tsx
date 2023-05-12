@@ -35,7 +35,7 @@ export const useLogin = () => {
                 visibility: res.data.visibilidad,
                 uCode: res.data.cod_universitario,
                 programId: res.data.programa_id,
-                role: res.data.role
+                role: res.data.role.toUpperCase()
             }
 
             sessionStore.setSession(SessionStateEnum.Active)

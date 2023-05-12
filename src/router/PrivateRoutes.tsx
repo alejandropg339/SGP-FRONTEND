@@ -10,6 +10,9 @@ const PrivateRoute = ({ children }:{ children:React.ReactNode }): JSX.Element =>
     const lastPath = pathname + search;
     localStorage.setItem('lastPath', lastPath );    
 
+    console.log('VALIDATION PRIVATE', sessionStore.session === SessionStateEnum.Active)
+    
+
     return (sessionStore.session === SessionStateEnum.Active)
         ? <>{children}</>
         : <Navigate to="/login" />

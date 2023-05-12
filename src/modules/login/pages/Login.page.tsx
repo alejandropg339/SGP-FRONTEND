@@ -48,7 +48,7 @@ const Login = () => {
                       </Formik>
                     </div>
                     <div>
-                      <p className="mb-0">{t("login.withoutAccount")} <Link to="/enrollment" className="text-white-50 fw-bold sgp-text-orange">  {t("login.register")} </Link></p>
+                      <p className="mb-0">{t("login.withoutAccount")} <Link to="enrollment" className="text-white-50 fw-bold sgp-text-orange">  {t("login.register")} </Link></p>
                     </div>
                   </div>
                 </div>

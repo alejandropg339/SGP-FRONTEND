@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools position="top-right"/>
+        <ReactQueryDevtools position="bottom-right"/>
         <I18nextProvider i18n={i18next}>
           <App />
         </I18nextProvider>      

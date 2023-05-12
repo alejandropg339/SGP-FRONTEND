@@ -6,6 +6,7 @@ import Users from "../modules/users/pages/Users.page"
 import { Sidebar } from "../commons/components/sidebar/Sidebar.component"
 import PrivateRoute from "./PrivateRoutes"
 import PublicRoute from "./PublicRoutes"
+import EditUser from "../modules/users/pages/EditUser.page"
 
 export const AppRouter = () => {
     return (
@@ -29,6 +30,7 @@ export const AppRouter = () => {
                                 <Routes>
                                     <Route path="my-account" element={<MyAccount />}></Route>
                                     <Route path="users" element={<Users />}></Route>
+                                    <Route path="edit-user" element={<EditUser />}></Route>
                                     <Route path="*" element={<Navigate to="/login" replace />}></Route>
                                 </Routes>
                             </PrivateRoute>
