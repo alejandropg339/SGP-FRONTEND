@@ -7,10 +7,14 @@ import { Sidebar } from "../commons/components/sidebar/Sidebar.component"
 import PrivateRoute from "./PrivateRoutes"
 import PublicRoute from "./PublicRoutes"
 import EditUser from "../modules/users/pages/EditUser.page"
+import { useGlobal } from "../store/global.store"
+import Loading from "../commons/components/Loading/Loading.component"
 
 export const AppRouter = () => {
+    const { showLoading } =  useGlobal()
     return (
         <>
+        { showLoading && <Loading/> }
             <Routes>
                 <Route path="login/*" element={
                     <PublicRoute>

@@ -3,6 +3,7 @@ import { RepositoryApiAuth } from '../../../repositories/repositoryFactory';
 import { UserResponseDataInterface } from '../../../commons/interfaces/user.interface';
 import { useQuery } from '@tanstack/react-query';
 import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
+import { useGlobal } from '../../../store/global.store';
 
 const getUsers = async () => {
     return await RepositoryApiAuth.users.getUsers();
@@ -14,8 +15,9 @@ export const useSearchUser = () => {
     const [results, setResults] = useState<UserResponseDataInterface[]>([]);
     const [initialResults, setInitialResults] = useState<UserResponseDataInterface[]>([]);
     const errorManagement = useErrorManagement();
+    const { setLoading } = useGlobal();
 
-    useQuery({
+    const { isLoading } =  useQuery({
         queryKey: ['users'],
         queryFn: getUsers,
         onSuccess: async (res) => {
@@ -40,6 +42,10 @@ export const useSearchUser = () => {
             setResults(initialResults);
         }
     }, [querySearch]);
+
+    useEffect(() => {
+        setLoading(isLoading)
+    },[isLoading])
 
     return {
         results,

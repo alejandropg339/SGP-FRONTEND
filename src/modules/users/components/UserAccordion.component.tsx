@@ -3,11 +3,13 @@ import { UserAccordionProps } from "../Interfaces/UserAccordion.interface";
 import { useUserStore } from "../../../store/user.store";
 import { RolesEnum } from "../../../enums/roles.enum";
 import { useEditUser } from "../hooks/useEditUser";
+import { useDeleteUser } from "../hooks/useDeleteUser";
 
 const UserAccordion = (props: UserAccordionProps) => {
     const { t } = useTranslation("global");
     const { userInfo } = useUserStore();
-    const { editUser } = useEditUser();
+    const { keepEditUser } = useEditUser();
+    const { deleteUser } =  useDeleteUser();
 
     return (
         <div className="accordion" id={props.user.cedula}>
@@ -30,8 +32,8 @@ const UserAccordion = (props: UserAccordionProps) => {
                         </ul>
                         {userInfo.role === RolesEnum.Admin &&
                             <div className="d-flex mb-2">
-                                <button className="btn sgp-bg-orange-light me-2 ms-3" onClick={() => editUser(props.user)}>{t("user.edit")}</button>
-                                <button className="btn btn-danger">{t("user.delete")}</button>
+                                <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3" onClick={() => keepEditUser(props.user)}>{t("user.edit")}</button>
+                                <button className="btn sgp-btn sgp-btn--primary" onClick={() => deleteUser()}>{t("user.delete")}</button>
                             </div>
                         }
                     </div>

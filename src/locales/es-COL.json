@@ -32,8 +32,10 @@
     "lastName": "Apellidos: ",
     "phone": "Teléfono: ",
     "institutionalEmail": "Correo institucional: ",
-    "personalEmail": "Correo Personal",
+    "personalEmail": "Correo Personal: ",
     "delete": "Eliminar",
-    "edit": "Editar"
+    "edit": "Editar",
+    "userInfo": "Información del usuario",
+    "userEditDescription": "Por favor ingresa los datos que deseas modificar."
   }
 }

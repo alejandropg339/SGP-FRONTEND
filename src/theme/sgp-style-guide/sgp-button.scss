@@ -1,0 +1,47 @@
+.sgp-btn {
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 0;
+    padding: 10px 17px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &--primary {
+        background-color: #{$sgp-orange-95} !important;
+        border: none !important;
+        color: #{$sgp-white} !important;
+
+        &:disabled {
+            opacity: 0.5;
+            background-color: #{$sgp-orange-50} !important;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        &:hover {
+            opacity: 0.85;
+            transition: opacity 0.5s ease-in-out;
+        }
+    }
+
+    &--secondary {
+        border: 1px solid #{$sgp-orange-95};
+        background-color: transparent;
+        color: #{$sgp-orange-95};
+
+        &:disabled {
+            opacity: 0.5;
+        }
+
+        &:hover {
+            opacity: 0.85;
+            transition: opacity 0.5s ease-in-out;
+            border: 1px solid #{$sgp-white} !important;
+            background-color: #{$sgp-orange-50};
+            color: #{$sgp-white};
+        }
+    }
+}

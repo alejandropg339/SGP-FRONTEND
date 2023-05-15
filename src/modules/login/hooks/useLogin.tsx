@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
 import { useSessionStore } from '../../../store/session.store';
 import { SessionStateEnum } from '../../../enums/sessionStates.enum';
+import { useGlobal } from '../../../store/global.store';
+import { useEffect } from 'react';
+import { handleModal } from '../../../commons/helpers/modalManagagemnt';
 
 const doLogin = async (body: LoginFormInterface) => {
     return await RepositoryApiNoAuth.authentication.login({ institutionalEmail: body.email!, password: body.password! })
@@ -18,6 +21,7 @@ export const useLogin = () => {
     const errorManagement = useErrorManagement();
     const userStore = useUserStore();
     const sessionStore = useSessionStore();
+    const { setLoading } = useGlobal(); 
     const navigate = useNavigate();
     const mutation = useMutation({
         mutationFn: doLogin,
@@ -40,20 +44,19 @@ export const useLogin = () => {
 
             sessionStore.setSession(SessionStateEnum.Active)
             userStore.setUser(userData);
-
             navigate(CommonRoutesEnum.Users)
         }, onError: (error: any) => {
             if (error.status === '0' && error.msg) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Credenciales incorrectas',
-                    text: error.msg,
-                })
+                handleModal('error', 'Credenciales incorrectas!', error.msg, true, false);
             } else {
                 errorManagement(error)
             }
-        },
+        }
     });
+
+    useEffect(() => {
+        setLoading(mutation.isLoading)
+    },[mutation.isLoading])
 
     return {
         mutation
