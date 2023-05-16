@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.component.scss';
 import { useState } from 'react';
+import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
+import { useSessionStore } from '../../../store/session.store';
 export const Sidebar = () => {
     const [openMenu, setOpenMenu] = useState(false)
-
+    const sessionStore = useSessionStore();
     const toggleMenu = () => {
         setOpenMenu(!openMenu)
     }
@@ -11,65 +13,57 @@ export const Sidebar = () => {
     const closeMenu = () => {
         openMenu && setOpenMenu(!openMenu)
     }
+
     return (
         <>
             <nav className={`sgp-sidebar ${openMenu && 'sgp-sidebar--expanded'}`}>
                 <div className={`d-flex w-100 sgp-text-white mt-2 ${openMenu ? 'justify-content-end' : 'justify-content-center'}`}>
                     {
                         openMenu ?
-                        <i className='sgp-sidebar__icon bx bx-x'  role='button' onClick={toggleMenu}></i>
-                        :
-                        <i className='sgp-sidebar__icon bx bx-menu' role='button' onClick={toggleMenu}></i>
+                            <i className='sgp-sidebar__icon bx bx-x' role='button' onClick={toggleMenu}></i>
+                            :
+                            <i className='sgp-sidebar__icon bx bx-menu' role='button' onClick={toggleMenu}></i>
                     }
                 </div>
                 <ul>
                     <li>
-                        <Link to="login" onClick={closeMenu}>
-                            <i className='sgp-sidebar__icon bx bx-home'></i>
-                            <span className="sgp-sidebar__nav-text">
-                                login
-                            </span>
-                        </Link>
+                        <NavLink to="my-account" onClick={closeMenu}>
+                            {({ isActive }) => (
+                                <>
+                                    <i className={`sgp-sidebar__icon ${isActive && 'sgp-sidebar__icon--active'} bx bx-user`}></i>
+                                    <span className={`sgp-sidebar__nav-text ${isActive && 'sgp-sidebar__nav-text--active'}`}>
+                                    My Account
+                                    </span> 
+                                </>
+                            )}
+                        </NavLink>
 
                     </li>
                     <li>
-                        <Link to="enrollment" onClick={closeMenu}>
-                            <i className='sgp-sidebar__icon bx bx-home'></i>
-                            <span className="sgp-sidebar__nav-text">
-                                Enrollment
-                            </span>
-                        </Link>
+                        <NavLink to="users" onClick={closeMenu}>
+                            {({ isActive }) => (
+                                <>
+                                    <i className={`sgp-sidebar__icon ${isActive && 'sgp-sidebar__icon--active'} bx bxs-user-detail`}></i>
+                                    <span className={`sgp-sidebar__nav-text ${isActive && 'sgp-sidebar__nav-text--active'}`}>
+                                        Usuarios
+                                    </span> 
+                                </>
+                            )}
+
+                        </NavLink>
 
                     </li>
-                    <li>
-                        <Link to="my-account" onClick={closeMenu}>
-                            <i className='sgp-sidebar__icon bx bx-home'></i>
-                            <span className="sgp-sidebar__nav-text">
-                                My Account
-                            </span>
-                        </Link>
 
-                    </li>
-                    <li>
-                        <Link to="users" onClick={closeMenu}>
-                            <i className='sgp-sidebar__icon bx bx-home'></i>
-                            <span className="sgp-sidebar__nav-text">
-                                Usuarios
-                            </span>
-                        </Link>
-
-                    </li>
-                    
                 </ul>
 
                 <ul className="sgp-logout">
                     <li>
-                        <a href="#">
-                        <i className='sgp-sidebar__icon bx bx-log-out'></i>
+                        <NavLink to={CommonRoutesEnum.Login} onClick={() => sessionStore.logout()}>
+                            <i className='sgp-sidebar__icon bx bx-log-out'></i>
                             <span className="sgp-sidebar__nav-text">
                                 Logout
                             </span>
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

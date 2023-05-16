@@ -1,0 +1,37 @@
+.sgp-fw {
+    &-400 {
+        font-weight: 400 !important;
+    }
+
+    &-500 {
+        font-weight: 500 !important;
+    }
+
+    &-600 {
+        font-weight: 600 !important;
+    }
+
+    &-700 {
+        font-weight: 700 !important;
+    }
+}
+
+.sgp-cap-text {
+    text-transform: capitalize !important;
+}
+
+.sgp-upper-text {
+    text-transform: uppercase !important;
+}
+
+.sgp-init-text {
+    text-transform: initial !important;
+}
+
+.sgp-lower-text {
+    text-transform: lowercase !important;
+}
+
+.sgp-upper-text {
+    text-transform: uppercase !important;
+}

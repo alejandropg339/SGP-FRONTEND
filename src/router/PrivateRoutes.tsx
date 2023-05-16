@@ -1,16 +1,16 @@
 import { Navigate, useLocation } from 'react-router-dom';
+import { useSessionStore } from '../store/session.store';
+import { SessionStateEnum } from '../enums/sessionStates.enum';
 
-const PrivateRoute = ({ children}:{children:React.ReactNode}): JSX.Element => {
+const PrivateRoute = ({ children }:{ children:React.ReactNode }): JSX.Element => {
     
     const { pathname, search } = useLocation();
+    const sessionStore = useSessionStore();
     
     const lastPath = pathname + search;
-    localStorage.setItem('lastPath', lastPath );
+    localStorage.setItem('lastPath', lastPath );        
 
-    const logged = localStorage.getItem('token');
-    
-
-    return (logged)
+    return (sessionStore.session === SessionStateEnum.Active)
         ? <>{children}</>
         : <Navigate to="/login" />
 }

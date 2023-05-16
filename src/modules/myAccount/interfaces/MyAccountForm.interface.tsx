@@ -3,5 +3,4 @@ export interface MyAccountFormInterface {
     lastName: string;
     phone: string;
     personalEmail: string;
-    program: string | number;
 }

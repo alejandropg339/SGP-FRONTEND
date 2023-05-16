@@ -1,16 +1,18 @@
 import { Formik, useField, Form } from "formik";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { CustomInput } from "../../commons/components/fromInputs/CustomInput.component";
+import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.component";
 import { EnrollmentInitialValues, enrollmentFormValidations } from "../config/EnrollmentForm.config";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
-import { CustomSelect } from "../../commons/components/fromInputs/CustomSelect.component";
+import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component";
+import { useEnrollment } from "../hooks/useEnrollment";
 
 const Enrollment = () => {
   const { t } = useTranslation('global');
+  const query = useEnrollment();
 
   const submit = (formValues: EnrollmentFormInterface) => {
-    console.log(formValues);
+    query.mutation.mutate(formValues);
   }
 
   return (
@@ -19,11 +21,11 @@ const Enrollment = () => {
         <div className="py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100" >
             <div className="col-12 col-md-8 col-lg-6 col-xl-5" >
-              <div className="card sgp-bg-gray text-white sgp-card">
+              <div className="card sgp-bg-gray-30 text-white sgp-card">
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">{t("enrollment.title")}</h2>
-                    <p className="text-white-50 mb-5">{t("enrollment.description")}</p>
+                    <h2 className="fw-bold mb-2 text-uppercase sgp-lb--h1">{t("enrollment.title")}</h2>
+                    <p className="text-white-50 mb-5 sgp-lb--large sgp-text-white">{t("enrollment.description")}</p>
                     <Formik
                       initialValues={EnrollmentInitialValues}
                       validationSchema={enrollmentFormValidations}
@@ -68,14 +70,14 @@ const Enrollment = () => {
                             </CustomSelect>
                           </div>
 
-                          <button className="btn btn-outline-light btn-lg px-5" type="submit" disabled={!formikProps.isValid}>{t("enrollment.complete")}</button>
+                          <button className="btn sgp-btn sgp-btn--primary btn-lg px-5" type="submit" disabled={!formikProps.isValid}>{t("enrollment.complete")}</button>
 
                         </Form>
                       )}
                     </Formik>
                   </div>
                   <div>
-                    <p className="mb-0">{t("enrollment.DouYouHaveAccount")} <Link to="/login" className="text-white-50 fw-bold sgp-text-orange">  {t("enrollment.login")} </Link></p>
+                    <p className="mb-0">{t("enrollment.DouYouHaveAccount")} <Link to="/login" className="text-white-50 fw-bold sgp-text-orange-95">  {t("enrollment.login")} </Link></p>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { emailFormatValidation, mustMatch, numeric, passwordFormatValidation, requiredField, onlyLetter, minLength, maxLength } from "../../commons/helpers/FormValidations";
+import { emailFormatValidation, mustMatch, numeric, passwordFormatValidation, requiredField, onlyLetter, minLength, maxLength } from "../../../commons/helpers/FormValidations";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
 import * as Yup from 'yup';
 

@@ -1,4 +1,4 @@
-import { SearchBarPropsInterface } from "../../interfaces/SearchBarProps.interface"
+import { SearchBarPropsInterface } from "../../interfaces/searchBarProps.interface"
 
 export const SearchBar = ({label, onInputChange}: SearchBarPropsInterface) => {
     return (

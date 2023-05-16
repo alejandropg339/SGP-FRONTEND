@@ -11,7 +11,7 @@ export const CustomSelect = ({ useField, label, id, ...props }: SelectProps) => 
 
     return (
         <div className="form-floating">
-            <select className={`form-select ${meta.error && 'is-invalid'}`} {...field} {...props} id={id}/>
+            <select className={`form-select ${(meta.error && meta.touched) && 'is-invalid'}`} {...field} {...props} id={id}/>
             <label htmlFor={id}>{label}</label>
         </div>
     )

@@ -1,21 +1,41 @@
-$sgp-orange: #F76E00;
-$sgp-orange-light: #FFA431;
-$sgp-gray-soft: #ececec;
-$sgp-gray-light: #cccccc;
-$spg-gray: #4C4C4C;
-$spg-gray-medium: #707070;
+$sgp-gray-95: #1A1A1A;
+$sgp-gray-70: #333333;
+$sgp-gray-50: #4C4C4C;
+$sgp-gray-30: #666666;
+$sgp-gray-20: #7F7F7F;
+$sgp-gray-10: #999999;
+$sgp-gray-5: #d1cfcf;
+$sgp-gray-0: #e5e5e4;
+
+$sgp-orange-5: #FCE5D8;
+$sgp-orange-10: #FBD1B1;
+$sgp-orange-20: #F9BD8B;
+$sgp-orange-30: #F8A765;
+$sgp-orange-50: #F6903F;
+$sgp-orange-70: #F47C19;
+$sgp-orange-95: #F76E00;
+
 $sgp-white: #ffffff;
 $sgp-blue: #354778;
 
 $sgp-colors: (
-  orange: $sgp-orange,
-  orange-light: $sgp-orange-light,
-  gray-soft: $sgp-gray-soft,
-  gray-light: $sgp-gray-light,
-  gray-medium: $spg-gray-medium,
-  gray: $spg-gray,
+  blue: $sgp-blue,
   white: $sgp-white,
-  blue: $sgp-blue
+  gray-95: $sgp-gray-95,
+  gray-70: $sgp-gray-70,
+  gray-50: $sgp-gray-50,
+  gray-30: $sgp-gray-30,
+  gray-20: $sgp-gray-20,
+  gray-10: $sgp-gray-10,
+  gray-5: $sgp-gray-5,
+  gray-0: $sgp-gray-0,
+  orange-5: $sgp-orange-5,
+  orange-10: $sgp-orange-10,
+  orange-20: $sgp-orange-20,
+  orange-30: $sgp-orange-30,
+  orange-50: $sgp-orange-50,
+  orange-70: $sgp-orange-70,
+  orange-95: $sgp-orange-95,
 );
 
 
