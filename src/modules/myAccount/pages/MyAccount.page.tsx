@@ -4,9 +4,11 @@ import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.
 import { MyAccountFormInterface } from "../interfaces/MyAccountForm.interface";
 import { MyAccountFormValidations, MyAccountInitialValues } from "../config/MyAccountForm.config";
 import './MyAccount.page.scss'
+import { useUserStore } from "../../../store/user.store";
 
 const MyAccount = () => {
   const { t } = useTranslation('global');
+  const { userInfo } = useUserStore();
 
   const submit = (formValues: MyAccountFormInterface) => {
     console.log(formValues);
@@ -23,10 +25,10 @@ const MyAccount = () => {
             </div>
             <div className="row">
                 <div className="col-12 text-center">
-                    <p className="sgp-lb--h1">Alejandro Padilla - 30000045273</p>
-                    <p className="sgp-lb--h3">alejandro.padlla@usbbog.edu.co</p>
-                    <p className="sgp-lb--h3">C.C 1010092615</p>
-                    <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h2">Admin</p>
+                    <p className="sgp-lb--h1">{userInfo.name} - {userInfo.uCode}</p>
+                    <p className="sgp-lb--h3">{userInfo.institutionalEmail}</p>
+                    <p className="sgp-lb--h3">C.C {userInfo.numberId}</p>
+                    <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h2">{userInfo.role?.toLocaleLowerCase()}</p>
                 </div>
             </div>
           <div className="row d-flex justify-content-center align-items-center " >

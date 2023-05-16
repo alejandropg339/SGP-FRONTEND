@@ -34,8 +34,8 @@ export const AppRouter = () => {
                                 <Routes>
                                     <Route path="my-account" element={<MyAccount />}></Route>
                                     <Route path="users" element={<Users />}></Route>
-                                    <Route path="edit-user" element={<EditUser />}></Route>
-                                    <Route path="*" element={<Navigate to="/login" replace />}></Route>
+                                    <Route path="edit-user/:userId" element={<EditUser />}></Route>
+                                    <Route path="*" element={<Navigate to="/users" replace />}></Route>
                                 </Routes>
                             </PrivateRoute>
                         </div>

@@ -37,5 +37,15 @@
     "edit": "Editar",
     "userInfo": "Información del usuario",
     "userEditDescription": "Por favor ingresa los datos que deseas modificar."
+  },
+  "editUser" : {
+    "userInfo": "Información del usuario",
+    "userEditDescription": "Por favor ingresa los datos que deseas modificar.",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "phone": "Celular",
+    "personalEmail": "Correo personal",
+    "role": "Rol",
+    "selectARole": "Selecciona un rol"
   }
 }

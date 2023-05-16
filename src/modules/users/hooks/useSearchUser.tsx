@@ -17,7 +17,7 @@ export const useSearchUser = () => {
     const errorManagement = useErrorManagement();
     const { setLoading } = useGlobal();
 
-    const { isLoading } =  useQuery({
+    const { isLoading, refetch } =  useQuery({
         queryKey: ['users'],
         queryFn: getUsers,
         onSuccess: async (res) => {
@@ -49,6 +49,7 @@ export const useSearchUser = () => {
 
     return {
         results,
-        setQuery
+        setQuery,
+        refetch
     }
 }

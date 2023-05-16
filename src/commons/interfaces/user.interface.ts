@@ -30,3 +30,9 @@ export interface UserResponseDataInterface {
     programa_id?: string;
 
 }
+
+export interface UserDeleteResponseInterface {
+    status: string;
+    msg: string;
+    data: [];
+}

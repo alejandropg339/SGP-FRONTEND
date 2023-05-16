@@ -4,7 +4,6 @@ import { LoginFormInterface } from '../interfaces/LoginForm.interface';
 import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
 import { useUserStore } from '../../../store/user.store';
 import { UserInterface } from '../../../commons/interfaces/user.interface';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
 import { useSessionStore } from '../../../store/session.store';
@@ -44,8 +43,10 @@ export const useLogin = () => {
 
             sessionStore.setSession(SessionStateEnum.Active)
             userStore.setUser(userData);
+            setLoading(false);
             navigate(CommonRoutesEnum.Users)
         }, onError: (error: any) => {
+            setLoading(false);
             if (error.status === '0' && error.msg) {
                 handleModal('error', 'Credenciales incorrectas!', error.msg, true, false);
             } else {

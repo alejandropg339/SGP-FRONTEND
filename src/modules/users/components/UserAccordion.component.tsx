@@ -9,7 +9,7 @@ const UserAccordion = (props: UserAccordionProps) => {
     const { t } = useTranslation("global");
     const { userInfo } = useUserStore();
     const { keepEditUser } = useEditUser();
-    const { deleteUser } =  useDeleteUser();
+    const { deleteUserAction } =  useDeleteUser();
 
     return (
         <div className="accordion" id={props.user.cedula}>
@@ -33,7 +33,7 @@ const UserAccordion = (props: UserAccordionProps) => {
                         {userInfo.role === RolesEnum.Admin &&
                             <div className="d-flex mb-2">
                                 <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3" onClick={() => keepEditUser(props.user)}>{t("user.edit")}</button>
-                                <button className="btn sgp-btn sgp-btn--primary" onClick={() => deleteUser()}>{t("user.delete")}</button>
+                                <button className="btn sgp-btn sgp-btn--primary" onClick={() => deleteUserAction(props.user.cedula ?? '')}>{t("user.delete")}</button>
                             </div>
                         }
                     </div>

@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
-import Swal from "sweetalert2";
 import { RepositoryApiNoAuth } from "../../../repositories/repositoryFactory";
 import { EnrollmentRequestInterface } from "../interfaces/EnrollmentService.interface";
 import { useMutation } from "@tanstack/react-query";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
+import { useLogin } from "../../login/hooks/useLogin";
+import { handleModal } from "../../../commons/helpers/modalManagagemnt";
+import { useEffect } from "react";
+import { useGlobal } from "../../../store/global.store";
 
 const enrollUser = async (body: EnrollmentFormInterface) => {
     const parsedRequest: EnrollmentRequestInterface = {
@@ -25,40 +28,28 @@ const enrollUser = async (body: EnrollmentFormInterface) => {
 
 export const useEnrollment = () => {
     const errorManagement = useErrorManagement();
-    // const userStore = useUserStore();
+    const { mutation: login } = useLogin();
+    const { setLoading } = useGlobal(); 
     const navigate = useNavigate();
 
     const mutation = useMutation({
         mutationFn: enrollUser,
-        onSuccess: (res) => {
-            console.log(res)
-            //TODO: CALL LOGIN HOOK
-            // const userData: Partial<UserInterface> = {
-            //     numberId: res.data.cedula,
-            //     name: res.data.nombres,
-            //     hotbedId: res.data.semillero_id,
-            //     institutionalEmail: res.data.correo_est,
-            //     lastName: res.data.apellidos,
-            //     phone: res.data.telefono,
-            //     visibility: res.data.visibilidad,
-            //     uCode: res.data.cod_universitario,
-            //     programId: res.data.programa_id,
-            // }
-
-            // userStore.setUser(userData);
-            navigate(CommonRoutesEnum.Users)
+        onSuccess: (_, { email, password }) => {
+            login.mutate({ email, password })
+            handleModal('success', 'Felicidades!', 'Has sido registrado exitosament', true, false, false);
+            navigate(CommonRoutesEnum.MyAccount)
         }, onError: (error: any) => {
             if (error.status === '0' && error.msg) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Por favor revisa los datos ingresados',
-                    text: error.msg,
-                })
+                handleModal('error', 'Por favor revisa los datos ingresados', error.msg, false, false);
             } else {
                 errorManagement(error)
             }
         },
     });
+
+    useEffect(() => {
+        setLoading(mutation.isLoading)
+    },[mutation.isLoading])
 
     return {
         mutation
