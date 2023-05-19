@@ -3,4 +3,5 @@ export interface UserEditFormInterface {
     lastName: string;
     phone: string;
     personalEmail: string;
+    role?: string;
 }

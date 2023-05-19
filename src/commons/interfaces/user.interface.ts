@@ -9,6 +9,7 @@ export interface UserInterface {
     role: string;
     programId?: string | null;
     hotbedId?: string | null;
+    personalEmail?: string | null;
 }
 
 export interface AllUsersResponseInterface {
@@ -29,4 +30,10 @@ export interface UserResponseDataInterface {
     semillero_id?: string;
     programa_id?: string;
 
+}
+
+export interface UserDeleteResponseInterface {
+    status: string;
+    msg: string;
+    data: [];
 }

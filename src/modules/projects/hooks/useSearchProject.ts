@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { RepositoryApiAuth } from '../../../repositories/repositoryFactory';
-import { UserResponseDataInterface } from '../../../commons/interfaces/user.interface';
-import { useQuery } from '@tanstack/react-query';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
-import { useGlobal } from '../../../store/global.store';
+import { useQuery } from "@tanstack/react-query";
+import { RepositoryFactory } from "../../../repositories/repositoryFactory";
+import { useEffect, useState } from "react";
+import { useGlobal } from "../../../store/global.store";
+import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
+import { ProjectsResponseData } from "../interfaces/projects.interface";
 
 const getUsers = async () => {
-    return await RepositoryApiAuth.users.getUsers();
+    return await RepositoryFactory.RepositoryApiAuth.projects.getProjects();
 }
 
 export const useSearchUser = () => {
 
     const [querySearch, setQuery] = useState('');
-    const [results, setResults] = useState<UserResponseDataInterface[]>([]);
-    const [initialResults, setInitialResults] = useState<UserResponseDataInterface[]>([]);
+    const [results, setResults] = useState<ProjectsResponseData[]>([]);
+    const [initialResults, setInitialResults] = useState<ProjectsResponseData[]>([]);
     const errorManagement = useErrorManagement();
     const { setLoading } = useGlobal();
 
     const { isLoading, refetch } =  useQuery({
-        queryKey: ['users'],
+        queryKey: ['projects'],
         queryFn: getUsers,
         onSuccess: async (res) => {
             setResults(res?.data ?? []);
@@ -28,12 +28,12 @@ export const useSearchUser = () => {
             console.error(error)
             errorManagement(error);
         },
-        cacheTime: 1000 * 60
+        cacheTime: 10000 * 60
     });
 
     useEffect(() => {
         if (querySearch.length > 0) {
-            const filteredUsers = results?.filter(user => user.nombres.toLowerCase().includes(querySearch.toLowerCase()) || user.nombres.toLowerCase().includes(querySearch.toLowerCase()) || String(user.cod_universitario).includes(querySearch));
+            const filteredUsers = results?.filter(user => user.titulo.toLowerCase().includes(querySearch.toLowerCase()));
             if (filteredUsers.length > 0) {
                 setResults(filteredUsers ?? initialResults);
             }

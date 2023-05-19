@@ -1,9 +1,9 @@
+@import '../../../theme/spg-theme.scss';
+
 .sgp-sidebar {
-    background: #212121;
-    position: fixed;
+    background: #{$sgp-gray-70};
     top: 0;
     bottom: 0;
-    height: 100%;
     left: 0;
     width: 60px;
     overflow: hidden;
@@ -27,7 +27,7 @@
         font-size: 1.5rem;
 
         &--active{
-            background: #000000;
+            background: #{$sgp-gray-95};
             color: #fff;
         }
     }
@@ -39,7 +39,7 @@
         width: 190px;
 
         &--active{
-            background: #000000;
+            background: #{$sgp-gray-95};
             color: #fff;
         }
     }
@@ -64,7 +64,7 @@
             display: table;
             border-collapse: collapse;
             border-spacing: 0;
-            color: #999;
+            color: #{$sgp-gray-10};
             font-family: arial;
             font-size: 14px;
             text-decoration: none;
@@ -115,5 +115,19 @@ nav.sgp-sidebar li.active>a,
 .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 .dashboard-page nav.dashboard-menu ul li.active a {
     color: #fff;
-    background-color: #000000;
+    background-color: #{$sgp-gray-95};
+}
+
+.sgp-sidebar-mobile {
+    position: fixed;
+    width:60px;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    z-index: 889944;
+
+    &__container-icon {
+        border-radius:8px;
+        background: #{$sgp-gray-70};
+    }
 }

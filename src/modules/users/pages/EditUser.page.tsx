@@ -6,13 +6,14 @@ import { EditUserFormValidations } from "../config/EditUserForm.config";
 import { useUserStore } from "../../../store/user.store";
 import { useEditUser } from "../hooks/useEditUser";
 import { UserResponseDataInterface } from "../../../commons/interfaces/user.interface";
+import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component";
 
 const EditUser = () => {
   const { t } = useTranslation('global');
-  const { userToEditInfo, userInfo } = useUserStore();
-  const { handleEditUser } = useEditUser();
+  const { userToEditInfo } = useUserStore();
+  const { handleEditUser, roles, userRole, handleEditRoleUser } = useEditUser();
 
-  const submit = (formValues: UserEditFormInterface) => {
+  const submit = async (formValues: UserEditFormInterface) => {
     const newUserInfo: Partial<UserResponseDataInterface> = {
       ...userToEditInfo,
       nombres: formValues.name,
@@ -21,7 +22,13 @@ const EditUser = () => {
       correo_personal: formValues.personalEmail
     }
 
-    handleEditUser.mutate(newUserInfo)
+    if(userRole !== formValues.role){
+      console.log('here')
+      const result = await handleEditRoleUser.mutateAsync(formValues.role!);
+      result.status === '1' && handleEditUser.mutate(newUserInfo)
+    }else {
+      handleEditUser.mutate(newUserInfo)
+    }
   }
 
   const EditUserInitialValues: UserEditFormInterface = {
@@ -29,6 +36,7 @@ const EditUser = () => {
     lastName: userToEditInfo.apellidos ?? '',
     phone: userToEditInfo.telefono ?? '',
     personalEmail: userToEditInfo.correo_personal ?? '',
+    role: userRole ?? '',
   }
 
   return (
@@ -37,7 +45,7 @@ const EditUser = () => {
         <div className="py-5 ">
           <div className="row mb-4">
             <div className="col-12 text-center">
-              <img src="src/assets/edit-user.svg" alt="avatar" className="sgp-my-account__avatar" />
+              <img src="../src/assets/edit-user.svg" alt="avatar" className="sgp-my-account__avatar" />
             </div>
           </div>
           <div className="row">
@@ -45,7 +53,7 @@ const EditUser = () => {
               <p className="sgp-lb--h1 mb-1">{userToEditInfo.nombres} {userToEditInfo.apellidos} - {userToEditInfo.cod_universitario}</p>
               <p className="sgp-lb--h4 mb-0">{userToEditInfo.correo_est}</p>
               <p className="sgp-lb--h4 mb-1">C.C {userToEditInfo.cedula}</p>
-              <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h5 sgp-lower-text">{userInfo.role}</p>
+              <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h5 sgp-lower-text">{userRole}</p>
             </div>
           </div>
           <div className="row d-flex justify-content-center align-items-center" >
@@ -53,8 +61,8 @@ const EditUser = () => {
               <div className="card sgp-bg-gray-20 text-white sgp-card">
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="sgp-lb--h1">{t("user.userInfo")}</h2>
-                    <p className="text-white-50 mb-5 sgp-text-white">{t("user.userEditDescription")}</p>
+                    <h2 className="sgp-lb--h1">{t("editUser.userInfo")}</h2>
+                    <p className="text-white-50 mb-5 sgp-text-white">{t("editUser.userEditDescription")}</p>
                     <Formik
                       initialValues={EditUserInitialValues}
                       validationSchema={EditUserFormValidations}
@@ -63,20 +71,26 @@ const EditUser = () => {
                     >
                       {(formikProps) => (
                         <Form>
-
                           <div className="mb-4">
-                            <CustomInput label={t("enrollment.name") ?? ""} type='text' name='name' useField={useField} onChange={formikProps.handleChange} />
+                            <CustomInput label={t("editUser.name") ?? ""} type='text' name='name' useField={useField} onChange={formikProps.handleChange} />
                           </div>
                           <div className="mb-4">
-                            <CustomInput label={t("enrollment.lastName") ?? ""} type='text' name='lastName' useField={useField} onChange={formikProps.handleChange} />
+                            <CustomInput label={t("editUser.lastName") ?? ""} type='text' name='lastName' useField={useField} onChange={formikProps.handleChange} />
                           </div>
                           <div className="mb-4">
-                            <CustomInput label={t("enrollment.phone") ?? ""} type='text' name='phone' useField={useField} onChange={formikProps.handleChange} />
+                            <CustomInput label={t("editUser.phone") ?? ""} type='text' name='phone' useField={useField} onChange={formikProps.handleChange} />
                           </div>
                           <div className="mb-4">
-                            <CustomInput label={t("enrollment.personalEmail") ?? ""} type='email' name='personalEmail' useField={useField} onChange={formikProps.handleChange} />
+                            <CustomInput label={t("editUser.personalEmail") ?? ""} type='email' name='personalEmail' useField={useField} onChange={formikProps.handleChange} />
                           </div>
-
+                          <div className="mb-4">
+                            <CustomSelect label={t("editUser.role") ?? ""} type='email' name='role' useField={useField} onChange={formikProps.handleChange} id="selectRole">
+                            <option defaultValue={userRole?.toUpperCase()}>{t("editUser.selectARole") ?? ""}</option>
+                              {roles.map((role) => (
+                                <option value={role.nombre.toLocaleUpperCase()}>{role.nombre}</option>
+                              ))}
+                            </CustomSelect>
+                          </div>
                           <button className="btn sgp-btn sgp-btn--primary btn-lg px-5" type="submit" disabled={!formikProps.isValid}>Actualizar</button>
 
                         </Form>

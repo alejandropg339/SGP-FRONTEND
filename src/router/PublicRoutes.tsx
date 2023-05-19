@@ -9,7 +9,7 @@ const PublicRoute = ({ children }:{ children:React.ReactNode }) => {
     
     return (!logged && sessionStore.session === SessionStateEnum.Expired)
         ? <>{children}</>
-        : <Navigate to={lastPath ?? '/users'} />
+        : <Navigate to={lastPath ?? '/my-account'} />
 }
 
 export default PublicRoute;
