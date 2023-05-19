@@ -16,7 +16,6 @@ ApiNoAuthClient.interceptors.request.use(
 ApiNoAuthClient.interceptors.response.use(
     (config) => {
         const { status } = config.data;
-        console.log('CONFIG DATA', config.data)
         if(!status || config.data.status === '1') {
             return config.data;
         } else {

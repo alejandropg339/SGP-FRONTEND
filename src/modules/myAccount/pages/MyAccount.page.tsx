@@ -2,16 +2,31 @@ import { Formik, useField, Form } from "formik";
 import { useTranslation } from 'react-i18next';
 import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.component";
 import { MyAccountFormInterface } from "../interfaces/MyAccountForm.interface";
-import { MyAccountFormValidations, MyAccountInitialValues } from "../config/MyAccountForm.config";
-import './MyAccount.page.scss'
+import { MyAccountFormValidations } from "../config/MyAccountForm.config";
 import { useUserStore } from "../../../store/user.store";
+import { useMyAccount } from "../hooks/useMyAccount";
+import './MyAccount.page.scss'
 
 const MyAccount = () => {
   const { t } = useTranslation('global');
   const { userInfo } = useUserStore();
+  const { handleUpdateMyAccount } = useMyAccount();
+
+  const MyAccountInitialValues: MyAccountFormInterface = {
+    name: userInfo.name ?? '',
+    lastName: userInfo.lastName ?? '',
+    phone: userInfo.phone ?? '',
+    personalEmail: userInfo.personalEmail ?? '',
+}
 
   const submit = (formValues: MyAccountFormInterface) => {
-    console.log(formValues);
+    const request = {
+      nombres: formValues.name,
+      apellidos: formValues.lastName,
+      telefono: formValues.phone,
+      correo_personal: formValues.personalEmail
+    }
+    handleUpdateMyAccount.mutate([request, userInfo.numberId ?? '']);
   }
 
   return (
@@ -33,11 +48,10 @@ const MyAccount = () => {
             </div>
           <div className="row d-flex justify-content-center align-items-center " >
             <div className="col-12 col-md-8 col-lg-6 col-xl-5" >
-              <div className="card sgp-bg-gray-50 text-white sgp-card">
+              <div className="card sgp-bg-gray-20 text-white sgp-card">
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="sgp-lb--h1">Tu Cuenta</h2>
-                    {/* TODO: BADGE ROLE */}
                     <p className="text-white-50 mb-5">{t("enrollment.description")}</p>
                     <Formik
                       initialValues={MyAccountInitialValues}

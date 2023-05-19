@@ -11,10 +11,9 @@ import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelec
 const EditUser = () => {
   const { t } = useTranslation('global');
   const { userToEditInfo } = useUserStore();
-  const { handleEditUser, roles, userRole } = useEditUser();
+  const { handleEditUser, roles, userRole, handleEditRoleUser } = useEditUser();
 
-  const submit = (formValues: UserEditFormInterface) => {
-    console.log('FORMVALUES', formValues)
+  const submit = async (formValues: UserEditFormInterface) => {
     const newUserInfo: Partial<UserResponseDataInterface> = {
       ...userToEditInfo,
       nombres: formValues.name,
@@ -23,7 +22,13 @@ const EditUser = () => {
       correo_personal: formValues.personalEmail
     }
 
-    handleEditUser.mutate(newUserInfo)
+    if(userRole !== formValues.role){
+      console.log('here')
+      const result = await handleEditRoleUser.mutateAsync(formValues.role!);
+      result.status === '1' && handleEditUser.mutate(newUserInfo)
+    }else {
+      handleEditUser.mutate(newUserInfo)
+    }
   }
 
   const EditUserInitialValues: UserEditFormInterface = {

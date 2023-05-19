@@ -25,7 +25,6 @@ export const useLogin = () => {
     const mutation = useMutation({
         mutationFn: doLogin,
         onSuccess: (res) => {
-            console.log(res)
             localStorage.setItem('token', res?.data?.token ?? '')
 
             const userData: Partial<UserInterface> = {
@@ -38,7 +37,8 @@ export const useLogin = () => {
                 visibility: res.data.visibilidad,
                 uCode: res.data.cod_universitario,
                 programId: res.data.programa_id,
-                role: res.data.role.toUpperCase()
+                role: res.data.role.toUpperCase(),
+                personalEmail: res.data.correo_personal ?? '',
             }
 
             sessionStore.setSession(SessionStateEnum.Active)

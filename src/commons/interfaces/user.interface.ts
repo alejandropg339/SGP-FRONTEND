@@ -9,6 +9,7 @@ export interface UserInterface {
     role: string;
     programId?: string | null;
     hotbedId?: string | null;
+    personalEmail?: string | null;
 }
 
 export interface AllUsersResponseInterface {

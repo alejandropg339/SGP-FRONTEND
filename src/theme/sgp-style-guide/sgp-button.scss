@@ -22,6 +22,7 @@
         }
 
         &:hover {
+            background-color: #{$sgp-orange-95};
             opacity: 0.85;
             transition: opacity 0.5s ease-in-out;
         }

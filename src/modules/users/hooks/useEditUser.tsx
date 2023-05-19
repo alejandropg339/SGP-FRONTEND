@@ -10,7 +10,7 @@ import { useGlobal } from "../../../store/global.store";
 import { handleModal } from "../../../commons/helpers/modalManagagemnt";
 import { RolesDataInterface } from "../../../commons/interfaces/roles.interface";
 
-const editUserService = async (user: Partial<UserResponseDataInterface>) =>{
+const editUserService = async (user: Partial<UserResponseDataInterface>) => {
     return await RepositoryFactory.RepositoryApiAuth.users.updateUser(user);
 }
 
@@ -19,6 +19,9 @@ const getRoles = async () => {
 }
 const getUserRoles = async (userId: string) => {
     return await RepositoryFactory.RepositoryApiAuth.users.getUserRole(userId)
+}
+const updateUserRole = async (userId: string, role: string) => {
+    return await RepositoryFactory.RepositoryApiAuth.users.updateUserRoles(userId, role)
 }
 
 export const useEditUser = () => {
@@ -46,6 +49,20 @@ export const useEditUser = () => {
         },
     });
 
+    const handleEditRoleUser = useMutation((role: string) => updateUserRole(userId!, role), {
+        onSuccess: (res) => {
+            handleModal('success', 'Proceso exitoso!', 'El usuario se ha actualizado correctamente');
+            navigate(CommonRoutesEnum.Users);
+        },
+        onError: (error: any) => {
+            if (error?.status === '0' && error?.msg) {
+                handleModal('error', 'Oh no!', error.msg);
+            } else {
+                errorManagement(error);
+            }
+        },
+    });
+
     const getRolesService = useQuery({
         queryKey: ['roles'],
         queryFn: getRoles,
@@ -66,7 +83,6 @@ export const useEditUser = () => {
         queryFn: () => userId ? getUserRoles(userId) : Promise.resolve(null),
         onSuccess: (data) => {
             setUserRole(data?.data?.rol)
-            console.log(data)
         },
         onError: (error: any) => {
             if (error?.status === '0' && error?.msg) {
@@ -84,20 +100,24 @@ export const useEditUser = () => {
 
     useEffect(() => {
         setLoading(handleEditUser.isLoading)
-    },[handleEditUser.isLoading])
+    }, [handleEditUser.isLoading])
 
     useEffect(() => {
         setLoading(getRolesService.isLoading)
-    },[getRolesService.isLoading])
+    }, [getRolesService.isLoading])
 
     useEffect(() => {
         setLoading(getUserRole.isLoading)
-    },[getUserRole.isLoading])
+    }, [getUserRole.isLoading])
 
+    useEffect(() => {
+        setLoading(handleEditRoleUser.isLoading)
+    }, [handleEditRoleUser.isLoading])
 
     return {
         keepEditUser,
         handleEditUser,
+        handleEditRoleUser,
         roles,
         userRole
     };

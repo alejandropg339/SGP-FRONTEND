@@ -36,7 +36,9 @@
     "delete": "Eliminar",
     "edit": "Editar",
     "userInfo": "Información del usuario",
-    "userEditDescription": "Por favor ingresa los datos que deseas modificar."
+    "userEditDescription": "Por favor ingresa los datos que deseas modificar.",
+    "inactive": "Inactivo",
+    "activate": "Activar Usuario"
   },
   "editUser" : {
     "userInfo": "Información del usuario",
@@ -47,5 +49,34 @@
     "personalEmail": "Correo personal",
     "role": "Rol",
     "selectARole": "Selecciona un rol"
+  },
+  "createProjectModule":{
+    "title": "Titulo del proyecto",
+    "description": "Descripción",
+    "city": "Ciudad",
+    "selectCity": "Selecciona la ciudad del proyecto",
+    "justification": "Justificación",
+    "methodology": "Metodología",
+    "projectType": "Tipo de poryecto",
+    "selectAProjectType": "Selecciona un tipo de proyecto",
+    "createProjectAction": "Crear proyecto"
+  },
+  "projects":{
+    "id": "Id: ",
+    "title": "Titulo: ",
+    "status": "Estado: ",
+    "description": "Descripcion: ",
+    "macroProject": "Macro Proyecto: ",
+    "initialDate": "Fecha de inicio: ",
+    "finalDate": "finalDate: ",
+    "hotbed": "Semillero: ",
+    "feedback": "Retroalimentacion final: ",
+    "visibility": "Visibilidad: ",
+    "city": "Ciudad: ",
+    "methodology": "Metodología: ",
+    "conclusions": "Conclusiones: ",
+    "justifications": "Justificacion: ",
+    "note": "Nota: ",
+    "projectType": "Tipo de proyecto: "
   }
 }
