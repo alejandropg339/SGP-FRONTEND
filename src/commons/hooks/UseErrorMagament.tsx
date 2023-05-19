@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { useSessionStore } from '../../store/session.store';
 import { SessionStateEnum } from '../../enums/sessionStates.enum';
 import { handleModal } from '../helpers/modalManagagemnt';
