@@ -11,11 +11,7 @@ export const useErrorManagement = () => {
         console.log('ERROR', error);
 
         if(error.status && error.status === '-1') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Sesión expirada',
-                text: 'Su sesión ha expirado, por favor vuelva a iniciar sesión.'
-            })
+            handleModal('error', 'Sesión expirada', 'Su sesión ha expirado, por favor vuelva a iniciar sesión.');
             sessionStore.setSession(SessionStateEnum.Expired)
             localStorage.removeItem('token');
             navigate('/login');
