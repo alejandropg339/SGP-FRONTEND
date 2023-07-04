@@ -5,4 +5,5 @@ export interface CreateProjectForm {
     methodology: string;
     justification: string;
     projectType: string;
+    projectStatus? : string;
 }

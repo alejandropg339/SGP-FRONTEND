@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { RepositoryApiAuth } from '../../../repositories/repositoryFactory';
 import { UserResponseDataInterface } from '../../../commons/interfaces/user.interface';
 import { useQuery } from '@tanstack/react-query';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
+import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
 import { useGlobal } from '../../../store/global.store';
 
 const getUsers = async () => {

@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { RepositoryFactory } from "../../../repositories/repositoryFactory";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../../store/global.store";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
+import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
 import { ProjectsResponseData } from "../interfaces/projects.interface";
 
 const getUsers = async () => {
     return await RepositoryFactory.RepositoryApiAuth.projects.getProjects();
 }
 
-export const useSearchUser = () => {
+export const useSearchProject = () => {
 
     const [querySearch, setQuery] = useState('');
     const [results, setResults] = useState<ProjectsResponseData[]>([]);

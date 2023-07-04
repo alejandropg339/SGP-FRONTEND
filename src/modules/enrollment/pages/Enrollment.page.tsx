@@ -25,7 +25,7 @@ const Enrollment = () => {
                 <div className="card-body p-5 text-center">
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase sgp-lb--h1">{t("enrollment.title")}</h2>
-                    <p className="text-white-50 mb-5 sgp-lb--large sgp-text-white">{t("enrollment.description")}</p>
+                    <p className="text-white-50 mb-5 sgp-lb--lg sgp-text-white">{t("enrollment.description")}</p>
                     <Formik
                       initialValues={EnrollmentInitialValues}
                       validationSchema={enrollmentFormValidations}

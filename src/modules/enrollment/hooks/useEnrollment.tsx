@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
+import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { RepositoryApiNoAuth } from "../../../repositories/repositoryFactory";
 import { EnrollmentRequestInterface } from "../interfaces/EnrollmentService.interface";
 import { useMutation } from "@tanstack/react-query";
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
 import { useLogin } from "../../login/hooks/useLogin";
-import { handleModal } from "../../../commons/helpers/modalManagagemnt";
+import { handleModal } from "../../../commons/helpers/modalManagement";
 import { useEffect } from "react";
 import { useGlobal } from "../../../store/global.store";
 
