@@ -3,7 +3,7 @@ import { RolesResponseInterface, UserRoleResponseInterface } from '../commons/in
 import { AllUsersResponseInterface, UserDeleteResponseInterface, UserResponseDataInterface } from '../commons/interfaces/user.interface';
 import ApiAuthClient from './clients/apiAuthClient';
 import { urlParser } from './endpoints/endpoints';
-import { CreateProjectRequest, CreateProjectResponse, ProjectsResponse } from '../modules/projects/interfaces/projects.interface';
+import { ActivateProjectResponse, CreateProjectRequest, CreateProjectResponse, DeleteProjectResponse, ProjectResponse, ProjectsResponse, UpdateProjectRequest, UpdateProjectResponse } from '../modules/projects/interfaces/projects.interface';
 import { ProjectTypesInterface } from '../modules/projects/interfaces/projectTypes.interface';
 
 const url = import.meta.env.VITE_API;
@@ -39,11 +39,23 @@ const ApiAuthRepository = {
         createProject(request: CreateProjectRequest): Promise<CreateProjectResponse> {
             return ApiAuthClient.post(urlParser(url).project, request)
         },
+        updateProject(request: UpdateProjectRequest, projectId: string): Promise<UpdateProjectResponse> {
+            return ApiAuthClient.put(urlParser(url).projectId(projectId), request)
+        },
         getProjectTypes(): Promise<ProjectTypesInterface> {
             return ApiAuthClient.get(urlParser(url).projectTypes)
         },
         getProjects(): Promise<ProjectsResponse> {
             return ApiAuthClient.get(urlParser(url).project)
+        },
+        getProject(projectId: string): Promise<ProjectResponse> {
+            return ApiAuthClient.get(urlParser(url).projectId(projectId))
+        },
+        deleteProject(projectId: string): Promise<DeleteProjectResponse> {
+            return ApiAuthClient.delete(urlParser(url).projectId(projectId))
+        },
+        activateProject(projectId: string): Promise<ActivateProjectResponse> {
+            return ApiAuthClient.put(urlParser(url).projectActivate(projectId))
         }
     }
 };

@@ -59,7 +59,8 @@
     "methodology": "Metodología",
     "projectType": "Tipo de poryecto",
     "selectAProjectType": "Selecciona un tipo de proyecto",
-    "createProjectAction": "Crear proyecto"
+    "createProjectAction": "Crear proyecto",
+    "statusProject": "Estado del proyecto: "
   },
   "projects":{
     "id": "Id: ",
@@ -77,6 +78,12 @@
     "conclusions": "Conclusiones: ",
     "justifications": "Justificacion: ",
     "note": "Nota: ",
-    "projectType": "Tipo de proyecto: "
+    "projectType": "Tipo de proyecto: ",
+    "statusProject": "Estado del proyecto: ",
+    "edit": "Editar",
+    "info": "Información",
+    "delete": "Eliminar",
+    "inactive": "Inactivo",
+    "activate": "Activar Proyecto"
   }
 }

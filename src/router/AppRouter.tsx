@@ -11,6 +11,9 @@ import { useGlobal } from "../store/global.store"
 import Loading from "../commons/components/Loading/Loading.component"
 import NewProject from "../modules/projects/pages/newProject/NewProject.page"
 import AllProjects from "../modules/projects/pages/allProjects/AllProjects.page"
+import EditProject from "../modules/projects/pages/editProject/EditProject.page"
+import Project from "../modules/projects/pages/project/Project.page"
+import NewProduct from "../modules/projects/pages/newProduct/NewProduct.page"
 
 export const AppRouter = () => {
     const { showLoading } =  useGlobal()
@@ -31,13 +34,16 @@ export const AppRouter = () => {
                         <div className="col-1 p-0 w-100">
                             <Sidebar />
                         </div>
-                        <div className="col">
+                        <div className="col ms-0 ps-0 ms-sm-5 ps-sm-4">
                             <PrivateRoute>
                                 <Routes>
                                     <Route path="my-account" element={<MyAccount />}></Route>
                                     <Route path="users" element={<Users />}></Route>
                                     <Route path="edit-user/:userId" element={<EditUser />}></Route>
                                     <Route path="projects/create" element={<NewProject />}></Route>
+                                    <Route path="projects/edit/:idProject" element={<EditProject />}></Route>
+                                    <Route path="projects/info/:idProject" element={<Project />}></Route>
+                                    <Route path="projects/product/:idProject" element={<NewProduct />}></Route>
                                     <Route path="projects/search" element={<AllProjects />}></Route>
                                     <Route path="*" element={<Navigate to="/users" replace />}></Route>
                                 </Routes>

@@ -1,4 +1,4 @@
-import { CreateProjectForm } from '../interfaces/createProjecForm.interface';
+import { CreateProjectForm } from '../interfaces/createProjectForm.interface';
 import { maxLength, minLength, requiredField } from './../../../commons/helpers/FormValidations';
 import * as Yup from 'yup';
 

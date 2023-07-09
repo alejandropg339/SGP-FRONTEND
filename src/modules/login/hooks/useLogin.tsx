@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { RepositoryApiNoAuth } from '../../../repositories/repositoryFactory';
 import { LoginFormInterface } from '../interfaces/LoginForm.interface';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
+import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
 import { useUserStore } from '../../../store/user.store';
 import { UserInterface } from '../../../commons/interfaces/user.interface';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,8 @@ import { useSessionStore } from '../../../store/session.store';
 import { SessionStateEnum } from '../../../enums/sessionStates.enum';
 import { useGlobal } from '../../../store/global.store';
 import { useEffect } from 'react';
-import { handleModal } from '../../../commons/helpers/modalManagagemnt';
+import { handleModal } from '../../../commons/helpers/modalManagement';
+import { shallow } from 'zustand/shallow';
 
 const doLogin = async (body: LoginFormInterface) => {
     return await RepositoryApiNoAuth.authentication.login({ institutionalEmail: body.email!, password: body.password! })

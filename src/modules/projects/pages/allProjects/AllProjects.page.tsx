@@ -1,9 +1,9 @@
 import { SearchBar } from "../../../../commons/components/searchBar/SearchBar.component";
 import ProjectsAccordion from "../../components/ProjectsAccordion";
-import { useSearchUser } from "../../hooks/useSearchProject";
+import { useSearchProject } from "../../hooks/useSearchProject";
 
 const AllProjects = () => {
-    const { results, setQuery } = useSearchUser();
+    const { results, setQuery } = useSearchProject();
 
     return (
         <div className="container mt-4">
@@ -13,8 +13,8 @@ const AllProjects = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col">
-                    {results && results.map((project, index) => (
+                <div className="col accordion">
+                    {results?.map((project, index) => (
                         <ProjectsAccordion project={ project } key={project.id ?? index} index={index} />
                     ))}
                 </div>

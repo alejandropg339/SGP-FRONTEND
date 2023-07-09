@@ -45,4 +45,27 @@
             color: #{$sgp-white};
         }
     }
+
+    &--tertiary {
+        border: 1px solid #{$sgp-gray-10};
+        background-color: #{$sgp-white};
+        color: #{$sgp-gray-10};
+
+        &:disabled {
+            opacity: 0.5;
+        }
+
+        &:hover {
+            opacity: 0.85;
+            transition: opacity 0.5s ease-in-out;
+            border: 1px solid #{$sgp-white} !important;
+            background-color: #{$sgp-gray-10};
+            color: #{$sgp-white};
+        }
+    }
+
+    &--sm{
+        padding: 8px 12px;
+        font-size: #{$sgp-label-medium-fs};
+    }
 }
