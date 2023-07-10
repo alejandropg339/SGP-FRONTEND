@@ -1,0 +1,45 @@
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 25px;
+    gap: 10px;
+}
+
+.flex-container-start {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 25px;
+    gap: 10px;
+}
+
+.flex-container-center {
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 25px;
+    gap: 10px;
+}
+
+.pdf-section {
+    border:2px;
+    border-color:rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    height: 750px;
+}
+
+.download-button {
+    background-color:solid #eeeeee;
+    border: none;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
