@@ -6,7 +6,7 @@
     font-style: normal !important;
     font-weight: normal;
     letter-spacing: normal;
-    color: #{$sgp-gray-50};
+    // color: #{$sgp-gray-50};
     text-transform: unset;
 
     // header
@@ -80,23 +80,18 @@
     }
 
     // small-text
-    &--small {
+    &--sm {
         font-size: #{$sgp-label-small-fs} !important;
         line-height: #{$sgp-label-small-lh} !important;
     }
 
     // small-text
-    &--large {
+    &--lg {
         font-size: #{$sgp-label-large-fs} !important;
         line-height: #{$sgp-label-large-lh} !important;
     }
 
-    &--large-bold {
-        font-size: #{$sgp-label-large-fs} !important;
-        line-height: #{$sgp-label-large-lh} !important;
-        font-weight: bold;
-    }
-    &--medium {
+    &--md {
         font-size: #{$sgp-label-medium-fs} !important;
         line-height: #{$sgp-label-medium-lh} !important;
     }

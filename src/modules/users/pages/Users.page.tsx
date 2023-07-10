@@ -13,8 +13,8 @@ const Users = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col">
-                    {results && results.map((user, index) => (
+                <div className="col accordion">
+                    {results?.map((user, index) => (
                         <UserAccordion user={user} key={user.cedula ?? index} index={index} />
                     ))}
                 </div>

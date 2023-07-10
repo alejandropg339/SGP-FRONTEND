@@ -8,7 +8,7 @@ interface InputProps {
   [x: string]: any;
 }
 
-type InputType = 'text' | 'password' | 'email' | 'tel' | 'number';
+type InputType = 'text' | 'password' | 'email' | 'tel' | 'number' | 'file';
 
 export const CustomInput = ({label, useField, ...props}: InputProps) => {
   const [field, meta] = useField(props);

@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { RepositoryFactory } from '../../../repositories/repositoryFactory';
 import { useEffect, useState } from 'react';
 import { ProjectTypesDataInterface } from '../interfaces/projectTypes.interface';
-import { handleModal } from '../../../commons/helpers/modalManagagemnt';
+import { handleModal } from '../../../commons/helpers/modalManagement';
 import { useNavigate } from 'react-router-dom';
 import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorMagament';
+import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
 import { useGlobal } from '../../../store/global.store';
 
 const getProjects = async () => await RepositoryFactory.RepositoryApiAuth.projects.getProjectTypes();

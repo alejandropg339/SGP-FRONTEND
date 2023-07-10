@@ -12,5 +12,6 @@ export const urlParser = (endpoint: string) => {
         projectId: (projectId: string) =>  `${endpoint}/project/${projectId}`,
         projectApprove: (projectId: string) => `${endpoint}/project/approve/${projectId}`,
         projectTypes: `${endpoint}/project/types/all`,
+        projectActivate:(projectId: string) =>  `${endpoint}/project/activate/${projectId}`,
     }
 }

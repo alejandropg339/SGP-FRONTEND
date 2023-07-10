@@ -7,7 +7,35 @@ export interface CreateProjectRequest {
     justificacion: string;
 }
 
+export interface UpdateProjectRequest {
+    tipo_proyecto: string;
+    titulo: string;
+    descripcion: string;
+    ciudad: string;
+    metodologia: string;
+    justificacion: string;
+    estado?: string;
+}
+
+export interface UpdateProjectResponse { 
+    status: string;
+    msg: string;
+    data: Array<number>;
+}
+
 export interface CreateProjectResponse {
+    status: string;
+    msg: string;
+    data: Array<number>;
+}
+
+export interface DeleteProjectResponse {
+    status: string;
+    msg: string;
+    data: Array<number>;
+}
+
+export interface ActivateProjectResponse {
     status: string;
     msg: string;
     data: Array<number>;
@@ -17,6 +45,12 @@ export interface ProjectsResponse {
     status: string;
     msg:    string;
     data:   ProjectsResponseData[];
+}
+
+export interface ProjectResponse {
+    status: string;
+    msg:    string;
+    data:   ProjectsResponseData;
 }
 
 export interface ProjectsResponseData {

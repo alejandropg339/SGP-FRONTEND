@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useSessionStore } from '../../store/session.store';
 import { SessionStateEnum } from '../../enums/sessionStates.enum';
-import { handleModal } from '../helpers/modalManagagemnt';
+import { handleModal } from '../helpers/modalManagement';
 
 export const useErrorManagement = () => {
     const navigate = useNavigate();

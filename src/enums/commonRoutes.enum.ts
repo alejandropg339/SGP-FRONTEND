@@ -3,5 +3,7 @@ export enum CommonRoutesEnum {
     Users = '/users',
     EditUser = '/edit-user',
     MyAccount = '/my-account',
+    Projects = '/projects',
     CerateProject = '/projects/create',
+    SearchProject = '/projects/search',
 }

@@ -4,10 +4,10 @@ import { useUserStore } from "../../../store/user.store";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { RepositoryFactory } from "../../../repositories/repositoryFactory";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorMagament";
+import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../../store/global.store";
-import { handleModal } from "../../../commons/helpers/modalManagagemnt";
+import { handleModal } from "../../../commons/helpers/modalManagement";
 import { RolesDataInterface } from "../../../commons/interfaces/roles.interface";
 
 const editUserService = async (user: Partial<UserResponseDataInterface>) => {

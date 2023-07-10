@@ -9,14 +9,21 @@ const UserAccordion = (props: UserAccordionProps) => {
     const { t } = useTranslation("global");
     const { userInfo } = useUserStore();
     const { keepEditUser } = useEditUser();
-    const { deleteUserAction,  activateUserDispatcher } = useToggleVisibilityUser();
+    const { deleteUserAction, activateUserDispatcher } = useToggleVisibilityUser();
 
     return (
-        <div className="accordion" id={props.user.cedula}>
+        <>
             <div className="accordion-item">
                 <h2 className="accordion-header">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${String(props.index)}`} aria-expanded="false" aria-controls={String(props.index)}>
-                        {props.user.nombres ?? ''} {props.user.apellidos ?? ''} - {props.user.cod_universitario ?? ''} &nbsp;&nbsp; {String(props.user.visibilidad) === String(0) && <span className="badge text-bg-danger">{t("user.inactive")}</span>}
+                    <button
+                        className="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#${String(props.index)}`}
+                        aria-expanded="false"
+                        aria-controls={String(props.index)}>
+                        {props.user.nombres ?? ''} {props.user.apellidos ?? ''} - {props.user.cod_universitario ?? ''} &nbsp;&nbsp; {String(props.user.visibilidad) === String(0) 
+                        && <span className="badge text-bg-danger">{t("user.inactive")}</span>}
                     </button>
                 </h2>
                 <div id={String(props.index)} className="accordion-collapse collapse" data-bs-parent={`#${props.user.cedula}`}>
@@ -33,7 +40,7 @@ const UserAccordion = (props: UserAccordionProps) => {
                         {userInfo.role === RolesEnum.Admin &&
                             <div className="d-flex mb-2">
                                 <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3" onClick={() => keepEditUser(props.user)}>{t("user.edit")}</button>
-                                {String(props.user.visibilidad) === String(1)
+                                {String(props.user.visibilidad) === '1'
                                     ?
                                     <button className="btn sgp-btn sgp-btn--primary" onClick={() => deleteUserAction(props.user.cedula ?? '')}>{t("user.delete")}</button>
                                     :
@@ -44,7 +51,7 @@ const UserAccordion = (props: UserAccordionProps) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
