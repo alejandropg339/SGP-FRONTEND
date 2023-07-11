@@ -14,6 +14,7 @@ import AllProjects from "../modules/projects/pages/allProjects/AllProjects.page"
 import EditProject from "../modules/projects/pages/editProject/EditProject.page"
 import Project from "../modules/projects/pages/project/Project.page"
 import NewProduct from "../modules/projects/pages/newProduct/NewProduct.page"
+import NewParticipant from "../modules/projects/pages/newParticipant/NewParticipant.page"
 
 export const AppRouter = () => {
     const { showLoading } =  useGlobal()
@@ -44,6 +45,7 @@ export const AppRouter = () => {
                                     <Route path="projects/edit/:idProject" element={<EditProject />}></Route>
                                     <Route path="projects/info/:idProject" element={<Project />}></Route>
                                     <Route path="projects/product/:idProject" element={<NewProduct />}></Route>
+                                    <Route path="projects/add-participant/:idProject" element={<NewParticipant />}></Route>
                                     <Route path="projects/search" element={<AllProjects />}></Route>
                                     <Route path="*" element={<Navigate to="/users" replace />}></Route>
                                 </Routes>
