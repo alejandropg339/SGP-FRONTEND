@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { LayoutFormProjects } from "../../layout/LayoutFormProjects";
+import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects";
 import { ParticipantFormInterface } from "../../interfaces/participant.interface";
 import { ParticipantFrom } from "../../components/ParticipantForm.component";
 import { handleActionModal } from "../../../../commons/helpers/modalManagement";

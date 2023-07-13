@@ -3,7 +3,7 @@ import { CreateProjectForm } from "../../interfaces/createProjectForm.interface"
 import { useProject } from "../../hooks/useProject";
 import { requestTransform } from "../../utils/requestProject";
 import { ProjectFrom } from "../../components/ProjectFrom.component";
-import { LayoutFormProjects } from "../../layout/LayoutFormProjects";
+import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects";
 import { Actions } from "../../enums/Actions.enum";
 
 const NewProject = () => {

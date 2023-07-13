@@ -91,7 +91,7 @@ const EditUser = () => {
                             <CustomSelect label={t("editUser.role") ?? ""} type='email' name='role' useField={useField} onChange={formikProps.handleChange} id="selectRole">
                             <option defaultValue={userRole?.toUpperCase()}>{t("editUser.selectARole") ?? ""}</option>
                               {roles.map((role) => (
-                                <option value={role.nombre.toLocaleUpperCase()}>{role.nombre}</option>
+                                <option value={role.nombre.toLocaleUpperCase()} key={role.nombre}>{role.nombre}</option>
                               ))}
                             </CustomSelect>
                           </div>

@@ -62,7 +62,6 @@ export const useProject = () => {
         queryKey: ['project', idProject],
         queryFn: () => findProject(idProject ??''),
         onSuccess: (data) => {
-            console.log('settet', data, idProject)
             dispatch({ type: 'setProjectData', projectsData: data.data })
             setInitialValues(responseToForm(data.data))
         },

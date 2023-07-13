@@ -7,5 +7,5 @@ export const EditUserFormValidations = Yup.object({
     personalEmail: Yup.string().trim().matches(emailFormatValidation.value, emailFormatValidation.message).required(requiredField),
     phone: Yup.string().matches(numeric.value, numeric.message).required(requiredField),
     role: Yup.string().required(requiredField),
-    password: Yup.string().trim().matches(passwordFormatValidation.value, passwordFormatValidation.message).required(requiredField()),
+    password: Yup.string().trim().matches(passwordFormatValidation.value, passwordFormatValidation.message)
 });

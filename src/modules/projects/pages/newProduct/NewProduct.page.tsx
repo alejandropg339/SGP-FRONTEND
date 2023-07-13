@@ -1,5 +1,5 @@
 import { ProductForm } from "../../components/ProductForm.component"
-import { LayoutFormProjects } from "../../layout/LayoutFormProjects"
+import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects"
 
 const NewProduct = () => {
     const submit = (formValues: any) => {
