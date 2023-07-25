@@ -1,92 +1,3 @@
-function loadJson(data:any, element:any) {
-    while (element.options.length > 1) {
-        element.remove(1);
-    }
-    var opt = null;
-    data.map((item:any) => {
-        opt = document.createElement('option');
-        opt.value = item.id;
-        if (item.nombre === undefined) {
-            opt.innerHTML = item.titulo;
-        } else {
-            opt.innerHTML = item.nombre;
-        }
-        element.appendChild(opt);
-    })
-}
-
-function validateStatus(data:any, status:any, element:any){
-    if(status !== null){
-        if(status !== undefined){
-            loadJson(data,element);
-        }
-
-    }
-}
-
-function loadGrupo(data:any, status:any) {
-    try {
-        var gruposInv = document.getElementById("grupoInvestigacion");
-        validateStatus(data, status, gruposInv);
-    } catch (error) {
-        console.log("Error", error);
-    }
-}
-
-function loadSemillero(data:any, status:any) {
-    try {
-        var semillero = document.getElementById("semillero");
-        validateStatus(data,status,semillero);
-        /*
-        switch (status) {
-            case '3003':
-                loadJson(data, semillero);
-                break;
-            default:
-                break;
-        }
-        */
-    } catch (error) {
-        console.log("Error", error);
-    }
-}
-
-function loadPrograma(data:any, status:any) {
-    try {
-        var programa = document.getElementById("programa");
-        validateStatus(data,status,programa);
-        /*
-        switch (status) {
-            case '1001':
-                loadJson(data, programa);
-                break;
-            default:
-                break;
-        }
-        */
-    } catch (error) {
-        console.log("Error", error);
-    }
-}
-
-function loadProyecto(data:any, status:any) {
-    try {
-        var proyecto = document.getElementById("proyecto");
-        validateStatus(data,status,proyecto);
-        /*
-        switch (status) {
-            case '4018':
-                loadJson(data, proyecto);
-                break;
-            default:
-                break;
-        }
-        */
-    } catch (error) {
-        console.log("Error", error);
-    }
-}
-
 function setRequest(url:string) {
     try {
         let parse = JSON.stringify(url);
@@ -98,4 +9,34 @@ function setRequest(url:string) {
     }
 }
 
-export { loadGrupo, loadSemillero, loadPrograma, loadProyecto, setRequest};
+const repNames:any = {
+    "0": "Datos básicos Semilleros",
+    "1": "Integrantes activos Semilleros",
+    "2": "Producción Semilleros",
+    "3": "Participación en eventos Semilleros",
+    "4": "Participación en convocatorias Semilleros",
+    "5": "Proyectos en convocatorias abiertas Semilleros",
+    "6": "Proyectos activos Semilleros",
+    "7": "Proyectos finalizados Semilleros",
+    "8": "Investigadores en formación Semilleros",
+    "9": "Uso de presupuesto Semilleros",
+    "10": "Producción GI",
+    "11": "Integrantes activos GI",
+    "12": "Datos básicos GI",
+    "13": "Participación en eventos GI",
+    "14": "Participación en convocatorias GI",
+    "15": "Proyectos en convocatorias abiertas GI",
+    "16": "Proyectos activos GI",
+    "17": "Proyectos finalizados GI",
+    "18": "Investigadores en formación",
+    "19": "Uso de presupuesto GI",
+    "20": "Semilleros en un programa",
+    "21": "Grupos de investigación en un programa",
+    "22": "Información de un proyecto",
+    "23": "Actividad en un periodo Semilleros",
+    "24": "Actividad en un periodo GI",
+    "25": "Uso de presupuesto en periodo Semilleros",
+    "26": "Uso de presupuesto en periodo GI"
+};
+
+export {setRequest, repNames};

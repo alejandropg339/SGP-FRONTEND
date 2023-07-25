@@ -3,13 +3,14 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
-import { loadGrupo, setRequest } from '../services/loadData';
+import { setRequest, repNames } from '../services/loadData';
 import { useLocation } from 'react-router-dom';
 
 //Funcionalidad lista
-//Pendiente limpieza y reciclaje
+//Pendiente reciclaje
 
 function FacGi() {
+    let request = {};
     const getFilePluginInstance = getFilePlugin();
     const { Download } = getFilePluginInstance;
     const [facultad, setFacultad] = useState([]);
@@ -17,12 +18,10 @@ function FacGi() {
     const [statusF, setStatusF] = useState("");
     const [statusG, setStatusG] = useState("");
 
-    const [objt, setObjt] = useState({});
     const [userId, setUserId] = useState("1000689373");
     const location = useLocation();
     const { reportId } = location.state;
 
-    const [pdf, setPdf] = useState<any>([]);
     const [pdfUrl, setPdfUrl] = useState("");
 
     const fetchFacultadData = async () => {
@@ -35,18 +34,18 @@ function FacGi() {
         }
     }
 
-    const fetchGrupoData = async () => {
+    const fetchGrupoData = async (facultad: any) => {
         try {
-            setObjt({
-                facultad: statusF
-            })
+            request = {
+                facultad
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
@@ -57,11 +56,11 @@ function FacGi() {
 
     const fetchPdfData = async () => {
         try {
-            setObjt({
+            request = {
                 dato: statusG,
                 reporte: reportId,
                 usuario: userId
-            })
+            }
             const result = await fetch("http://localhost:8081/report/generar", {
                 method: "POST",
 
@@ -69,54 +68,61 @@ function FacGi() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            setPdf(parsedResponse);
-            let url = setRequest(pdf);
-            setPdfUrl(url!);
+            let url: string = setRequest(parsedResponse) as string;
+            setPdfUrl(url);
         } catch (error) {
             console.log("Error xd", error);
         }
-
     }
 
     useEffect(() => {
         fetchFacultadData();
     }, []);
 
+    const handleFacultySelected = async (event: any) => {
+        setStatusF(event.target.value);
+        await fetchGrupoData(event.target.value);
+    }
+
     return <>
+        <div>
+            <h1>{repNames[reportId]}</h1>
+        </div>
         <div className="flex-container">
-            <div hidden>
-                <input id='reportId' type='text' value={reportId} ></input>
-                <input id='userId' type='text' value={userId}></input>
-            </div>
             <div>
                 <select id="facultad"
                     value={statusF}
-                    onChange={(e) => setStatusF(e.target.value)}
-                    onMouseOut={fetchGrupoData}
+                    onChange={async (e) => await handleFacultySelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Facultad--</option>
                     {facultad.length > 0 && (
                         <>
-                            {facultad.map((facu:any) => (
-                                <option value={facu.id}>{facu.nombre}</option>
+                            {facultad.map((facu: any) => (
+                                <option value={facu.id} key={facu.id}>{facu.nombre}</option>
                             ))}
                         </>
                     )}
                 </select>
             </div>
             <div>
-                <div>
-                    <select id="grupoInvestigacion"
-                        value={statusG}
-                        onChange={(e) => setStatusG(e.target.value)}
-                        onMouseOver={() => loadGrupo(grupo, statusF)}
-                    >
-                        <option value="0">--Grupo--</option>
-                    </select>
-                </div>
+                <select id="grupoInvestigacion"
+                    value={statusG}
+                    onChange={(e) => setStatusG(e.target.value)}
+                    className='select-general'
+                >
+                    <option value="0">--Grupo--</option>
+                    {grupo.length > 0 && (
+                        <>
+                            {grupo.map((group: any) => (
+                                <option value={group.id} key={group.id}>{group.nombre}</option>
+                            ))}
+                        </>
+                    )}
+                </select>
             </div>
 
             <div>
@@ -126,7 +132,7 @@ function FacGi() {
         </div>
         <div>
             <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
+                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
                     {pdfUrl && (
                         <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
                     )}
@@ -134,7 +140,9 @@ function FacGi() {
             </div>
         </div>
         <div className="flex-container-center">
-            <button type="button" className="download-button"><Download /></button>
+            <div role="button" className="download-button">
+                <Download />
+            </div>
         </div>
 
     </>

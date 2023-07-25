@@ -3,7 +3,7 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
-import { loadPrograma, setRequest } from '../services/loadData';
+import { setRequest, repNames } from '../services/loadData';
 import { useLocation } from 'react-router-dom';
 
 //Funcionalidad lista
@@ -11,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 
 function FacProg() {
+    let request = {};
     const getFilePluginInstance = getFilePlugin();
     const { Download } = getFilePluginInstance;
     const [facultad, setFacultad] = useState([]);
@@ -18,12 +19,10 @@ function FacProg() {
     const [statusF, setStatusF] = useState("");
     const [statusP, setStatusP] = useState("");
 
-    const [objt, setObjt] = useState({});
     const [userId, setUserId] = useState("1000689373");
     const location = useLocation();
     const { reportId } = location.state;
 
-    const [pdf, setPdf] = useState<any>([]);
     const [pdfUrl, setPdfUrl] = useState("");
 
 
@@ -38,18 +37,18 @@ function FacProg() {
 
     }
 
-    const fetchProgramaData = async () => {
+    const fetchProgramaData = async (facultad: any) => {
         try {
-            setObjt({
-                facultad: statusF
-            })
+            request = {
+                facultad
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/programa", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setPrograma(parsedResponse);
@@ -60,11 +59,11 @@ function FacProg() {
 
     const fetchPdfData = async () => {
         try {
-            setObjt({
+            request = {
                 dato: statusP,
                 reporte: reportId,
                 usuario: userId
-            })
+            }
             const result = await fetch("http://localhost:8081/report/generar", {
                 method: "POST",
 
@@ -72,42 +71,41 @@ function FacProg() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            setPdf(parsedResponse);
-            let url = setRequest(pdf);
-            setPdfUrl(url!);
+            let url: string = setRequest(parsedResponse) as string;
+            setPdfUrl(url);
         } catch (error) {
             console.log("Error xd", error);
         }
-
     }
 
     useEffect(() => {
         fetchFacultadData();
     }, []);
 
-
-
+    const handleFacultySelected = async (event: any) => {
+        setStatusF(event.target.value);
+        await fetchProgramaData(event.target.value);
+    }
 
     return <>
+        <div>
+            <h1>{repNames[reportId]}</h1>
+        </div>
         <div className="flex-container">
-            <div hidden>
-                <input id='reportId' value={reportId} type='text'></input>
-                <input id='userId' value={userId} type='text'></input>
-            </div>
             <div>
                 <select id="facultad"
                     value={statusF}
-                    onChange={(e) => setStatusF(e.target.value)}
-                    onMouseOut={fetchProgramaData}
+                    onChange={async (e) => await handleFacultySelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Facultad--</option>
                     {facultad.length > 0 && (
                         <>
-                            {facultad.map((facu:any) => (
-                                <option value={facu.id}>{facu.nombre}</option>
+                            {facultad.map((facu: any) => (
+                                <option value={facu.id} key={facu.id}>{facu.nombre}</option>
                             ))}
                         </>
                     )}
@@ -117,9 +115,16 @@ function FacProg() {
                 <select id="programa"
                     value={statusP}
                     onChange={(e) => setStatusP(e.target.value)}
-                    onMouseOver={() => loadPrograma(programa, statusF)}
+                    className='select-general'
                 >
                     <option value="0">--Programa--</option>
+                    {programa.length > 0 && (
+                        <>
+                            {programa.map((item: any) => (
+                                <option value={item.id} key={item.id}>{item.nombre}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
 
@@ -130,15 +135,17 @@ function FacProg() {
         </div>
         <div>
             <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
-                    {pdfUrl && (
+                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                    {pdfUrl !== "" && (
                         <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
                     )}
                 </Worker>
             </div>
         </div>
         <div className="flex-container-center">
-            <button type="button" className="download-button"><Download /></button>
+            <div role="button" className="download-button">
+                <Download />
+            </div>
         </div>
 
     </>

@@ -4,7 +4,7 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
-import { loadGrupo, loadSemillero, loadProyecto, setRequest } from '../services/loadData';
+import { setRequest, repNames } from '../services/loadData';
 import '../styles/reports.scss'
 
 //Funcionalidad lista
@@ -18,12 +18,11 @@ function FacGISemProy() {
     /*
     Funciones de carga de datos desde la API
     */
+    let request = {};
     const getFilePluginInstance = getFilePlugin();
     const { Download } = getFilePluginInstance;
-    const [pdf, setPdf] = useState<any>([]);
     const [pdfUrl, setPdfUrl] = useState("");
     const [userId, setUserId] = useState("1000689373");
-    const [objt, setObjt] = useState({});
     const location = useLocation();
     const { reportId } = location.state;
 
@@ -40,11 +39,11 @@ function FacGISemProy() {
 
     const fetchPdfData = async () => {
         try {
-            setObjt({
+            request = {
                 dato: statusPj,
                 reporte: reportId,
                 usuario: userId
-            })
+            }
             const result = await fetch("http://localhost:8081/report/generar", {
                 method: "POST",
 
@@ -52,12 +51,11 @@ function FacGISemProy() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            setPdf(parsedResponse);
-            let url = setRequest(pdf);
-            setPdfUrl(url!);
+            let url: string = setRequest(parsedResponse) as string;
+            setPdfUrl(url);
         } catch (error) {
             console.log("Error xd", error);
         }
@@ -75,18 +73,18 @@ function FacGISemProy() {
 
     }
 
-    const fetchGrupoData = async () => {
+    const fetchGrupoData = async (facultad: any) => {
         try {
-            setObjt({
-                facultad: statusF
-            })
+            request = {
+                facultad
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
@@ -95,18 +93,18 @@ function FacGISemProy() {
         }
     }
 
-    const fetchSemilleroData = async () => {
+    const fetchSemilleroData = async (gi: any) => {
         try {
-            setObjt({
-                gi: statusG
-            })
+            request = {
+                gi
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi/semillero", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setSemillero(parsedResponse);
@@ -115,18 +113,18 @@ function FacGISemProy() {
         }
     }
 
-    const fetchProyectoData = async () => {
+    const fetchProyectoData = async (semillero: any) => {
         try {
-            setObjt({
-                semillero: statusS
-            })
+            request = {
+                semillero
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi/semillero/proyecto", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setProyecto(parsedResponse);
@@ -135,31 +133,44 @@ function FacGISemProy() {
         }
     }
 
-
     useEffect(() => {
         fetchFacultadData();
     }, []);
+
+    const handleFacultySelected = async (event: any) => {
+        setStatusF(event.target.value);
+        await fetchGrupoData(event.target.value);
+    }
+
+    const handleGISelected = async (event: any) => {
+        setStatusG(event.target.value);
+        await fetchSemilleroData(event.target.value);
+    }
+
+    const handleSemSelected = async (event: any) => {
+        setStatusS(event.target.value);
+        await fetchProyectoData(event.target.value);
+    }
 
     /*
     Funcion de renderizado
     */
     return <>
+        <div>
+            <h1>{repNames[reportId]}</h1>
+        </div>
         <div className="flex-container">
-            <div hidden>
-                <input id='reportId' type='text' value={reportId}/*Traer id reporte*/></input>
-                <input id='userId' type='text' value={userId}/*Traer id usuario*/></input>
-            </div>
             <div>
                 <select id="facultad"
                     value={statusF}
-                    onChange={(e) => setStatusF(e.target.value)}
-                    onMouseOut={fetchGrupoData}
+                    onChange={async (e) => await handleFacultySelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Facultad--</option>
                     {facultad.length > 0 && (
                         <>
-                            {facultad.map((facu:any) => (
-                                <option value={facu.id}>{facu.nombre}</option>
+                            {facultad.map((facu: any) => (
+                                <option value={facu.id} key={facu.id}>{facu.nombre}</option>
                             ))}
                         </>
                     )}
@@ -168,37 +179,55 @@ function FacGISemProy() {
             <div>
                 <select id="grupoInvestigacion"
                     value={statusG}
-                    onChange={(e) => setStatusG(e.target.value)}
-                    onMouseOver={() => loadGrupo(grupo, statusF)}
-                    onMouseOut={fetchSemilleroData}
+                    onChange={async (e) => await handleGISelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Grupo--</option>
+                    {grupo.length > 0 && (
+                        <>
+                            {grupo.map((group: any) => (
+                                <option value={group.id} key={group.id}>{group.nombre}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
 
             <div>
                 <select id="semillero"
                     value={statusS}
-                    onChange={(e) => setStatusS(e.target.value)}
-                    onMouseOver={() => loadSemillero(semillero, statusG)}
-                    onMouseOut={fetchProyectoData}
+                    onChange={async (e) => await handleSemSelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Semillero--</option>
+                    {semillero.length > 0 && (
+                        <>
+                            {semillero.map((sem: any) => (
+                                <option value={sem.id} key={sem.id}>{sem.nombre}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
             <div>
                 <select id="proyecto"
                     value={statusPj}
                     onChange={(e) => setStatusPj(e.target.value)}
-                    onMouseOver={() => loadProyecto(proyecto, statusPj)}
+                    className='select-general'
                 >
                     <option value="0">--Proyecto--</option>
+                    {proyecto.length > 0 && (
+                        <>
+                            {proyecto.map((item: any) => (
+                                <option value={item.id} key={item.id}>{item.titulo}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
             <div>
                 <button type="button" onClick={fetchPdfData}>Generar reporte</button>
             </div>
-
         </div>
         <div id="pdf">
             <div className="pdf-section">
@@ -210,7 +239,9 @@ function FacGISemProy() {
             </div>
         </div>
         <div className="flex-container-center">
-            <button type="button" className="download-button"><Download /></button>
+            <div role="button" className="download-button">
+                <Download />
+            </div>
         </div>
 
     </>

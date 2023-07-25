@@ -4,7 +4,7 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
-import { loadGrupo, loadSemillero, loadProyecto, setRequest } from '../services/loadData';
+import { setRequest, repNames } from '../services/loadData';
 
 //Funcionalidad lista
 //Pendiente limpieza y reciclaje
@@ -17,15 +17,9 @@ function FacGISemProy() {
     /*
     Funciones de carga de datos desde la API
     */
+    let request = {};
     const getFilePluginInstance = getFilePlugin();
     const { Download } = getFilePluginInstance;
-    const [pdf, setPdf] = useState<any>([]);
-    const [pdfUrl, setPdfUrl] = useState("");
-    const [userId, setUserId] = useState("1000689373");
-    const [objt, setObjt] = useState({});
-    const location = useLocation();
-    const { reportId } = location.state;
-
     const [facultad, setFacultad] = useState([]);
     const [grupo, setGrupo] = useState([]);
     const [semillero, setSemillero] = useState([]);
@@ -35,33 +29,15 @@ function FacGISemProy() {
     const [statusG, setStatusG] = useState<any>([]);
     const [statusS, setStatusS] = useState<any>([]);
     const [statusPj, setStatusPj] = useState<any>([]);
+    const [statusIni, setStatusIni] = useState("");
+    const [statusFin, setStatusFin] = useState("");
 
 
-    const fetchPdfData = async () => {
-        try {
-            setObjt({
-                dato: statusPj,
-                reporte: reportId,
-                usuario: userId
-            })
-            const result = await fetch("http://localhost:8081/report/generar", {
-                method: "POST",
+    const [userId, setUserId] = useState("1000689373");
+    const location = useLocation();
+    const { reportId } = location.state;
 
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(objt)
-            });
-            const parsedResponse = await result.json();
-            setPdf(parsedResponse);
-            let url = setRequest(pdf);
-            setPdfUrl(url!);
-        } catch (error) {
-            console.log("Error xd", error);
-        }
-
-    }
+    const [pdfUrl, setPdfUrl] = useState("");
 
     const fetchFacultadData = async () => {
         try {
@@ -71,21 +47,20 @@ function FacGISemProy() {
         } catch (error) {
             console.log("Error", error);
         }
-
     }
 
-    const fetchGrupoData = async () => {
+    const fetchGrupoData = async (facultad: any) => {
         try {
-            setObjt({
-                facultad: statusF
-            })
+            request = {
+                facultad
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
@@ -94,18 +69,18 @@ function FacGISemProy() {
         }
     }
 
-    const fetchSemilleroData = async () => {
+    const fetchSemilleroData = async (gi: any) => {
         try {
-            setObjt({
-                gi: statusG
-            })
+            request = {
+                gi
+            }
             const result = await fetch("http://localhost:8081/filtro/facultad/gi/semillero", {
                 method: "POST",
 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
             setSemillero(parsedResponse);
@@ -114,51 +89,65 @@ function FacGISemProy() {
         }
     }
 
-    const fetchProyectoData = async () => {
+    const fetchPdfDataTime = async () => {
         try {
-            setObjt({
-                semillero: statusS
-            })
-            const result = await fetch("http://localhost:8081/filtro/facultad/gi/semillero/proyecto", {
+            request = {
+                dato: statusS,
+                reporte: reportId,
+                usuario: userId,
+                inicio: statusIni,
+                fin: statusFin
+            }
+            const result = await fetch("http://localhost:8081/report/generar/anios", {
                 method: "POST",
 
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(objt)
+                body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            setProyecto(parsedResponse);
+            let url: string = setRequest(parsedResponse) as string;
+            setPdfUrl(url);
         } catch (error) {
-            console.log("ªªªªªªErrorªªªªªª", error);
+            console.log("Error xd", error);
         }
     }
-
 
     useEffect(() => {
         fetchFacultadData();
     }, []);
 
+    const handleFacultySelected = async (event: any) => {
+        setStatusF(event.target.value);
+        await fetchGrupoData(event.target.value);
+    }
+
+    const handleGISelected = async (event: any) => {
+        setStatusG(event.target.value);
+        await fetchSemilleroData(event.target.value);
+    }
+
     /*
     Funcion de renderizado
     */
     return <>
+        <div>
+            <h1>{repNames[reportId]}</h1>
+        </div>
         <div className="flex-container">
-            <div hidden>
-                <input id='reportId' type='text' value={reportId}/*Traer id reporte*/></input>
-                <input id='userId' type='text' value={userId}/*Traer id usuario*/></input>
-            </div>
             <div>
                 <select id="facultad"
                     value={statusF}
-                    onChange={(e) => setStatusF(e.target.value)}
-                    onMouseOut={fetchGrupoData}
+                    onChange={async (e) => await handleFacultySelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Facultad--</option>
                     {facultad.length > 0 && (
                         <>
-                            {facultad.map((facu:any) => (
-                                <option value={facu.id}>{facu.nombre}</option>
+                            {facultad.map((facu: any) => (
+                                <option value={facu.id} key={facu.id}>{facu.nombre}</option>
                             ))}
                         </>
                     )}
@@ -167,11 +156,17 @@ function FacGISemProy() {
             <div>
                 <select id="grupoInvestigacion"
                     value={statusG}
-                    onChange={(e) => setStatusG(e.target.value)}
-                    onMouseOver={() => loadGrupo(grupo, statusF)}
-                    onMouseOut={fetchSemilleroData}
+                    onChange={async (e) => await handleGISelected(e)}
+                    className='select-general'
                 >
                     <option value="0">--Grupo--</option>
+                    {grupo.length > 0 && (
+                        <>
+                            {grupo.map((group: any) => (
+                                <option value={group.id} key={group.id}>{group.nombre}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
 
@@ -179,29 +174,60 @@ function FacGISemProy() {
                 <select id="semillero"
                     value={statusS}
                     onChange={(e) => setStatusS(e.target.value)}
-                    onMouseOver={() => loadSemillero(semillero, statusG)}
-                    onMouseOut={fetchProyectoData}
+                    className='select-general'
                 >
                     <option value="0">--Semillero--</option>
+                    {semillero.length > 0 && (
+                        <>
+                            {semillero.map((sem: any) => (
+                                <option value={sem.id} key={sem.id}>{sem.nombre}</option>
+                            ))}
+                        </>
+                    )}
                 </select>
             </div>
             <div>
-                <select id="proyecto"
-                    value={statusPj}
-                    onChange={(e) => setStatusPj(e.target.value)}
-                    onMouseOver={() => loadProyecto(proyecto, statusPj)}
+                <select id="anoIni"
+                    value={statusIni}
+                    onChange={(e) => setStatusIni(e.target.value)}
+                    className='select-general'
                 >
-                    <option value="0">--Proyecto--</option>
+                    <option value="0">--Año inicial--</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
                 </select>
             </div>
+
             <div>
-                <button type="button" onClick={fetchPdfData}>Generar reporte</button>
+                <select id="anoFin"
+                    value={statusFin}
+                    onChange={(e) => setStatusFin(e.target.value)}
+                    className='select-general'
+                >
+                    <option value="0">--Año Final--</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="button" onClick={fetchPdfDataTime}>Generar reporte</button>
             </div>
 
         </div>
-        <div id="pdf">
+        <div>
             <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js'>
+                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
                     {pdfUrl && (
                         <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
                     )}
@@ -209,7 +235,9 @@ function FacGISemProy() {
             </div>
         </div>
         <div className="flex-container-center">
-            <button type="button" className="download-button"><Download /></button>
+            <div role="button" className="download-button">
+                <Download />
+            </div>
         </div>
 
     </>
