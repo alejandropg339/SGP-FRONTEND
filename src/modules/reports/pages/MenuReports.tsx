@@ -46,7 +46,7 @@ const Layout = () => {
                     <h1>Presupuesto</h1>
                     <ul>
                         <li><Link to="/reports/facGiSem" state={{ reportId: "9" }}>Uso Semilleros</Link></li>
-                        <li><Link to="/reports/facGiSem" state={{ reportId: "19" }}>Uso Grupos de investigación</Link></li>
+                        <li><Link to="/reports/facGi" state={{ reportId: "19" }}>Uso Grupos de investigación</Link></li>
                         <li><Link to="/reports/facGiSemTime" state={{ reportId: "25" }}>Uso Semilleros en periodo</Link></li>
                         <li><Link to="/reports/facGiTime" state={{ reportId: "26" }}>Uso Grupo de investigación en periodo</Link></li>
                     </ul>
