@@ -56,12 +56,14 @@ const ProjectsAccordion = (props: ProjectsAccordionProps) => {
                             {userInfo.role === RolesEnum.Admin &&
                                 <>
                                     <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={info}>{t("projects.info")}&nbsp;<i className='bx bx-info-circle sgp-lb sgp-lb--subtitle-movil'></i></button>
-                                    <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={edit}>{t("projects.edit")}&nbsp;<i className='bx bx-edit-alt sgp-lb sgp-lb--subtitle-movil'></i></button>
+                                    {/* FIXME: Uncomment this lines */}
+                                    {/* <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={edit}>{t("projects.edit")}&nbsp;<i className='bx bx-edit-alt sgp-lb sgp-lb--subtitle-movil'></i></button>
                                     {String(props.project.visibilidad) === '1'
                                         ?
                                         <button className="btn sgp-btn sgp-btn--primary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={() => deleteProjectAction(String(props.project.id))}>{t("projects.delete")}&nbsp;<i className='bx bx-trash sgp-lb sgp-lb--subtitle-movil sgp-text-white'></i></button>
                                         :
-                                        <button className="btn sgp-btn sgp-btn--primary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={() => mutateActivateProject(String(props.project.id))}>{t("projects.activate")}</button>}
+                                        <button className="btn sgp-btn sgp-btn--primary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={() => mutateActivateProject(String(props.project.id))}>{t("projects.activate")}</button>
+                                    } */}
 
                                 </>
                             }

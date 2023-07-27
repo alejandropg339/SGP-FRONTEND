@@ -67,6 +67,9 @@ export const useEditUser = () => {
         queryKey: ['roles'],
         queryFn: getRoles,
         onSuccess: (data) => {
+            const roles = data?.data
+            //FIXME: remove this when the backend is ready
+            roles.push({ nombre: 'EGRESADO', descripcion: 'EGRESADO' })
             setRoles(data?.data ?? []);
         },
         onError: (error: any) => {

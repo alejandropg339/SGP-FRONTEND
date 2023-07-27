@@ -7,6 +7,7 @@ import { useUserStore } from "../../../store/user.store";
 import { useEditUser } from "../hooks/useEditUser";
 import { UserResponseDataInterface } from "../../../commons/interfaces/user.interface";
 import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component";
+import { handleModal } from "../../../commons/helpers/modalManagement";
 
 const EditUser = () => {
   const { t } = useTranslation('global');
@@ -23,11 +24,16 @@ const EditUser = () => {
     }
 
     if(userRole !== formValues.role){
-      console.log('here')
-      const result = await handleEditRoleUser.mutateAsync(formValues.role!);
-      result.status === '1' && handleEditUser.mutate(newUserInfo)
+      //FIXME: Uncomment this lines
+      // const result = await handleEditRoleUser.mutateAsync(formValues.role!);
+      // result.status === '1' && handleEditUser.mutate(newUserInfo)
+      //TODO: DELETE HANDEMODAL
+      handleModal('success', 'Proceso exitoso!', 'El usuario se ha actualizado correctamente');
     }else {
-      handleEditUser.mutate(newUserInfo)
+      //FIXME: Uncomment this lines
+      // handleEditUser.mutate(newUserInfo)
+      //TODO: DELETE HANDEMODAL
+      handleModal('success', 'Proceso exitoso!', 'El usuario se ha actualizado correctamente');
     }
   }
 
@@ -54,7 +60,8 @@ const EditUser = () => {
               <p className="sgp-lb--h1 mb-1">{userToEditInfo.nombres} {userToEditInfo.apellidos} - {userToEditInfo.cod_universitario}</p>
               <p className="sgp-lb--h4 mb-0">{userToEditInfo.correo_est}</p>
               <p className="sgp-lb--h4 mb-1">C.C {userToEditInfo.cedula}</p>
-              <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h5 sgp-lower-text">{userRole}</p>
+              {/* FIXME UNCOMMENT THIS LINE */}
+              {/* <p className="badge rounded-pill sgp-bg-orange-95 sgp-lb--h5 sgp-lower-text">{userRole}</p> */}
             </div>
           </div>
           <div className="row d-flex justify-content-center align-items-center" >

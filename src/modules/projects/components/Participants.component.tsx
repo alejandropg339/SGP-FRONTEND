@@ -24,16 +24,19 @@ export const Participants = ({ idProject }: { idProject: string }) => {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item sgp-lb-h5 ps-2 d-flex justify-content-between">
                             <p>Alejandro Padilla</p>
-                            <button className="btn sgp-btn sgp-btn--secondary" onClick={deleteParticipant}><i className='bx bx-trash-alt' ></i></button>
+                    {/* FIXME: UNCOMMENT THIS LINES */}
+                            {/* <button className="btn sgp-btn sgp-btn--secondary" onClick={deleteParticipant}><i className='bx bx-trash-alt' ></i></button> */}
                         </li>
                         <li className="list-group-item sgp-lb-h5 ps-2 d-flex justify-content-between">
                             <p>Jefferson Daza</p>
-                            <button className="btn sgp-btn sgp-btn--secondary" onClick={deleteParticipant}><i className='bx bx-trash-alt' ></i></button>
+                    {/* FIXME: UNCOMMENT THIS LINES */}
+                            {/* <button className="btn sgp-btn sgp-btn--secondary" onClick={deleteParticipant}><i className='bx bx-trash-alt' ></i></button> */}
                         </li>
                     </ul>
-                    <div className="d-flex mb-2 mt-3">
+                    {/* FIXME: UNCOMMENT THIS LINES */}
+                    {/* <div className="d-flex mb-2 mt-3">
                         <button className="btn sgp-btn sgp-btn--primary me-2 d-flex justify-content-center align-items-center ms-2" onClick={() => navigate(`/projects/add-participant/${idProject}`)}><i className='bx bx-plus-circle me-1'></i>Añadir participante</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

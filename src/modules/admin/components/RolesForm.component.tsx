@@ -20,7 +20,7 @@ export const RolesForm = ({ initialValues, submit }: RolesFormProps) => {
             {(formikProps) => (
                 <Form>
                     <div className="mb-4">
-                        <CustomInput label={"Nombre del rol"} type='text' name='id' useField={useField} onChange={formikProps.handleChange} />
+                        <CustomInput label={"Nombre del rol"} type='text' name='roleName' useField={useField} onChange={formikProps.handleChange} />
                     </div>
 
                     <div className="mb-4">

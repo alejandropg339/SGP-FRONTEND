@@ -103,14 +103,15 @@ const Project = () => {
 
       <div className="d-flex justify-content-between align-items-center">
         <h3 className="sgp-lb sgp-lb--h3 mt-4">Proudctos</h3>
-        <div>
+        {/* FIXME: UNCOMMENT THIS LINES */}
+        {/* <div>
           <button
             className='sgp-btn sgp-btn--primary sgp-btn--sm'
             onClick={() => navigate(`/projects/product/${idProject}`)}
           >
             <i className='bx bx-plus sgp-fw-600'></i> Añadir producto
           </button>
-        </div>
+        </div> */}
       </div>
       <p className="sgp-lb sgp-lb--md">Productos asociados al proyecto: </p>
 
@@ -130,14 +131,16 @@ const Project = () => {
                 ><i className='sgp-lb sgp-lb--lg bx bx-download'></i> Descargar
                 </a>
 
-                {!note &&
+                {/* FIXME: UNCOMMENT THIS LINES */}
+
+                {/* {!note &&
                   <button
                     className='sgp-btn sgp-btn--secondary sgp-lb sgp-lb--md ms-2'
                     style={{ textDecoration: 'none' }}
                     onClick={() => handleActionModal('warning', '¿Estás seguro de eliminar este producto?', 'Esta acción no se puede deshacer', true, true, 'Eliminar', 'Cancelar', () => { console.log('Eliminado') })}
                   ><i className='sgp-lb sgp-lb--lg bx bx-trash'></i> Eliminar
                   </button>
-                }
+                } */}
 
               </div>
 
@@ -148,10 +151,13 @@ const Project = () => {
             </div>
           </div>
         ))}
-        {!note && <CommentsForm submit={submitComment} />}
+        {/* FIXME: UNCOMMENT THIS LINES */}
+        {/* {!note && <CommentsForm submit={submitComment} />} */}
       </div>
 
-      {!note &&
+      {/* FIXME: UNCOMMENT THIS LINES */}
+
+      {/* {!note &&
         <>
           <hr className='sgp-bg-gray-0 sgp-text-gray-10' />
 
@@ -162,7 +168,7 @@ const Project = () => {
             <QualificationsForm submit={submit} />
           </div>
         </>
-      }
+      } */}
 
     </section>
   )

@@ -3,6 +3,8 @@ import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProject
 import { handleActionModal } from "../../../../commons/helpers/modalManagement";
 import { RolesForm } from "../../components/RolesForm.component";
 import { RolesFormInterface } from "../../interfaces/RolesForm.iterface";
+import { useNavigate } from "react-router-dom";
+import { CommonRoutesEnum } from "../../../../enums/commonRoutes.enum";
 
 const Roles = () => {
   const { t } = useTranslation('global');
@@ -18,13 +20,13 @@ const Roles = () => {
     reportsRole:  '',
     rolesRole:  '',
   }
-//   const navigate = useNavigate()
+  const navigate = useNavigate()
 //   const { idProject } = useParams();
 
   const submit = async (formValues: RolesFormInterface) => {
     console.log(formValues)
     handleActionModal('success', 'Rol añadido correctamente')
-    // navigate(`/projects/info/${idProject}`)
+    navigate(CommonRoutesEnum.Users)
     // console.log(formValues)
   }
 
