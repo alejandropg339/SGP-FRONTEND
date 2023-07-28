@@ -19,7 +19,7 @@ const Layout = () => {
                     </ul>
                 </div>
                 <div className="option-list">
-                    <h1>Grupos de investigación</h1>
+                    <h1>Grupos de Investigación</h1>
                     <ul>
                         <li><Link to="/reports/facGi" state={{ reportId: "10" }}>Producción</Link></li>
                         <li><Link to="/reports/facGi" state={{ reportId: "11" }}>Integrantes activos</Link></li>
