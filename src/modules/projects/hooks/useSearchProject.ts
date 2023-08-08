@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { RepositoryFactory } from '../../../repositories/repositoryFactory';
 import { useEffect, useState } from 'react';
 import { useGlobal } from '../../../store/global.store';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
+import { useErrorManagement } from '../../../commons/hooks/useErrorManagement';
 import { ProjectsResponseData } from '../interfaces/projects.interface';
 
 const getUsers = async () => {

@@ -21,14 +21,13 @@ export const ParticipantFrom: React.FC<ParticipantFormProps> = ({ initialValues,
             {(formikProps) => (
                 <Form>
                     <div className="mb-4">
-                        <CustomInput label={"Ingresa la cedula del participante"} type='text' name='id' useField={useField} onChange={formikProps.handleChange} />
+                        <CustomInput label={"Ingresa la cedula del participante"} type='text' name='userId' useField={useField} onChange={formikProps.handleChange} />
                     </div>
-
                     <div className="mb-4">
                         <CustomSelect label={"Rol"} name='role' useField={useField} onChange={formikProps.handleChange} id="selectProjectType">
                             <option defaultValue={''}>{"Selecciona el rol dentro de proyecto"}</option>
                                 <option value={"INVESTIGADOR"}>Investigador</option>
-                                <option value={"DOCENTE"}>Docente</option>
+                                <option value={"DOCENTE"}>Docente Investigador</option>
                         </CustomSelect>
                     </div>
 

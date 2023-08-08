@@ -4,12 +4,14 @@ import * as Yup from 'yup';
 
 export const newProductInitialValues: NewProductFormInterface = {
     name: '',
-    description: '',
+    productType: '',
+    link: '',
     file: ''
 }
 
 export const newProductFormValidations = Yup.object({
     name: Yup.string().required(requiredField),
-    description: Yup.string().required(requiredField),
-    file: Yup.mixed().required(requiredField),
+    productType: Yup.string().required(requiredField),
+    link: Yup.string(),
+    file: Yup.mixed(),
 });

@@ -4,7 +4,7 @@ import { useUserStore } from "../../../store/user.store";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { RepositoryFactory } from "../../../repositories/repositoryFactory";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
+import { useErrorManagement } from "../../../commons/hooks/useErrorManagement";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../../store/global.store";
 import { handleModal } from "../../../commons/helpers/modalManagement";

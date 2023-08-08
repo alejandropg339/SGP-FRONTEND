@@ -26,6 +26,7 @@ const MyAccount = () => {
       apellidos: formValues.lastName,
       telefono: formValues.phone,
       correo_personal: formValues.personalEmail,
+      contrasena: formValues.password
     }
     handleUpdateMyAccount.mutate([request, userInfo.numberId ?? '']);
   }

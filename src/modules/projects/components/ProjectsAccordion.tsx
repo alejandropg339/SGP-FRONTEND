@@ -29,7 +29,7 @@ const ProjectsAccordion = (props: ProjectsAccordionProps) => {
                         data-bs-target={`#${String(props.index)}`}
                         aria-expanded="false"
                         aria-controls={String(props.index)}>
-                        {props.project.titulo ?? ''} - {props.project.nota ?? 'Pendinte'} &nbsp;&nbsp; {String(props.project.visibilidad) === String(0)
+                        {props.project.titulo ?? ''} - {props.project.nota ?? 'Pendiente'} &nbsp;&nbsp; {String(props.project.visibilidad) === String(0)
                             && <span className="badge text-bg-danger">{t("projects.inactive")}</span>}
                     </button>
                 </h2>

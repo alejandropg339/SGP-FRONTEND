@@ -1,5 +1,12 @@
 export interface NewProductFormInterface {
     name: string;
-    description: string;
+    productType: string;
+    link: string;
     file: File | null | string;
+}
+
+export interface NewProductResponseInterface {
+    status: string;
+    msg: string;
+    data: Array<any>;
 }

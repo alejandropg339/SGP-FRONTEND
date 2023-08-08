@@ -3,7 +3,7 @@ import { CustomTextArea } from "../../../commons/components/fromInputs/CustomTex
 import { commentsFormValidation } from "../config/commentsFormValidations.config"
 import { useRef } from "react"
 
-export const CommentsForm = ({ submit }: { submit: (formValues: any) => void }) => {
+export const CommentsForm = ({ submit, productId }: { submit: (formValues: { comment: string, productId: string }) => void, productId: string }) => {
   const formikRef = useRef<any>()
   return (
     <Formik
@@ -11,8 +11,9 @@ export const CommentsForm = ({ submit }: { submit: (formValues: any) => void }) 
           validationSchema={commentsFormValidation}
           validateOnMount={true}
           innerRef={formikRef}
-          onSubmit={(values, { resetForm }) =>{
-            submit(values);
+          onSubmit={(values: any, { resetForm }) =>{
+            const formValues = { ...values, productId }
+            submit(formValues);
             resetForm();
             formikRef.current.setFieldValue('comment', '');
           }}

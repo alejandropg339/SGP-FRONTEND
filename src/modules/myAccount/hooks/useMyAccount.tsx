@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { handleModal } from "../../../commons/helpers/modalManagement"
-import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement"
+import { useErrorManagement } from "../../../commons/hooks/useErrorManagement"
 import { UpdateMyAccountRequest } from "../../../commons/interfaces/myAccount.interface"
 import { RepositoryFactory } from "../../../repositories/repositoryFactory"
 

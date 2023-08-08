@@ -3,7 +3,7 @@ import { RepositoryFactory } from '../../../repositories/repositoryFactory';
 import { CreateProjectRequest, UpdateProjectRequest, UpdateProjectResponse } from '../interfaces/projects.interface';
 import { useEffect, useState } from 'react';
 import { handleActionModal, handleModal } from '../../../commons/helpers/modalManagement';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
+import { useErrorManagement } from '../../../commons/hooks/useErrorManagement';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobal } from '../../../store/global.store';
 import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
@@ -58,7 +58,7 @@ export const useProject = () => {
         },
     });
 
-    const { isLoading: loadingProject } = useQuery({
+    const { isLoading: loadingProject,  refetch: refetchProjectData} = useQuery({
         queryKey: ['project', idProject],
         queryFn: () => findProject(idProject ??''),
         onSuccess: (data) => {
@@ -73,7 +73,6 @@ export const useProject = () => {
                 errorManagement(error);
             }
         },
-        // enabled: idProject !== Actions.Create,
     });
 
     const handleDelete = useMutation({
@@ -130,6 +129,7 @@ export const useProject = () => {
         deleteProjectAction,
         mutateActivateProject,
         projectsData,
-        idProject
+        idProject,
+        refetchProjectData
     };
 };

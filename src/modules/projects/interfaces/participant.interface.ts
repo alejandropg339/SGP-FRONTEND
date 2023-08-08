@@ -1,4 +1,10 @@
 export interface ParticipantFormInterface {
-    id: string;
+    userId: string;
     role: string;
+}
+
+export interface AddParticipantResponse {
+    status: string;
+    msg: string;
+    data: Array<any>;
 }

@@ -5,5 +5,8 @@ export interface CreateProjectForm {
     methodology: string;
     justification: string;
     projectType: string;
+    program: number | string;
     projectStatus? : string;
-}
+    initialDate?: Date | null | string | undefined;
+    finalDate?: Date | null | string | undefined;
+}      
