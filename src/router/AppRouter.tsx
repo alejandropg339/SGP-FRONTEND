@@ -21,7 +21,7 @@ import FacGiSem from "../modules/reports/pages/FacGiSem"
 import FacGISemProy from "../modules/reports/pages/FacGiSemProy"
 import FacProg from "../modules/reports/pages/FacProg"
 import FacGiTime from "../modules/reports/pages/FacGiTime"
-import UploadAndDisplayImage from "../modules/reports/pages/Firma"
+import UploadAndDisplayImage from "../modules/sign/pages/Firma"
 import FacGiSemTime from "../modules/reports/pages/FacGiSemTime"
 
 
@@ -64,7 +64,8 @@ export const AppRouter = () => {
                                     <Route path="reports/fac" element={<Fac />} />
                                     <Route path="reports/facGiSemTime" element={<FacGiSemTime />} />
                                     <Route path="reports/facGiTime" element={<FacGiTime />} />
-                                    <Route path="reports/firma" element={<UploadAndDisplayImage />} />
+                                    <Route path="sign" element={<UploadAndDisplayImage />} />
+
                                 </Routes>
                             </PrivateRoute>
                         </div>

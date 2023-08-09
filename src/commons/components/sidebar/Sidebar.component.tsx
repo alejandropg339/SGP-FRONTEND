@@ -259,6 +259,23 @@ export const Sidebar = () => {
                                     </NavLink>
                                 </li>
                             </ul>
+                            <ul>
+                                <li className={`${openMenu && 'ps-1'}`} data-tooltip-id="options-tooltip" data-tooltip-content="Firma">
+                                    <NavLink to="sign" onClick={closeMenu}>
+                                        {({ isActive }) => (
+                                            <>
+                                                <i className={`sgp-sidebar__icon ${isActive && 'sgp-sidebar__icon--active'} bx bx-sun`}></i>
+                                                {openMenu &&
+                                                    <span className={`sgp-sidebar__nav-text ${isActive && 'sgp-sidebar__nav-text--active'}`}>
+                                                        Firma
+                                                    </span>
+                                                }
+                                            </>
+                                        )}
+
+                                    </NavLink>
+                                </li>
+                            </ul>
                         </li>
 
                     </ul>

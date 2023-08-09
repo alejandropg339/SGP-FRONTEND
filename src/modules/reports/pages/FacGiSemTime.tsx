@@ -33,7 +33,8 @@ function FacGISemProy() {
     const [statusFin, setStatusFin] = useState("");
 
 
-    const [userId, setUserId] = useState("1000689373");
+    const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
+    const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
     const location = useLocation();
     const { reportId } = location.state;
 
