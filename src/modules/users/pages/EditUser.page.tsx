@@ -37,6 +37,7 @@ const EditUser = () => {
     phone: userToEditInfo.telefono ?? '',
     personalEmail: userToEditInfo.correo_personal ?? '',
     role: userRole ?? '',
+    password: ''
   }
 
   return (
@@ -84,10 +85,13 @@ const EditUser = () => {
                             <CustomInput label={t("editUser.personalEmail") ?? ""} type='email' name='personalEmail' useField={useField} onChange={formikProps.handleChange} />
                           </div>
                           <div className="mb-4">
+                            <CustomInput label={"Contraseña"} type='password' name='password' useField={useField} onChange={formikProps.handleChange} />
+                          </div>
+                          <div className="mb-4">
                             <CustomSelect label={t("editUser.role") ?? ""} type='email' name='role' useField={useField} onChange={formikProps.handleChange} id="selectRole">
                             <option defaultValue={userRole?.toUpperCase()}>{t("editUser.selectARole") ?? ""}</option>
                               {roles.map((role) => (
-                                <option value={role.nombre.toLocaleUpperCase()}>{role.nombre}</option>
+                                <option value={role.nombre.toLocaleUpperCase()} key={role.nombre}>{role.nombre}</option>
                               ))}
                             </CustomSelect>
                           </div>

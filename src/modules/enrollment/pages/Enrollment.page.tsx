@@ -6,10 +6,12 @@ import { EnrollmentInitialValues, enrollmentFormValidations } from "../config/En
 import { EnrollmentFormInterface } from "../interfaces/EnrollmentForm.interface";
 import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component";
 import { useEnrollment } from "../hooks/useEnrollment";
+import { usePrograms } from "../../../commons/hooks/usePrograms";
 
 const Enrollment = () => {
   const { t } = useTranslation('global');
   const query = useEnrollment();
+  const { programs } = usePrograms();
 
   const submit = (formValues: EnrollmentFormInterface) => {
     query.mutation.mutate(formValues);
@@ -63,10 +65,9 @@ const Enrollment = () => {
                           </div>
                           <div className="mb-4">
                             <CustomSelect id="enrollmentSelect" label={t("enrollment.program")} name="program" useField={useField}>
-                              <option selected>Selecciona un programa</option>
-                              <option value="1">Ingenieria de sistemas</option>
-                              <option value="2">Ingenieria areonautica</option>
-                              <option value="3">Ingenieria electronica</option>
+                            {programs.map((program, index) => (
+                                <option value={program.id} key={index}>{program.nombre}</option>
+                            ))}
                             </CustomSelect>
                           </div>
 

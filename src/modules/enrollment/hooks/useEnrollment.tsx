@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
+import { useErrorManagement } from "../../../commons/hooks/useErrorManagement";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { RepositoryApiNoAuth } from "../../../repositories/repositoryFactory";
 import { EnrollmentRequestInterface } from "../interfaces/EnrollmentService.interface";

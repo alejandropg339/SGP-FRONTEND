@@ -247,6 +247,21 @@ export const Sidebar = () => {
                     </ul>
 
                     <ul className="sgp-logout">
+                        <li data-tooltip-id="options-tooltip" data-tooltip-content="Roles">
+                            <NavLink to={CommonRoutesEnum.Roles} onClick={closeMenu}>
+                                {({ isActive }) => (
+                                    <>
+                                        <i className={`sgp-sidebar__icon ${isActive && 'sgp-sidebar__icon--active'} bx bx-cog`}></i>
+                                        {openMenu &&
+                                            <span className={`sgp-sidebar__nav-text ${isActive && 'sgp-sidebar__nav-text--active'}`}>
+                                                Roles
+                                            </span>
+                                        }
+                                    </>
+                                )}
+                            </NavLink>
+
+                        </li>
                         <li data-tooltip-id="options-tooltip" data-tooltip-content="Mi cuenta">
                             <NavLink to="my-account" onClick={closeMenu}>
                                 {({ isActive }) => (

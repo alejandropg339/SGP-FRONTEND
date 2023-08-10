@@ -1,5 +1,5 @@
 import { AddQualificationFormInterface } from '../interfaces/addQualificationForm.interface';
-import { requiredField, numeric } from './../../../commons/helpers/FormValidations';
+import { requiredField } from './../../../commons/helpers/FormValidations';
 import * as Yup from 'yup';
 
 export const addQualificationInitialValues: AddQualificationFormInterface = {
@@ -9,7 +9,7 @@ export const addQualificationInitialValues: AddQualificationFormInterface = {
 }
 
 export const addQualificationFormValidations = Yup.object({
-    qualification: Yup.string().matches(numeric.value, numeric.message).required(requiredField),
+    qualification: Yup.string().required(requiredField),
     retrospective: Yup.string().required(requiredField),
     conclusions: Yup.string().required(requiredField),
 });

@@ -3,12 +3,12 @@ interface InputProps {
   name: string;
   type: InputType,
   useField: any
-  max?: number,
-  min?: number,
+  max?: number | Date,
+  min?: number | Date | string,
   [x: string]: any;
 }
 
-type InputType = 'text' | 'password' | 'email' | 'tel' | 'number' | 'file';
+type InputType = 'text' | 'password' | 'email' | 'tel' | 'number' | 'file' | 'date';
 
 export const CustomInput = ({label, useField, ...props}: InputProps) => {
   const [field, meta] = useField(props);

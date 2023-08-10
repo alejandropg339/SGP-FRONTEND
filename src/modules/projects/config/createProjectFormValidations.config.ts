@@ -9,6 +9,10 @@ export const createProjectInitialValues: CreateProjectForm = {
     methodology: '',
     justification: '',
     projectType: '',
+    finalDate: '',
+    initialDate: '',
+    projectStatus: '',
+    program: '',
 }
 
 export const createProjectFormValidations = Yup.object({
@@ -18,4 +22,5 @@ export const createProjectFormValidations = Yup.object({
     methodology: Yup.string().required(requiredField),
     justification: Yup.string().required(requiredField),
     projectType: Yup.string().required(requiredField),
+    program: Yup.string().required(requiredField)
 });

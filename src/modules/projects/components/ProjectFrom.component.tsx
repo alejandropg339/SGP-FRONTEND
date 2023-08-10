@@ -6,19 +6,26 @@ import { useTranslation } from "react-i18next"
 import { citiesOptions } from "../../../commons/helpers/citiesOptions"
 import { useProjectTypes } from "../hooks/useProjecTypes"
 import { CreateProjectForm } from "../interfaces/createProjectForm.interface"
-import { createProjectFormValidations } from "../config/createProjectFormValidations.config"
+import { createProjectFormValidations, createProjectInitialValues } from "../config/createProjectFormValidations.config"
 import { Actions } from "../enums/Actions.enum"
 import { projectStatus } from "../utils/proyectStatus"
+import { transformDate } from "../utils/dateFormat"
+import { usePrograms } from "../../../commons/hooks/usePrograms"
 
 interface ProjectFormProps {
     initialValues: CreateProjectForm;
     action: string
     submit: (formValues: CreateProjectForm) => Promise<void>,
+    isEdit?: boolean
 }
-export const ProjectFrom: React.FC<ProjectFormProps> = ({ initialValues, action, submit }) => {
+export const ProjectFrom: React.FC<ProjectFormProps> = ({ initialValues = createProjectInitialValues, action, submit, isEdit }) => {
     const { t } = useTranslation('global');
     const { projectTypes } = useProjectTypes();
+    const { programs } = usePrograms();
+    const currentDate = transformDate(new Date())
     return (
+        <>
+        {initialValues && 
         <Formik
             initialValues={initialValues}
             validationSchema={createProjectFormValidations}
@@ -60,7 +67,16 @@ export const ProjectFrom: React.FC<ProjectFormProps> = ({ initialValues, action,
                             ))}
                         </CustomSelect>
                     </div>
-                    
+
+                    <div className="mb-4">
+                        <CustomSelect label="Programa" name='program' useField={useField} onChange={formikProps.handleChange} id="selectProjectType">
+                            <option defaultValue={''} hidden>Selecciona un Programa</option>
+                            {programs.map((program, index) => (
+                                <option value={Number(program.id)} key={index}>{program.nombre}</option>
+                            ))}
+                        </CustomSelect>
+                    </div>
+
                     {action !== Actions.Create && <div className="mb-4">
                         <CustomSelect label={t("createProjectModule.statusProject") ?? ""} name='projectStatus' useField={useField} onChange={formikProps.handleChange} id="selectProjectType">
                             <option defaultValue={''}>{t("createProjectModule.selectAProjectType") ?? ""}</option>
@@ -70,11 +86,25 @@ export const ProjectFrom: React.FC<ProjectFormProps> = ({ initialValues, action,
                         </CustomSelect>
                     </div>
                     }
-                    <button className="btn sgp-btn sgp-btn--primary btn-lg px-5" type="submit" disabled={!formikProps.isValid}>{t("createProjectModule.createProjectAction")}</button>
+
+                    {isEdit &&
+                        <>
+                            <div className="mb-4">
+                                <CustomInput label="fecha de inicio" type='date' name='initialDate' useField={useField} onChange={formikProps.handleChange} min={currentDate}/>
+                            </div>
+
+                            <div className="mb-4">
+                                <CustomInput label="fecha de fin" type='date' name='finalDate' useField={useField} onChange={formikProps.handleChange} />
+                            </div>
+                        </>
+                    }
+
+                    <button className="btn sgp-btn sgp-btn--primary btn-lg px-5" type="submit" disabled={!formikProps.isValid}>{isEdit ? 'Editar' : t("createProjectModule.createProjectAction")}</button>
 
                 </Form>
             )}
-        </Formik>
+        </Formik>}
+        </>
     )
 }
 
