@@ -10,3 +10,9 @@ export interface NewProductResponseInterface {
     msg: string;
     data: Array<any>;
 }
+
+export interface DeleteProductResponseInterface {
+    status: string;
+    msg: string;
+    data: Array<any>;
+}

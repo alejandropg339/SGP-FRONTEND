@@ -71,4 +71,6 @@ export interface ProjectsResponseData {
     nota:                    number | null;
     tipo_proyecto:           string;
     programa_id:             number;
+    programa:               string;
+    participantes:          Array<{usuario: string, rol: string}>;
 }

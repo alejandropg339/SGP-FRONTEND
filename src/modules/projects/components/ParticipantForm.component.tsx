@@ -4,6 +4,7 @@ import { CustomSelect } from '../../../commons/components/fromInputs/CustomSelec
 import { useTranslation } from 'react-i18next'
 import { ParticipantFormInterface } from '../interfaces/participant.interface'
 import { newParticipantFormValidations } from '../config/addParticipantFormValidations.config'
+import { ParticipantsRoles } from '../../../enums/participantsRoles.enum'
 
 interface ParticipantFormProps {
     initialValues: ParticipantFormInterface;
@@ -26,8 +27,8 @@ export const ParticipantFrom: React.FC<ParticipantFormProps> = ({ initialValues,
                     <div className="mb-4">
                         <CustomSelect label={"Rol"} name='role' useField={useField} onChange={formikProps.handleChange} id="selectProjectType">
                             <option defaultValue={''}>{"Selecciona el rol dentro de proyecto"}</option>
-                                <option value={"INVESTIGADOR"}>Investigador</option>
-                                <option value={"DOCENTE"}>Docente Investigador</option>
+                                <option value={ParticipantsRoles.Researcher}>Investigador</option>
+                                <option value={ParticipantsRoles.TeacherResearcher}>Docente Investigador</option>
                         </CustomSelect>
                     </div>
 

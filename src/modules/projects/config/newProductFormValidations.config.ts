@@ -1,4 +1,4 @@
-import { NewProductFormInterface } from '../interfaces/newProductForm.interface';
+import { NewProductFormInterface } from '../interfaces/product.interface';
 import { requiredField } from './../../../commons/helpers/FormValidations';
 import * as Yup from 'yup';
 

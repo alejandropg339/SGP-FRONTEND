@@ -3,17 +3,17 @@ import { useState } from "react"
 import { editStatusFormValidations } from "../config/editProjectStatus.config"
 import { CustomSelect } from "../../../commons/components/fromInputs/CustomSelect.component"
 
-export const ProjectStatus = ({ title, currentStatus, submitEditStatus }: { title: string, currentStatus: string, submitEditStatus: (status: string) => void }) => {
+export const ProjectStatus = ({ title, currentStatus, submitEditStatus, canEdit }: { title: string, currentStatus: string, submitEditStatus: (status: string) => void, canEdit: boolean | undefined}) => {
     const [isEditing, setIsEditing] = useState(false)
 
     const submit = ({ status }: { status: string }) => {
-        submitEditStatus(status)
+        canEdit && submitEditStatus(status)
     }
 
     return (
         <div className="row mt-3">
             <div className="col-12">
-                <button className="btn sgp-btn sgp-btn--ghost sgp-lb sgp-lb--h3 p-0 mb-2" onClick={() => setIsEditing(!isEditing)}><span className="sgp-text-gray-95 sgp-fw-600">{title}</span> <i className='bx bx-edit-alt'></i></button>
+                <button className="btn sgp-btn sgp-btn--ghost sgp-lb sgp-lb--h3 p-0 mb-2" onClick={() => setIsEditing(!isEditing)}><span className="sgp-text-gray-95 sgp-fw-600">{title}</span> { canEdit && <i className='bx bx-edit-alt'></i> }</button>
                 <p className='sgp-lb sgp-lb--md'>
                     {currentStatus}
                 </p>

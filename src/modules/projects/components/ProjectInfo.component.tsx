@@ -6,7 +6,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
             <div className="d-flex align-items-md-center flex-column flex-md-row flex-wrap">
                 {project.tipo_proyecto &&
                     <div
-                        className="plan-info__item me-5 mb-1">
+                        className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Tipo de proyecto
                         </p>
@@ -16,7 +16,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
                     </div>
                 }
                 {project.metodologia &&
-                    <div className="plan-info__item me-5 mb-1">
+                    <div className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             metodología
                         </p>
@@ -27,7 +27,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
                 }
 
                 {project.ciudad &&
-                    <div className="plan-info__item me-5 mb-1">
+                    <div className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Ciudad
                         </p>
@@ -37,9 +37,20 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
                     </div>
                 }
 
+                {project.programa &&
+                    <div className="plan-info__item me-5 mb-3">
+                        <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
+                            Programa
+                        </p>
+                        <p className="sgp-lb sgp-lb--md sgp-text-gray-95 mb-0">
+                            {project?.programa ?? 'N/A'}
+                        </p>
+                    </div>
+                }
+
                 {project.fecha_inicio &&
                     <div
-                        className="plan-info__item me-5 mb-1">
+                        className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Fecha de inicio
                         </p>
@@ -51,7 +62,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
 
                 {project.fecha_fin &&
                     <div
-                        className="plan-info__item me-5 mb-1">
+                        className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Fecha de finalización
                         </p>
@@ -62,7 +73,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
                 }
                 {project.semillero &&
                     <div
-                        className="plan-info__item me-5 mb-1">
+                        className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Semillero
                         </p>
@@ -73,7 +84,7 @@ export const ProjectInfo = ({ project }: { project: Partial<ProjectsResponseData
                 }
                 {project.macro_proyecto &&
                     <div
-                        className="plan-info__item me-5 mb-1">
+                        className="plan-info__item me-5 mb-3">
                         <p className="sgp-lb sgp-lb--sm sgp-text-gray-50 mb-3">
                             Macro proyecto
                         </p>

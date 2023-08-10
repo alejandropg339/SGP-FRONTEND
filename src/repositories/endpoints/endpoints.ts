@@ -19,5 +19,6 @@ export const urlParser = (endpoint: string) => {
         projectProducts: (projectId: string) => `${endpoint}/project/product/all/${projectId}`,
         productComment: (productId: string) => `${endpoint}/project/product/comment/${productId}`,
         programs: `${endpoint}/program`,
+        participants: (idProject: string) => `${endpoint}/participant/${idProject}`,
     }
 }

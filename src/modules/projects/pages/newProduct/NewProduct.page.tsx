@@ -2,7 +2,7 @@ import { ProductForm } from "../../components/ProductForm.component"
 import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects"
 import { useGlobal } from "../../../../store/global.store";
 import { useMutation } from "@tanstack/react-query";
-import { NewProductFormInterface, NewProductResponseInterface } from "../../interfaces/newProductForm.interface";
+import { NewProductFormInterface, NewProductResponseInterface } from "../../interfaces/product.interface";
 import { RepositoryFactory } from "../../../../repositories/repositoryFactory";
 import { useNavigate, useParams } from "react-router-dom";
 import { handleActionModal } from "../../../../commons/helpers/modalManagement";

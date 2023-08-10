@@ -1,7 +1,7 @@
 import { Form, Formik, useField } from "formik"
 import { CustomInput } from "../../../commons/components/fromInputs/CustomInput.component"
 import { newProductFormValidations, newProductInitialValues } from "../config/newProductFormValidations.config"
-import { NewProductFormInterface } from "../interfaces/newProductForm.interface"
+import { NewProductFormInterface } from "../interfaces/product.interface"
 import { useState } from "react"
 
 export const ProductForm = ({ submit }: { submit: (formValues: NewProductFormInterface) => void }) => {

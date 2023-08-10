@@ -5,11 +5,11 @@ import ApiAuthClient from './clients/apiAuthClient';
 import { urlParser } from './endpoints/endpoints';
 import { ActivateProjectResponse, CreateProjectRequest, CreateProjectResponse, DeleteProjectResponse, ProjectResponse, ProjectsResponse, UpdateProjectRequest, UpdateProjectResponse } from '../modules/projects/interfaces/projects.interface';
 import { ProjectTypesInterface } from '../modules/projects/interfaces/projectTypes.interface';
-import { AddParticipantResponse, ParticipantFormInterface } from '../modules/projects/interfaces/participant.interface';
+import { AddParticipantResponse, DeleteParticipantsResponse, ParticipantFormInterface, ParticipantsResponse } from '../modules/projects/interfaces/participant.interface';
 import { AddQualificationFormInterface } from '../modules/projects/interfaces/addQualificationForm.interface';
-import { NewProductFormInterface, NewProductResponseInterface } from '../modules/projects/interfaces/newProductForm.interface';
+import { DeleteProductResponseInterface, NewProductFormInterface, NewProductResponseInterface } from '../modules/projects/interfaces/product.interface';
 import { ProductsResponseInterface } from '../modules/projects/interfaces/products.interface';
-import { AddCommentResponseInterface } from '../modules/projects/interfaces/addComment.interface';
+import { AddCommentResponseInterface, ProductComments } from '../modules/projects/interfaces/addComment.interface';
 import { ProgramsResponse } from '../commons/interfaces/programs.interface';
 
 const url = import.meta.env.VITE_API;
@@ -101,9 +101,21 @@ const ApiAuthRepository = {
             return ApiAuthClient.get(urlParser(url).projectProducts(projectId))
         },
 
-        addProductComment(productId: string, comment: string): Promise<AddCommentResponseInterface> {
-            return ApiAuthClient.post(urlParser(url).productComment(productId), { comentario: comment })
-        }
+        addProductComment(productId: string, comment: string, userId: string): Promise<AddCommentResponseInterface> {
+            return ApiAuthClient.post(urlParser(url).productComment(productId), { comentario: comment, usuario_id: userId })
+        },
+        getAllParticipants(projectId: string): Promise<ParticipantsResponse> {
+            return ApiAuthClient.get(urlParser(url).participants(projectId))
+        },
+        deleteParticipant(projectId: string, request: {usuario: string}): Promise<DeleteParticipantsResponse> {
+            return ApiAuthClient.delete(urlParser(url).participants(projectId), { data: request })
+        },
+        deleteProduct(productId: string): Promise<DeleteProductResponseInterface> {
+            return ApiAuthClient.delete(urlParser(url).projectProduct(productId))
+        },
+        getProductComments(productId: string): Promise<ProductComments> {
+            return ApiAuthClient.post(urlParser(url).productComment(productId))
+        },
     },
     programs: {
         getPrograms(): Promise<ProgramsResponse> {
