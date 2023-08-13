@@ -83,6 +83,7 @@ const Layout = () => {
                             <ul>
                                 <li><Link to="/reports/facGiSem" state={{ reportId: "6" }}>Proyectos activos Semilleros</Link></li>
                                 <li><Link to="/reports/facGiSem" state={{ reportId: "7" }}>Proyectos finalizados Semilleros</Link></li>
+                                <li><Link to="/reports/facGiSemProy" state={{ reportId: "22" }}>Información de un proyecto</Link></li>
                             </ul>
                         </div>
                         <div className="option-list">
