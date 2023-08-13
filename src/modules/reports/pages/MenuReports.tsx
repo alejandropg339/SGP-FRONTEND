@@ -61,7 +61,7 @@ const Layout = () => {
                     <Outlet />
                 </>
             )
-        case 'COORDINADOR INVESTIGACION':
+        case 'COORDINADOR INVESTIGACIÓN':
             return (
                 <>
                     <div className="flex-container-start">
