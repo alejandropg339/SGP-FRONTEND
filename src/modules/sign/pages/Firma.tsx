@@ -5,7 +5,6 @@ function UploadAndDisplayImage() {
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
     const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
     const img: any = document.querySelector('input[type="file"]')!;
-    const [selectedImage, setSelectedImage] = useState(null);
     const [signUrl, setSignUrl] = useState("");
     const [state, setState] = useState(true);
 
@@ -21,16 +20,7 @@ function UploadAndDisplayImage() {
             console.log("Error xd", error);
         }
     }
-/*
-    const userTest1 = () => {
-        setUserId("1000456123");
-        fetchSign("1000456123");
-    }
-    const userTest2 = () => {
-        setUserId("1000689373");
-        fetchSign("1000689373");
-    }
-*/
+
     const fetchSign = async (id: any) => {
         try {
             const result = await fetch("http://localhost:8081/archivo/get/firma/" + id);
@@ -52,7 +42,6 @@ function UploadAndDisplayImage() {
     }, [])
 
     const handleImageInput = (event: any) => {
-        setSelectedImage(event.target.files[0]);
         setSignUrl(URL.createObjectURL(event.target.files[0]))
     }
 
@@ -67,7 +56,7 @@ function UploadAndDisplayImage() {
             <h1>Firma</h1>
             <br />
             <div className="flex-container-center">
-                <img alt="not found"
+                <img alt="FIRMA NO REGISTRADA"
                     width={"250px"}
                     src={signUrl} />
             </div>
@@ -83,6 +72,7 @@ function UploadAndDisplayImage() {
                             }}
                         />
                         <br />
+                        <br/>
                         <button onClick={handleSaveImage}>Guardar</button>
                     </div>
                 )}
