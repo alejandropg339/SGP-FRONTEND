@@ -22,7 +22,7 @@ export const useProjectTypes = () => {
         onError: (error: any) => {
             if (error.code.status === '0') {
                 handleModal('error', 'Oops!', 'Algo salió mal, por favor intenta de nuevo más tarde', true, false, false);
-                navigate(CommonRoutesEnum.Users);
+                navigate(CommonRoutesEnum.Home);
             } else {
                 errorManagement(error);
             }

@@ -37,7 +37,7 @@ export const useEnrollment = () => {
         onSuccess: (_, { email, password }) => {
             login.mutate({ email, password })
             handleModal('success', 'Felicidades!', 'Has sido registrado exitosament', true, false, false);
-            navigate(CommonRoutesEnum.MyAccount)
+            navigate(CommonRoutesEnum.Home)
         }, onError: (error: any) => {
             if (error.status === '0' && error.msg) {
                 handleModal('error', 'Por favor revisa los datos ingresados', error.msg, false, false);

@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { UserAccordionProps } from "../Interfaces/UserAccordion.interface";
 import { useUserStore } from "../../../store/user.store";
-import { RolesEnum } from "../../../enums/roles.enum";
 import { useEditUser } from "../hooks/useEditUser";
 import { useToggleVisibilityUser } from "../hooks/useDeleteUser";
+import { Permissions } from "../../../enums/permissions.enum";
 
 const UserAccordion = (props: UserAccordionProps) => {
     const { t } = useTranslation("global");
-    const { userInfo } = useUserStore();
+    const { userInfo: { permisions } } = useUserStore();
     const { keepEditUser } = useEditUser();
     const { deleteUserAction, activateUserDispatcher } = useToggleVisibilityUser();
 
@@ -37,7 +37,7 @@ const UserAccordion = (props: UserAccordionProps) => {
                             <li className="list-group-item sgp-lb-h5"><span className="sgp-fw-600">{t("user.institutionalEmail")}</span>{props.user.correo_est ?? ''}</li>
                             {props.user.correo_personal && <li className="list-group-item sgp-lb-h5"><span className="sgp-fw-600">{t("user.personalEmail")}</span>{props.user.correo_personal ?? ''} </li>}
                         </ul>
-                        {userInfo.role === RolesEnum.Admin &&
+                        {permisions?.USUARIOS === Permissions.Write &&
                             <div className="d-flex mb-2">
                                 <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3" onClick={() => keepEditUser(props.user)}>{t("user.edit")}</button>
                                 {String(props.user.visibilidad) === '1'

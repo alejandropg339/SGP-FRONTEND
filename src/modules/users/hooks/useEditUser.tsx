@@ -50,7 +50,7 @@ export const useEditUser = () => {
     });
 
     const handleEditRoleUser = useMutation((role: string) => updateUserRole(userId!, role), {
-        onSuccess: (res) => {
+        onSuccess: (_) => {
             handleModal('success', 'Proceso exitoso!', 'El usuario se ha actualizado correctamente');
             navigate(CommonRoutesEnum.Users);
         },
@@ -82,7 +82,7 @@ export const useEditUser = () => {
         queryKey: ['userRole', userId],
         queryFn: () => userId ? getUserRoles(userId) : Promise.resolve(null),
         onSuccess: (data) => {
-            setUserRole(data?.data?.rol)
+            setUserRole(data?.data?.nombre)
         },
         onError: (error: any) => {
             if (error?.status === '0' && error?.msg) {

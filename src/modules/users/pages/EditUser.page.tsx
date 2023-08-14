@@ -23,7 +23,6 @@ const EditUser = () => {
     }
 
     if(userRole !== formValues.role){
-      console.log('here')
       const result = await handleEditRoleUser.mutateAsync(formValues.role!);
       result.status === '1' && handleEditUser.mutate(newUserInfo)
     }else {
