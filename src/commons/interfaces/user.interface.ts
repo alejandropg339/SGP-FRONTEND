@@ -10,6 +10,7 @@ export interface UserInterface {
     programId?: string | null;
     hotbedId?: string | null;
     personalEmail?: string | null;
+    permisions?: UserPermissionsInterface;
 }
 
 export interface AllUsersResponseInterface {
@@ -36,4 +37,15 @@ export interface UserDeleteResponseInterface {
     status: string;
     msg: string;
     data: [];
+}
+
+export interface UserPermissionsInterface {
+    ROLES: string;
+    EVENTOS: string;
+    REPORTES: string;
+    USUARIOS: string;
+    PROGRAMAS: string;
+    PROYECTOS: string;
+    FACULTADES: string;
+    SEMILLEROS: string;
 }

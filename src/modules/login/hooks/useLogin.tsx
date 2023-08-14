@@ -11,7 +11,6 @@ import { SessionStateEnum } from '../../../enums/sessionStates.enum';
 import { useGlobal } from '../../../store/global.store';
 import { useEffect } from 'react';
 import { handleModal } from '../../../commons/helpers/modalManagement';
-import { shallow } from 'zustand/shallow';
 
 const doLogin = async (body: LoginFormInterface) => {
     return await RepositoryApiNoAuth.authentication.login({ institutionalEmail: body.email!, password: body.password! })
@@ -40,12 +39,13 @@ export const useLogin = () => {
                 programId: res.data.programa_id,
                 role: res.data.role.toUpperCase(),
                 personalEmail: res.data.correo_personal ?? '',
+                permisions: res.data.acceso
             }
 
             sessionStore.setSession(SessionStateEnum.Active)
             userStore.setUser(userData);
             setLoading(false);
-            navigate(CommonRoutesEnum.Users)
+            navigate(CommonRoutesEnum.Home)
         }, onError: (error: any) => {
             setLoading(false);
             if (error.status === '0' && error.msg) {

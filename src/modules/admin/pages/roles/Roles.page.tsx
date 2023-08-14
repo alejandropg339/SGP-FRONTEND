@@ -1,13 +1,18 @@
-import { useTranslation } from "react-i18next";
 import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects";
 import { handleActionModal } from "../../../../commons/helpers/modalManagement";
 import { RolesForm } from "../../components/RolesForm.component";
 import { RolesFormInterface } from "../../interfaces/RolesForm.iterface";
 import { useNavigate } from "react-router-dom";
 import { CommonRoutesEnum } from "../../../../enums/commonRoutes.enum";
+import { RepositoryFactory } from "../../../../repositories/repositoryFactory";
+import { useMutation } from "@tanstack/react-query";
+import { useGlobal } from "../../../../store/global.store";
+import { CreateRoleResponseInterface } from "../../../../commons/interfaces/roles.interface";
+
+const createNewRole = async (formValues: RolesFormInterface) => await RepositoryFactory.RepositoryApiAuth.roles.createRole(formValues);
 
 const Roles = () => {
-  const { t } = useTranslation('global');
+  const { setLoading } = useGlobal();
 
   const initialValues: RolesFormInterface = {
     roleName: '',
@@ -21,14 +26,28 @@ const Roles = () => {
     rolesRole:  '',
   }
   const navigate = useNavigate()
-//   const { idProject } = useParams();
 
   const submit = async (formValues: RolesFormInterface) => {
     console.log(formValues)
-    handleActionModal('success', 'Rol añadido correctamente')
-    navigate(CommonRoutesEnum.Users)
-    // console.log(formValues)
+    handleCreateRole([formValues])
   }
+
+  const { mutate: handleCreateRole } = useMutation<CreateRoleResponseInterface, any, [RolesFormInterface]>(([roles]) => createNewRole(roles), {
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      handleActionModal('success', 'Rol creado!', 'El rol fue creado exitosamente!.')
+      navigate(CommonRoutesEnum.Home)
+    },
+    onError: () => {
+      handleActionModal('error', 'Error!', 'Hemos tenido un error a la hora de crear el rol por favor intentalo de nuevo y si el error persiste contacta a soporte.')
+
+    },
+    onSettled: () => {
+      setLoading(false);
+    }
+  })
 
   return (
     <LayoutFormProjects 

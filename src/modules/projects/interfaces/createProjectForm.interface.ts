@@ -9,4 +9,5 @@ export interface CreateProjectForm {
     projectStatus? : string;
     initialDate?: Date | null | string | undefined;
     finalDate?: Date | null | string | undefined;
+    user?: string;
 }      

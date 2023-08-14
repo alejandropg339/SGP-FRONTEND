@@ -20,5 +20,6 @@ export const urlParser = (endpoint: string) => {
         productComment: (productId: string) => `${endpoint}/project/product/comment/${productId}`,
         programs: `${endpoint}/program`,
         participants: (idProject: string) => `${endpoint}/participant/${idProject}`,
+        newRole: `${endpoint}/role/permissions`,
     }
 }

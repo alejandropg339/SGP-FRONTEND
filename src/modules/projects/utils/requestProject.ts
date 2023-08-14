@@ -12,6 +12,7 @@ interface RequestProject {
     programa_id?: number;
     fecha_inicio?: string | Date | null | undefined;
     fecha_fin?:  string | Date | null | undefined;
+    usuario?: string;
 }
 
 export const requestTransform = (formValues: CreateProjectForm) => {
@@ -23,7 +24,8 @@ export const requestTransform = (formValues: CreateProjectForm) => {
         justificacion: formValues.justification,
         ciudad: formValues.city,
         estado: formValues.projectStatus!,
-        programa_id: Number(formValues.program)
+        programa_id: Number(formValues.program),
+        usuario: formValues?.user
     }
 
     if(formValues.initialDate && formValues.finalDate) {

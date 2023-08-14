@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { CreateProjectForm } from "../../interfaces/createProjectForm.interface";
 import { useProject } from "../../hooks/useProject";
 import { requestTransform } from "../../utils/requestProject";
@@ -8,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { createProjectInitialValues } from "../../config/createProjectFormValidations.config";
 
 const EditProject = () => {
-  const { t } = useTranslation('global');
   const { mutateUpdate, initialValues = createProjectInitialValues, loadingProject } = useProject();
   const { idProject } = useParams()
 

@@ -1,5 +1,5 @@
 import { UpdateMyAccountRequest } from '../commons/interfaces/myAccount.interface';
-import { RolesResponseInterface, UserRoleResponseInterface } from '../commons/interfaces/roles.interface';
+import { CreateRoleRequestInterface, CreateRoleResponseInterface, RolesResponseInterface, UserRoleResponseInterface } from '../commons/interfaces/roles.interface';
 import { AllUsersResponseInterface, UserDeleteResponseInterface, UserResponseDataInterface } from '../commons/interfaces/user.interface';
 import ApiAuthClient from './clients/apiAuthClient';
 import { urlParser } from './endpoints/endpoints';
@@ -11,6 +11,7 @@ import { DeleteProductResponseInterface, NewProductFormInterface, NewProductResp
 import { ProductsResponseInterface } from '../modules/projects/interfaces/products.interface';
 import { AddCommentResponseInterface, ProductComments } from '../modules/projects/interfaces/addComment.interface';
 import { ProgramsResponse } from '../commons/interfaces/programs.interface';
+import { RolesFormInterface } from '../modules/admin/interfaces/RolesForm.iterface';
 
 const url = import.meta.env.VITE_API;
 
@@ -120,6 +121,22 @@ const ApiAuthRepository = {
     programs: {
         getPrograms(): Promise<ProgramsResponse> {
             return ApiAuthClient.get(urlParser(url).programs)
+        }
+    },
+    roles: {
+        createRole(formValues: RolesFormInterface): Promise<CreateRoleResponseInterface> {
+            const request: CreateRoleRequestInterface = {
+                tipo_usuario: formValues.roleName.toUpperCase(),
+                USUARIOS: formValues.usersRole,
+                PROGRAMAS: formValues.programsRole,
+                FACULTADES: formValues.facultiesRole,
+                EVENTOS: formValues.eventsRole,
+                PROYECTOS: formValues.projectsRole,
+                SEMILLEROS: formValues.hotbedRole,
+                REPORTES: formValues.reportsRole,
+                ROLES: formValues.rolesRole,
+            }
+            return ApiAuthClient.post(urlParser(url).newRole, request)
         }
     }
 };

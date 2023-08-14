@@ -52,7 +52,7 @@ const Project = () => {
   const navigate = useNavigate()
 
   const submit = (formValues: AddQualificationFormInterface) => {
-    handleActionModal('info', 'Estas seguro?', 'Rrecuerda que una vez agregada la calificación no podrás modificarla.', true, true, 'Calificar', 'Cancelar', () => { handleSubmitNote([formValues, idProject!]) })
+    handleActionModal('info', 'Estas seguro?', 'Una vez agregada la calificación podrás modificarla en cualquier momento pero no añadir comentarios a los entregables ni eliminarlos.', true, true, 'Calificar', 'Cancelar', () => { handleSubmitNote([formValues, idProject!]) })
   }
 
   const submitComment = (formValues: { comment: string, productId: string }) => {
@@ -287,7 +287,7 @@ const Project = () => {
         </>
       }
 
-      {!project.nota && canQualify && 
+      { canQualify && 
         <>
           <hr className='sgp-bg-gray-0 sgp-text-gray-10' />
 

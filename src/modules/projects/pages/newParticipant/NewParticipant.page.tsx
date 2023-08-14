@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects";
 import { AddParticipantResponse, ParticipantFormInterface } from "../../interfaces/participant.interface";
 import { ParticipantFrom } from "../../components/ParticipantForm.component";
@@ -14,7 +13,6 @@ type CreateParticipantType = (formValues: ParticipantFormInterface, projectId: s
 const createParticipant: CreateParticipantType = async (formValues: ParticipantFormInterface, projectId: string) => await RepositoryFactory.RepositoryApiAuth.projects.addParticipant(projectId, formValues)
 
 const NewParticipant = () => {
-  const { t } = useTranslation('global');
 
   // FIXME
   const initialValues: ParticipantFormInterface = {

@@ -1,3 +1,5 @@
+import { UserPermissionsInterface } from "../../../commons/interfaces/user.interface";
+
 export interface LoginRequestInterface {
     institutionalEmail: string;
     password: string;
@@ -21,5 +23,6 @@ interface LoginDataResponseInterface {
     semillero_id: null;
     programa_id: null;
     role: string;
+    acceso: UserPermissionsInterface;
     token: string;
 }

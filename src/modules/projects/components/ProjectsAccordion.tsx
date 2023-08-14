@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { ProjectsAccordionProps } from "../interfaces/projectsAccordionProps.interface";
-import { RolesEnum } from "../../../enums/roles.enum";
 import { useUserStore } from "../../../store/user.store";
 import { useNavigate } from "react-router-dom";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { useProject } from "../hooks/useProject";
+import { Permissions } from "../../../enums/permissions.enum";
 
 const ProjectsAccordion = (props: ProjectsAccordionProps) => {
     const { t } = useTranslation("global");
-    const { userInfo } = useUserStore();
     const navigate = useNavigate();
     const { deleteProjectAction, mutateActivateProject } = useProject();
+    const { userInfo: { permisions } } = useUserStore();
 
     const edit = () => {
         navigate(`${CommonRoutesEnum.Projects}/edit/${props.project.id}`);
@@ -18,6 +18,7 @@ const ProjectsAccordion = (props: ProjectsAccordionProps) => {
     const info = () => {
         navigate(`${CommonRoutesEnum.Projects}/info/${props.project.id}`);
     }
+    
     return (
         <>
             <div className="accordion-item">
@@ -53,10 +54,11 @@ const ProjectsAccordion = (props: ProjectsAccordionProps) => {
                             {props.project.tipo_proyecto && <li className="list-group-item sgp-lb-h5"><span className="sgp-fw-600">{t("projects.projectType")}</span>{props.project.tipo_proyecto ?? ''}</li>}
                         </ul>
                         <div className="d-flex mb-2">
-                            {userInfo.role === RolesEnum.Admin &&
+                            <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={info}>{t("projects.info")}&nbsp;<i className='bx bx-info-circle sgp-lb sgp-lb--subtitle-movil'></i></button>
+                            {permisions?.PROYECTOS === Permissions.Write &&
                                 <>
-                                    <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={info}>{t("projects.info")}&nbsp;<i className='bx bx-info-circle sgp-lb sgp-lb--subtitle-movil'></i></button>
                                     <button className="btn sgp-btn sgp-btn--secondary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={edit}>{t("projects.edit")}&nbsp;<i className='bx bx-edit-alt sgp-lb sgp-lb--subtitle-movil'></i></button>
+
                                     {String(props.project.visibilidad) === '1'
                                         ?
                                         <button className="btn sgp-btn sgp-btn--primary me-2 ms-3 d-flex justify-content-center align-items-center" onClick={() => deleteProjectAction(String(props.project.id))}>{t("projects.delete")}&nbsp;<i className='bx bx-trash sgp-lb sgp-lb--subtitle-movil sgp-text-white'></i></button>

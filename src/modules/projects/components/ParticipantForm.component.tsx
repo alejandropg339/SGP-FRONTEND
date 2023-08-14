@@ -1,7 +1,6 @@
 import { Form, Formik, useField } from 'formik'
 import { CustomInput } from '../../../commons/components/fromInputs/CustomInput.component'
 import { CustomSelect } from '../../../commons/components/fromInputs/CustomSelect.component'
-import { useTranslation } from 'react-i18next'
 import { ParticipantFormInterface } from '../interfaces/participant.interface'
 import { newParticipantFormValidations } from '../config/addParticipantFormValidations.config'
 import { ParticipantsRoles } from '../../../enums/participantsRoles.enum'
@@ -11,7 +10,6 @@ interface ParticipantFormProps {
     submit: (formValues: ParticipantFormInterface) => Promise<void>,
 }
 export const ParticipantFrom: React.FC<ParticipantFormProps> = ({ initialValues, submit }) => {
-    const { t } = useTranslation('global');
     return (
         <Formik
             initialValues={initialValues}
