@@ -4,7 +4,7 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
-import { setRequest, repNames } from '../services/loadData';
+import { setRequest, repNames, filterData, filterApi, reportApi } from '../services/loadData';
 
 //Funcionalidad lista
 //Pendiente limpieza y reciclaje
@@ -23,12 +23,10 @@ function FacGISemProy() {
     const [facultad, setFacultad] = useState([]);
     const [grupo, setGrupo] = useState([]);
     const [semillero, setSemillero] = useState([]);
-    const [proyecto, setProyecto] = useState([]);
 
     const [statusF, setStatusF] = useState<any>([]);
     const [statusG, setStatusG] = useState<any>([]);
     const [statusS, setStatusS] = useState<any>([]);
-    const [statusPj, setStatusPj] = useState<any>([]);
     const [statusIni, setStatusIni] = useState("");
     const [statusFin, setStatusFin] = useState("");
 
@@ -42,7 +40,7 @@ function FacGISemProy() {
 
     const fetchFacultadData = async () => {
         try {
-            const result = await fetch("http://localhost:8081/filtro/facultad");
+            const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
         } catch (error) {
@@ -55,7 +53,7 @@ function FacGISemProy() {
             request = {
                 facultad
             }
-            const result = await fetch("http://localhost:8081/filtro/facultad/gi", {
+            const result = await fetch(filterApi + filterData["gi"], {
                 method: "POST",
 
                 headers: {
@@ -75,7 +73,7 @@ function FacGISemProy() {
             request = {
                 gi
             }
-            const result = await fetch("http://localhost:8081/filtro/facultad/gi/semillero", {
+            const result = await fetch(filterApi + filterData["semillero"], {
                 method: "POST",
 
                 headers: {
@@ -99,7 +97,7 @@ function FacGISemProy() {
                 inicio: statusIni,
                 fin: statusFin
             }
-            const result = await fetch("http://localhost:8081/report/generar/anios", {
+            const result = await fetch(reportApi + filterData["anios"], {
                 method: "POST",
 
                 headers: {

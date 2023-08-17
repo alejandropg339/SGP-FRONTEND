@@ -1,8 +1,12 @@
+const filterApi = import.meta.env.VITE_FILTER_API;
+const reportApi = import.meta.env.VITE_REPORT_API;
+const getReportApi = import.meta.env.VITE_GET_REPORT_API;
+
 function setRequest(url:string) {
     try {
         let parse = JSON.stringify(url);
         let temp = JSON.parse(parse);
-        parse = "http://localhost:8081/archivo/get/reporte/"+temp.nombreDocumento;
+        parse = getReportApi+temp.nombreDocumento;
         return parse;
     } catch (error) {
         console.log("Error on setRequest", error);
@@ -39,4 +43,16 @@ const repNames:any = {
     "26": "Uso de presupuesto en periodo GI"
 };
 
-export {setRequest, repNames};
+const filterData:any ={
+    "facultad": "/facultad",
+    "gi": "/facultad/gi",
+    "semillero": "/facultad/gi/semillero",
+    "proyecto": "/facultad/gi/semillero/proyecto",
+    "programa": "/facultad/programa",
+    "anios": "/anios"
+}
+
+
+
+
+export {setRequest, repNames, filterData, filterApi, reportApi};
