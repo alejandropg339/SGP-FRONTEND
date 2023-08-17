@@ -24,6 +24,9 @@ import FacGiTime from "../modules/reports/pages/FacGiTime"
 import UploadAndDisplayImage from "../modules/sign/pages/Firma"
 import FacGiSemTime from "../modules/reports/pages/FacGiSemTime"
 
+import NewParticipant from "../modules/projects/pages/newParticipant/NewParticipant.page"
+import Roles from "../modules/admin/pages/roles/Roles.page"
+import Home from '../modules/home/pages/Home'
 
 export const AppRouter = () => {
     const { showLoading } = useGlobal()
@@ -54,6 +57,7 @@ export const AppRouter = () => {
                                     <Route path="projects/edit/:idProject" element={<EditProject />}></Route>
                                     <Route path="projects/info/:idProject" element={<Project />}></Route>
                                     <Route path="projects/product/:idProject" element={<NewProduct />}></Route>
+                                    <Route path="projects/add-participant/:idProject" element={<NewParticipant />}></Route>
                                     <Route path="projects/search" element={<AllProjects />}></Route>
                                     <Route path="*" element={<Navigate to="/users" replace />}></Route>
                                     <Route path="reports" element={<MenuReports />}></Route>
@@ -66,6 +70,9 @@ export const AppRouter = () => {
                                     <Route path="reports/facGiTime" element={<FacGiTime />} />
                                     <Route path="sign" element={<UploadAndDisplayImage />} />
 
+                                    <Route path="admin/roles" element={<Roles />}></Route>
+                                    <Route path="home" element={<Home />}></Route>
+                                    <Route path="*" element={<Navigate to="/home" replace />}></Route>
                                 </Routes>
                             </PrivateRoute>
                         </div>

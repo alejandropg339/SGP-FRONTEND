@@ -59,8 +59,8 @@ export interface ProjectsResponseData {
     estado:                  string;
     descripcion:             string;
     macro_proyecto:          null;
-    fecha_inicio:            Date;
-    fecha_fin:               Date | null;
+    fecha_inicio:            Date | null | string | undefined;
+    fecha_fin:               Date | null | string | undefined;
     semillero:               null;
     retroalimentacion_final: null | string;
     visibilidad:             number;
@@ -70,4 +70,7 @@ export interface ProjectsResponseData {
     justificacion:           string;
     nota:                    number | null;
     tipo_proyecto:           string;
+    programa_id:             number;
+    programa:               string;
+    participantes:          Array<{usuario: string, rol: string}>;
 }

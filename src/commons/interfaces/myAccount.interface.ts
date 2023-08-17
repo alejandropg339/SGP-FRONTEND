@@ -3,4 +3,5 @@ export interface UpdateMyAccountRequest {
     apellidos: string;
     telefono: string;
     correo_personal: string;
+    contrasena?: string;
 }

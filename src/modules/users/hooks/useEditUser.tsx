@@ -4,7 +4,7 @@ import { useUserStore } from "../../../store/user.store";
 import { CommonRoutesEnum } from "../../../enums/commonRoutes.enum";
 import { RepositoryFactory } from "../../../repositories/repositoryFactory";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
+import { useErrorManagement } from "../../../commons/hooks/useErrorManagement";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../../store/global.store";
 import { handleModal } from "../../../commons/helpers/modalManagement";
@@ -50,7 +50,7 @@ export const useEditUser = () => {
     });
 
     const handleEditRoleUser = useMutation((role: string) => updateUserRole(userId!, role), {
-        onSuccess: (res) => {
+        onSuccess: (_) => {
             handleModal('success', 'Proceso exitoso!', 'El usuario se ha actualizado correctamente');
             navigate(CommonRoutesEnum.Users);
         },
@@ -82,7 +82,7 @@ export const useEditUser = () => {
         queryKey: ['userRole', userId],
         queryFn: () => userId ? getUserRoles(userId) : Promise.resolve(null),
         onSuccess: (data) => {
-            setUserRole(data?.data?.rol)
+            setUserRole(data?.data?.nombre)
         },
         onError: (error: any) => {
             if (error?.status === '0' && error?.msg) {

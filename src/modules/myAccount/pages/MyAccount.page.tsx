@@ -17,6 +17,7 @@ const MyAccount = () => {
     lastName: userInfo.lastName ?? '',
     phone: userInfo.phone ?? '',
     personalEmail: userInfo.personalEmail ?? '',
+    password: ''
 }
 
   const submit = (formValues: MyAccountFormInterface) => {
@@ -24,7 +25,8 @@ const MyAccount = () => {
       nombres: formValues.name,
       apellidos: formValues.lastName,
       telefono: formValues.phone,
-      correo_personal: formValues.personalEmail
+      correo_personal: formValues.personalEmail,
+      contrasena: formValues.password
     }
     handleUpdateMyAccount.mutate([request, userInfo.numberId ?? '']);
   }
@@ -73,6 +75,9 @@ const MyAccount = () => {
                           </div>
                           <div className="mb-4">
                             <CustomInput label={t("enrollment.personalEmail") ?? ""} type='email' name='personalEmail' useField={useField} onChange={formikProps.handleChange} />
+                          </div>
+                          <div className="mb-4">
+                            <CustomInput label={t("user.password") ?? ""} type='password' name='password' useField={useField} onChange={formikProps.handleChange} />
                           </div>
 
                           <button className="btn sgp-btn sgp-btn--primary btn-lg px-5" type="submit" disabled={!formikProps.isValid}>Actualizar</button>

@@ -6,4 +6,6 @@ export enum CommonRoutesEnum {
     Projects = '/projects',
     CerateProject = '/projects/create',
     SearchProject = '/projects/search',
+    Roles = '/admin/roles',
+    Home = '/home'
 }

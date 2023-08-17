@@ -5,9 +5,8 @@ const ApiAuthClient = axios.create();
 ApiAuthClient.interceptors.request.use(
     (config) => {
         config.headers = {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
-
+            ...config.headers
         } as AxiosRequestHeaders
         return config;
     }, (error) => {

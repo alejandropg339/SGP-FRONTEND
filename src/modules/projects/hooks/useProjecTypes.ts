@@ -5,7 +5,7 @@ import { ProjectTypesDataInterface } from '../interfaces/projectTypes.interface'
 import { handleModal } from '../../../commons/helpers/modalManagement';
 import { useNavigate } from 'react-router-dom';
 import { CommonRoutesEnum } from '../../../enums/commonRoutes.enum';
-import { useErrorManagement } from '../../../commons/hooks/UseErrorManagement';
+import { useErrorManagement } from '../../../commons/hooks/useErrorManagement';
 import { useGlobal } from '../../../store/global.store';
 
 const getProjects = async () => await RepositoryFactory.RepositoryApiAuth.projects.getProjectTypes();
@@ -22,7 +22,7 @@ export const useProjectTypes = () => {
         onError: (error: any) => {
             if (error.code.status === '0') {
                 handleModal('error', 'Oops!', 'Algo salió mal, por favor intenta de nuevo más tarde', true, false, false);
-                navigate(CommonRoutesEnum.Users);
+                navigate(CommonRoutesEnum.Home);
             } else {
                 errorManagement(error);
             }

@@ -3,7 +3,7 @@ import { handleActionModal, handleModal } from "../../../commons/helpers/modalMa
 import { RepositoryFactory } from "../../../repositories/repositoryFactory";
 import { useEffect } from "react";
 import { useGlobal } from "../../../store/global.store";
-import { useErrorManagement } from "../../../commons/hooks/UseErrorManagement";
+import { useErrorManagement } from "../../../commons/hooks/useErrorManagement";
 import { useSearchUser } from "./useSearchUser";
 
 

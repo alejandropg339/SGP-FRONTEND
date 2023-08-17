@@ -1,18 +1,22 @@
-import { useTranslation } from "react-i18next";
 import { CreateProjectForm } from "../../interfaces/createProjectForm.interface";
 import { useProject } from "../../hooks/useProject";
 import { requestTransform } from "../../utils/requestProject";
 import { ProjectFrom } from "../../components/ProjectFrom.component";
-import { LayoutFormProjects } from "../../layout/LayoutFormProjects";
+import { LayoutFormProjects } from "../../../../commons/layout/LayoutFormProjects";
 import { Actions } from "../../enums/Actions.enum";
+import { useUserStore } from "../../../../store/user.store";
 
 const NewProject = () => {
-  const { t } = useTranslation('global');
   const { mutate, initialValues } = useProject();
+  const { userInfo: { numberId } } = useUserStore()
   // const { action } = useParams() ;
 
   const submit = async (formValues: CreateProjectForm) => {
-      mutate(requestTransform(formValues));
+    const values: CreateProjectForm = {
+      ...formValues,
+      user: numberId
+    }
+      mutate(requestTransform(values));
   }
 
   return (

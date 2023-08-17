@@ -33,6 +33,7 @@
     "phone": "Teléfono: ",
     "institutionalEmail": "Correo institucional: ",
     "personalEmail": "Correo Personal: ",
+    "password": "Contraseña: ",
     "delete": "Eliminar",
     "edit": "Editar",
     "userInfo": "Información del usuario",
