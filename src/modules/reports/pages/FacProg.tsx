@@ -18,6 +18,7 @@ function FacProg() {
     const [programa, setPrograma] = useState([]);
     const [statusF, setStatusF] = useState("");
     const [statusP, setStatusP] = useState("");
+    const [isLoading, setLoading] = useState(true);
 
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
     const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
@@ -32,10 +33,10 @@ function FacProg() {
             const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
-
     }
 
     const fetchProgramaData = async (facultad: any) => {
@@ -60,6 +61,7 @@ function FacProg() {
 
     const fetchPdfData = async () => {
         try {
+            setLoading(true);
             request = {
                 dato: statusP,
                 reporte: reportId,
@@ -77,6 +79,7 @@ function FacProg() {
             const parsedResponse = await result.json();
             let url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
+            setLoading(false);
         } catch (error) {
             console.log("Error xd", error);
         }
@@ -135,18 +138,26 @@ function FacProg() {
 
         </div>
         <div>
-            <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
-                    {pdfUrl !== "" && (
-                        <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
-                    )}
-                </Worker>
-            </div>
+            {pdfUrl && (
+                <div className="pdf-section">
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                        {pdfUrl && (
+                            <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
+                        )}
+                    </Worker>
+                    <div className="flex-container-center">
+                        <div role="button" className="download-button">
+                            <Download />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="flex-container-center">
-            <div role="button" className="download-button">
-                <Download />
-            </div>
+
+        <div>
+            {isLoading && (
+                <div className='loader'></div>
+            )}
         </div>
 
     </>

@@ -26,6 +26,7 @@ function FacGISemProy() {
     const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
     const location = useLocation();
     const { reportId } = location.state;
+    const [isLoading, setLoading] = useState(true);
 
     const [facultad, setFacultad] = useState([]);
     const [grupo, setGrupo] = useState([]);
@@ -40,6 +41,7 @@ function FacGISemProy() {
 
     const fetchPdfData = async () => {
         try {
+            setLoading(true);
             request = {
                 dato: statusPj,
                 reporte: reportId,
@@ -57,10 +59,10 @@ function FacGISemProy() {
             const parsedResponse = await result.json();
             let url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
+            setLoading(false);
         } catch (error) {
             console.log("Error xd", error);
         }
-
     }
 
     const fetchFacultadData = async () => {
@@ -68,14 +70,15 @@ function FacGISemProy() {
             const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
-
     }
 
     const fetchGrupoData = async (facultad: any) => {
         try {
+            setLoading(true);
             request = {
                 facultad
             }
@@ -89,6 +92,7 @@ function FacGISemProy() {
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -96,6 +100,7 @@ function FacGISemProy() {
 
     const fetchSemilleroData = async (gi: any) => {
         try {
+            setLoading(true);
             request = {
                 gi
             }
@@ -109,6 +114,7 @@ function FacGISemProy() {
             });
             const parsedResponse = await result.json();
             setSemillero(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("ªªªªªªErrorªªªªªª", error);
         }
@@ -116,6 +122,7 @@ function FacGISemProy() {
 
     const fetchProyectoData = async (semillero: any) => {
         try {
+            setLoading(true);
             request = {
                 semillero
             }
@@ -129,6 +136,7 @@ function FacGISemProy() {
             });
             const parsedResponse = await result.json();
             setProyecto(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("ªªªªªªErrorªªªªªª", error);
         }
@@ -230,19 +238,27 @@ function FacGISemProy() {
                 <button type="button" onClick={fetchPdfData}>Generar reporte</button>
             </div>
         </div>
-        <div id="pdf">
-            <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
-                    {pdfUrl && (
-                        <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
-                    )}
-                </Worker>
-            </div>
+        <div>
+            {pdfUrl && (
+                <div className="pdf-section">
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                        {pdfUrl && (
+                            <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
+                        )}
+                    </Worker>
+                    <div className="flex-container-center">
+                        <div role="button" className="download-button">
+                            <Download />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="flex-container-center">
-            <div role="button" className="download-button">
-                <Download />
-            </div>
+
+        <div>
+            {isLoading && (
+                <div className='loader'></div>
+            )}
         </div>
 
     </>

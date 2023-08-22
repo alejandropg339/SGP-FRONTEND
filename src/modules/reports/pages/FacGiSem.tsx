@@ -5,6 +5,7 @@ import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
 import { setRequest, repNames, filterData, filterApi, reportApi } from '../services/loadData';
+import { setLayerDimensions } from 'pdfjs-dist';
 
 //Funcionalidad lista
 //Pendiente reciclaje
@@ -19,6 +20,7 @@ function FacGiSem() {
     const [statusF, setStatusF] = useState("");
     const [statusG, setStatusG] = useState("");
     const [statusS, setStatusS] = useState("");
+    const [isLoading, setLoading] = useState(true);
 
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
     const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
@@ -32,14 +34,15 @@ function FacGiSem() {
             const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
-
     }
 
     const fetchGrupoData = async (facultad: any) => {
         try {
+            setLoading(true);
             request = {
                 facultad
             }
@@ -53,6 +56,7 @@ function FacGiSem() {
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -60,6 +64,7 @@ function FacGiSem() {
 
     const fetchSemilleroData = async (gi: any) => {
         try {
+            setLoading(true);
             request = {
                 gi
             }
@@ -73,6 +78,7 @@ function FacGiSem() {
             });
             const parsedResponse = await result.json();
             setSemillero(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("ªªªªªªErrorªªªªªª", error);
         }
@@ -80,6 +86,7 @@ function FacGiSem() {
 
     const fetchPdfData = async () => {
         try {
+            setLoading(true);
             request = {
                 dato: statusS,
                 reporte: reportId,
@@ -97,6 +104,7 @@ function FacGiSem() {
             const parsedResponse = await result.json();
             let url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
+            setLoading(false);
         } catch (error) {
             console.log("Error xd", error);
         }
@@ -179,18 +187,26 @@ function FacGiSem() {
 
         </div>
         <div>
-            <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
-                    {pdfUrl && (
-                        <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
-                    )}
-                </Worker>
-            </div>
+            {pdfUrl && (
+                <div className="pdf-section">
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                        {pdfUrl && (
+                            <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
+                        )}
+                    </Worker>
+                    <div className="flex-container-center">
+                        <div role="button" className="download-button">
+                            <Download />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="flex-container-center">
-            <div role="button" className="download-button">
-                <Download />
-            </div>
+
+        <div>
+            {isLoading && (
+                <div className='loader'></div>
+            )}
         </div>
 
     </>

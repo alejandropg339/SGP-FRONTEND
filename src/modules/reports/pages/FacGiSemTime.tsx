@@ -29,6 +29,7 @@ function FacGISemProy() {
     const [statusS, setStatusS] = useState<any>([]);
     const [statusIni, setStatusIni] = useState("");
     const [statusFin, setStatusFin] = useState("");
+    const [isLoading, setLoading] = useState(true);
 
 
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
@@ -43,6 +44,7 @@ function FacGISemProy() {
             const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -50,6 +52,7 @@ function FacGISemProy() {
 
     const fetchGrupoData = async (facultad: any) => {
         try {
+            setLoading(true);
             request = {
                 facultad
             }
@@ -63,6 +66,7 @@ function FacGISemProy() {
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -70,6 +74,7 @@ function FacGISemProy() {
 
     const fetchSemilleroData = async (gi: any) => {
         try {
+            setLoading(true);
             request = {
                 gi
             }
@@ -83,6 +88,7 @@ function FacGISemProy() {
             });
             const parsedResponse = await result.json();
             setSemillero(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("ªªªªªªErrorªªªªªª", error);
         }
@@ -90,6 +96,7 @@ function FacGISemProy() {
 
     const fetchPdfDataTime = async () => {
         try {
+            setLoading(true);
             request = {
                 dato: statusS,
                 reporte: reportId,
@@ -109,6 +116,7 @@ function FacGISemProy() {
             const parsedResponse = await result.json();
             let url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
+            setLoading(false);
         } catch (error) {
             console.log("Error xd", error);
         }
@@ -225,18 +233,26 @@ function FacGISemProy() {
 
         </div>
         <div>
-            <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
-                    {pdfUrl && (
-                        <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
-                    )}
-                </Worker>
-            </div>
+            {pdfUrl && (
+                <div className="pdf-section">
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                        {pdfUrl && (
+                            <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
+                        )}
+                    </Worker>
+                    <div className="flex-container-center">
+                        <div role="button" className="download-button">
+                            <Download />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="flex-container-center">
-            <div role="button" className="download-button">
-                <Download />
-            </div>
+
+        <div>
+            {isLoading && (
+                <div className='loader'></div>
+            )}
         </div>
 
     </>

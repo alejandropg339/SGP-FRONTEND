@@ -17,6 +17,7 @@ function FacGi() {
     const [grupo, setGrupo] = useState([]);
     const [statusF, setStatusF] = useState("");
     const [statusG, setStatusG] = useState("");
+    const [isLoading, setLoading] = useState(true);
 
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
     const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
@@ -30,6 +31,7 @@ function FacGi() {
             const result = await fetch(filterApi + filterData["facultad"]);
             const parsedResponse = await result.json();
             setFacultad(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -37,6 +39,7 @@ function FacGi() {
 
     const fetchGrupoData = async (facultad: any) => {
         try {
+            setLoading(true);
             request = {
                 facultad
             }
@@ -50,6 +53,7 @@ function FacGi() {
             });
             const parsedResponse = await result.json();
             setGrupo(parsedResponse);
+            setLoading(false);
         } catch (error) {
             console.log("Error", error);
         }
@@ -57,6 +61,7 @@ function FacGi() {
 
     const fetchPdfData = async () => {
         try {
+            setLoading(true);
             request = {
                 dato: statusG,
                 reporte: reportId,
@@ -73,6 +78,7 @@ function FacGi() {
             });
             const parsedResponse = await result.json();
             let url: string = setRequest(parsedResponse) as string;
+            setLoading(false);
             setPdfUrl(url);
         } catch (error) {
             console.log("Error xd", error);
@@ -132,18 +138,26 @@ function FacGi() {
 
         </div>
         <div>
-            <div className="pdf-section">
-                <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
-                    {pdfUrl && (
-                        <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
-                    )}
-                </Worker>
-            </div>
+            {pdfUrl && (
+                <div className="pdf-section">
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                        {pdfUrl && (
+                            <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
+                        )}
+                    </Worker>
+                    <div className="flex-container-center">
+                        <div role="button" className="download-button">
+                            <Download />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-        <div className="flex-container-center">
-            <div role="button" className="download-button">
-                <Download />
-            </div>
+
+        <div>
+            {isLoading && (
+                <div className='loader'></div>
+            )}
         </div>
 
     </>
