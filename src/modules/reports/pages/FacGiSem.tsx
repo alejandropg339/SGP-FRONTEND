@@ -188,7 +188,7 @@ function FacGiSem() {
         <div>
             {pdfUrl && (
                 <div className="pdf-section">
-                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js'>
+                    <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.9.179/build/pdf.worker.min.js'>
                         {pdfUrl && (
                             <Viewer fileUrl={pdfUrl} plugins={[getFilePluginInstance]} />
                         )}
