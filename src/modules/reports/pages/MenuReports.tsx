@@ -4,7 +4,7 @@ import { useUserStore } from "../../../store/user.store";
 
 const Layout = () => {
     const localItems = useUserStore();
-    let userRole = localItems.userInfo.role;
+    const userRole = localItems.userInfo.role;
     switch (userRole) {
         case 'ADMINISTRADOR':
             return (

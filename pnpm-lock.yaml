@@ -44,7 +44,7 @@ dependencies:
     specifier: ^3.3.0
     version: 3.3.0
   pdfjs-dist:
-    specifier: ^3.8.162
+    specifier: ^3.9.179
     version: 3.9.179
   react:
     specifier: ^18.2.0
