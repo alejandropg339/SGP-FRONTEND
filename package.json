@@ -25,7 +25,7 @@
     "formik": "^2.2.9",
     "i18next": "^22.4.15",
     "lodash.debounce": "^4.0.8",
-    "pdfjs-dist": "^3.8.162",
+    "pdfjs-dist": "^3.9.179",
     "luxon": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -5,7 +5,6 @@ import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { getFilePlugin } from '@react-pdf-viewer/get-file';
 import { setRequest, repNames, filterData, filterApi, reportApi } from '../services/loadData';
-import { setLayerDimensions } from 'pdfjs-dist';
 
 //Funcionalidad lista
 //Pendiente reciclaje
@@ -23,7 +22,7 @@ function FacGiSem() {
     const [isLoading, setLoading] = useState(true);
 
     const localItems:any = JSON.parse(localStorage.getItem("user-data") as any);
-    const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
+    const userId = localItems["state"]["userInfo"]["numberId"];
     const location = useLocation();
     const { reportId } = location.state;
 
@@ -102,7 +101,7 @@ function FacGiSem() {
                 body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            let url: string = setRequest(parsedResponse) as string;
+            const url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
             setLoading(false);
         } catch (error) {

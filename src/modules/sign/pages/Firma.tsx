@@ -4,8 +4,8 @@ import { useUserStore } from "../../../store/user.store";
 function UploadAndDisplayImage() {
     const formData = new FormData();
     const localItems = useUserStore();
-    let userRole = localItems.userInfo.role;
-    const [userId, setUserId] = useState(localItems.userInfo.numberId) as any;
+    const userRole = localItems.userInfo.role;
+    const userId = localItems.userInfo.numberId as any;
     const img: any = document.querySelector('input[type="file"]')!;
     const [signUrl, setSignUrl] = useState("");
     const [state, setState] = useState(true);

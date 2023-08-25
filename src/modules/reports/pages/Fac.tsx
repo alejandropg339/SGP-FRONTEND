@@ -19,7 +19,7 @@ function Fac() {
 
     const [pdfUrl, setPdfUrl] = useState("");
     const localItems: any = JSON.parse(localStorage.getItem("user-data") as any);
-    const [userId, setUserId] = useState(localItems["state"]["userInfo"]["numberId"]);
+    const userId = localItems["state"]["userInfo"]["numberId"];
 
     const location = useLocation();
     const { reportId } = location.state;
@@ -53,7 +53,7 @@ function Fac() {
                 body: JSON.stringify(request)
             });
             const parsedResponse = await result.json();
-            let url: string = setRequest(parsedResponse) as string;
+            const url: string = setRequest(parsedResponse) as string;
             setPdfUrl(url);
             setLoading(false);
         } catch (error) {
