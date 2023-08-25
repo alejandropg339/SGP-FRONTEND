@@ -1,0 +1,90 @@
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 25px;
+    gap: 10px;
+}
+
+.flex-container-start {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    align-items: start;
+    margin: 25px;
+    gap: 10px;
+}
+
+.flex-container-center {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 25px;
+    gap: 10px;
+}
+
+.pdf-section {
+    border: 2px;
+    border-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+}
+
+.download-button {
+    background-color: solid #eeeeee;
+    border: none;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.select-general {
+    width: 200px;
+}
+
+.option-list {
+    border-style: solid;
+    border-width: medium;
+    height: 500px;
+    width: 400px;
+
+    li {
+        list-style-type: none;
+    }
+}
+
+a {
+    color: #303030;
+    text-decoration: underline;
+}
+
+h1 {
+    color: #000000;
+    font-family: 'Raleway', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 72px;
+    margin: 0 0 24px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.loader {   
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #db8534; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

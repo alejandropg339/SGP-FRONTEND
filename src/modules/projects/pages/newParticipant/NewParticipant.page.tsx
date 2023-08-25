@@ -51,7 +51,7 @@ const NewParticipant = () => {
     <LayoutFormProjects 
     title="Añadir participante"
     description="Por favor ingresa los datos solicitados para añadir un nuevo participante al proyecto"
-    imgSrc="add-user.svg"
+    imgSrc="https://tecnosoft.ingusb.com/img/add-user.svg"
     >
       <ParticipantFrom initialValues={initialValues} submit={submit}/>
     </LayoutFormProjects>

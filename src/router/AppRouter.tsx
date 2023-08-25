@@ -14,15 +14,25 @@ import AllProjects from "../modules/projects/pages/allProjects/AllProjects.page"
 import EditProject from "../modules/projects/pages/editProject/EditProject.page"
 import Project from "../modules/projects/pages/project/Project.page"
 import NewProduct from "../modules/projects/pages/newProduct/NewProduct.page"
+import MenuReports from "../modules/reports/pages/MenuReports"
+import Fac from "../modules/reports/pages/Fac"
+import FacGi from "../modules/reports/pages/FacGi"
+import FacGiSem from "../modules/reports/pages/FacGiSem"
+import FacGISemProy from "../modules/reports/pages/FacGiSemProy"
+import FacProg from "../modules/reports/pages/FacProg"
+import FacGiTime from "../modules/reports/pages/FacGiTime"
+import UploadAndDisplayImage from "../modules/sign/pages/Firma"
+import FacGiSemTime from "../modules/reports/pages/FacGiSemTime"
+
 import NewParticipant from "../modules/projects/pages/newParticipant/NewParticipant.page"
 import Roles from "../modules/admin/pages/roles/Roles.page"
 import Home from '../modules/home/pages/Home'
 
 export const AppRouter = () => {
-    const { showLoading } =  useGlobal()
+    const { showLoading } = useGlobal()
     return (
         <>
-        { showLoading && <Loading/> }
+            {showLoading && <Loading />}
             <Routes>
                 <Route path="login/*" element={
                     <PublicRoute>
@@ -49,6 +59,17 @@ export const AppRouter = () => {
                                     <Route path="projects/product/:idProject" element={<NewProduct />}></Route>
                                     <Route path="projects/add-participant/:idProject" element={<NewParticipant />}></Route>
                                     <Route path="projects/search" element={<AllProjects />}></Route>
+                                    <Route path="*" element={<Navigate to="/users" replace />}></Route>
+                                    <Route path="reports" element={<MenuReports />}></Route>
+                                    <Route path="reports/facGiSemProy" element={<FacGISemProy />} />
+                                    <Route path="reports/facGi" element={<FacGi />} />
+                                    <Route path="reports/facGiSem" element={<FacGiSem />} />
+                                    <Route path="reports/facProg" element={<FacProg />} />
+                                    <Route path="reports/fac" element={<Fac />} />
+                                    <Route path="reports/facGiSemTime" element={<FacGiSemTime />} />
+                                    <Route path="reports/facGiTime" element={<FacGiTime />} />
+                                    <Route path="sign" element={<UploadAndDisplayImage />} />
+
                                     <Route path="admin/roles" element={<Roles />}></Route>
                                     <Route path="home" element={<Home />}></Route>
                                     <Route path="*" element={<Navigate to="/home" replace />}></Route>

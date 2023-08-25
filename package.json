@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prod": "vite --mode prod",
     "build": "tsc && vite build",
     "build-prod": "tsc && vite build --mode prod",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -12,6 +13,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/get-file": "^3.12.0",
     "@tanstack/react-query": "^4.29.5",
     "@tanstack/react-query-devtools": "^4.29.6",
     "@types/bootstrap": "^5.2.6",
@@ -22,6 +25,7 @@
     "formik": "^2.2.9",
     "i18next": "^22.4.15",
     "lodash.debounce": "^4.0.8",
+    "pdfjs-dist": "^3.8.162",
     "luxon": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

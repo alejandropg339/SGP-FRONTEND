@@ -13,7 +13,7 @@ export const LayoutFormProjects: React.FC<LayoutProps> = ({ children, title, des
         <div className="py-5 ">
           <div className="row mb-4">
             <div className="col-12 text-center">
-              <img src={imgSrc ? `../../src/assets/${imgSrc}` : "../../src/assets/add-project.svg"} alt="avatar" className="sgp-my-account__avatar" />
+              <img src={imgSrc ? `../../src/assets/${imgSrc}` : "https://tecnosoft.ingusb.com/img/add-project.svg"} alt="avatar" className="sgp-my-account__avatar" />
             </div>
           </div>
           <div className="row d-flex justify-content-center align-items-center" >
