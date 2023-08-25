@@ -53,7 +53,7 @@ const Roles = () => {
     <LayoutFormProjects 
     title="Añadir rol"
     description="Al crear un rol es posible seleccionar los privilegios que tendrán los usuarios en cada uno de los módulos del sistema, a continuación encontrará una descripción de cada uno de los privilegios que se podrán dar por cada módulo:"
-    imgSrc="add-user.svg"
+    imgSrc="https://tecnosoft.ingusb.com/img/add-user.svg"
     >
       <p className="text-white-50 mb-5 sgp-text-white mb-2">
         <strong className="sgp-text-orange-50">Escritura: </strong>El usuario tendra la posiblidad de crear, editar y eliminar información dentro del módulo.

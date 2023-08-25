@@ -65,6 +65,7 @@ const Enrollment = () => {
                           </div>
                           <div className="mb-4">
                             <CustomSelect id="enrollmentSelect" label={t("enrollment.program")} name="program" useField={useField}>
+                            <option defaultValue={''}>{"Selecciona un programa"}</option>
                             {programs.map((program, index) => (
                                 <option value={program.id} key={index}>{program.nombre}</option>
                             ))}

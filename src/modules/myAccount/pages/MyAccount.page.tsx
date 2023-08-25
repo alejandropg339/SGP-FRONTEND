@@ -37,7 +37,7 @@ const MyAccount = () => {
         <div className="py-5 ">
             <div className="row mb-4">
                 <div className="col-12 text-center">
-                    <img src="src/assets/avatar.svg" alt="avatar" className="sgp-my-account__avatar"/>
+                    <img src="https://tecnosoft.ingusb.com/img/avatar.svg" alt="avatar" className="sgp-my-account__avatar"/>
                 </div>
             </div>
             <div className="row">

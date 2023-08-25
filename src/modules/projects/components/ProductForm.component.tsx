@@ -18,7 +18,7 @@ export const ProductForm = ({ submit }: { submit: (formValues: NewProductFormInt
             {(formikProps) => (
                 <Form>
                     <div className="mb-4">
-                        <CustomInput label="Nombre del proyecto" type='text' name="name" useField={useField} onChange={formikProps.handleChange} />
+                        <CustomInput label="Nombre del producto" type='text' name="name" useField={useField} onChange={formikProps.handleChange} />
                     </div>
 
                     <div className="mb-4">
