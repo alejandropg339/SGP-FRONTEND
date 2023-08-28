@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../../store/user.store";
+import { signApi } from "../../reports/services/loadData";
 
 function UploadAndDisplayImage() {
     const formData = new FormData();
@@ -12,7 +13,7 @@ function UploadAndDisplayImage() {
 
     const saveSign = async (formData: any) => {
         try {
-            const result = await fetch("http://localhost:8081/archivo/upload", {
+            const result = await fetch(signApi+"archivo/upload", {
                 method: "POST",
                 body: formData
             });
@@ -25,7 +26,7 @@ function UploadAndDisplayImage() {
 
     const fetchSign = async (id: any) => {
         try {
-            const result = await fetch("http://localhost:8081/archivo/get/firma/" + id);
+            const result = await fetch(signApi+"archivo/get/firma/" + id);
             const imageBlob = await result.blob();
             if (result.ok) {
                 setState(false);
