@@ -10,15 +10,18 @@ function UploadAndDisplayImage() {
     const img: any = document.querySelector('input[type="file"]')!;
     const [signUrl, setSignUrl] = useState("");
     const [state, setState] = useState(true);
+    const [isLoading, setLoading] = useState(true);
 
     const saveSign = async (formData: any) => {
         try {
-            const result = await fetch(signApi+"archivo/upload", {
+            setLoading(true);
+            const result = await fetch(signApi + "archivo/upload", {
                 method: "POST",
                 body: formData
             });
             const parsedResponse = await result.json();
             alert("Success: " + parsedResponse);
+            setLoading(true);
         } catch (error) {
             console.log("Error xd", error);
         }
@@ -26,7 +29,8 @@ function UploadAndDisplayImage() {
 
     const fetchSign = async (id: any) => {
         try {
-            const result = await fetch(signApi+"archivo/get/firma/" + id);
+            setLoading(true);
+            const result = await fetch(signApi + "archivo/get/firma/" + id);
             const imageBlob = await result.blob();
             if (result.ok) {
                 setState(false);
@@ -35,6 +39,7 @@ function UploadAndDisplayImage() {
             }
             const imageURL = URL.createObjectURL(imageBlob);
             setSignUrl(imageURL);
+            setLoading(false);
         } catch (error) {
             console.log("Error on fetchSign", error);
         }
@@ -84,6 +89,11 @@ function UploadAndDisplayImage() {
                             <br />
                             <button onClick={handleSaveImage}>Guardar</button>
                         </div>
+                    )}
+                </div>
+                <div>
+                    {isLoading && (
+                        <div className='loader'></div>
                     )}
                 </div>
             </div>
