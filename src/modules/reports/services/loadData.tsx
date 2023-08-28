@@ -1,6 +1,7 @@
 const filterApi = import.meta.env.VITE_FILTER_API;
 const reportApi = import.meta.env.VITE_REPORT_API;
 const getReportApi = import.meta.env.VITE_GET_REPORT_API;
+const signApi = import.meta.env.VITE_GET_SIGN_API;
 
 function setRequest(url:string) {
     try {
@@ -55,4 +56,4 @@ const filterData:any ={
 
 
 
-export {setRequest, repNames, filterData, filterApi, reportApi};
+export {setRequest, repNames, filterData, filterApi, reportApi, signApi};
